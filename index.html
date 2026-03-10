@@ -84,7 +84,7 @@ nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;p
 
 /* ─── STATEMENT ─── */
 .statement{padding:80px 60px 70px;position:relative;overflow:hidden}
-.statement-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;z-index:0;filter:brightness(.85) contrast(1.1) saturate(.3)}
+.statement-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;z-index:0;filter:brightness(.85) contrast(1.05) saturate(.4)}
 .statement-inner{position:relative;z-index:1}
 .statement-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,9rem);line-height:.86;color:var(--white);letter-spacing:-.01em;max-width:1100px}
 .statement-big .c-petrol{color:var(--petrol-l)}
@@ -364,7 +364,7 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
 <!-- STATEMENT -->
 <section class="statement photo-bg-sec">
   <img class="bg statement-bg" src="fotos/pb-pessoas-desfocadas.png" alt="" style="position:absolute">
-  <div class="overlay" style="background:rgba(7,6,10,.45)"></div>
+  <div class="overlay" style="background:rgba(7,6,10,.22)"></div>
   <div class="statement-inner content" style="padding:90px 60px 80px">
     <p class="statement-big reveal">No cinema,<br>você só existe<br><span class="c-terra">se der para ver.</span></p>
     <div class="statement-cols">
@@ -378,8 +378,8 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
      PARTE 01 — ROTEIRO
 ═══════════════════════════════════════════════════ -->
 <div id="roteiro" class="photo-bg-sec" style="background:var(--bg3)">
-  <img class="bg" src="fotos/bts-fabrica-camera.png" alt="" style="opacity:.45;filter:brightness(.5) contrast(1.2)">
-  <div class="overlay" style="background:rgba(7,6,10,.72)"></div>
+  <img class="bg" src="fotos/bts-fabrica-camera.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(7,6,10,.38)"></div>
   <div class="content sec-head">
     <div class="sec-num">01</div>
     <p class="sec-label reveal">Parte 01</p>
@@ -415,11 +415,15 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
     </div>
   </div>
 
-  <!-- 02 Da Ideia ao Roteiro -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/subaquatica-boiando.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:brightness(.6) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.65);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+  </div><!-- fim mod 01 -->
+
+</div><!-- /cw parte1-bloco1 -->
+
+<!-- 02 Da Ideia ao Roteiro — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/subaquatica-boiando.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;filter:brightness(.75) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label">02 — Da Ideia ao Roteiro</p>
     <h3 class="mod-h">Conflito, storyline, <em>escaleta</em></h3>
     <div class="mod-2col">
@@ -436,8 +440,10 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
         <p class="mod-body">No videoclipe, a escaleta muitas vezes substitui o roteiro formal — organiza ambiências, performances e micro-narrativas sem precisar de diálogos ou estrutura dramática clássica.</p>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
+</div>
+
+<div class="cw"><!-- cw parte1-bloco2 -->
 
   <!-- 03 Construção de Personagens -->
   <div class="mod reveal">
@@ -459,11 +465,15 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
     </div>
   </div>
 
-  <!-- 04 Roteiro como Documento Técnico -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/bts-fabrica-expressao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;filter:brightness(.5) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.72);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+  </div><!-- fim mod 03 -->
+
+</div><!-- /cw parte1-bloco2 -->
+
+<!-- 04 Roteiro como Documento Técnico — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/bts-fabrica-expressao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8;filter:brightness(.7) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.42);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label">04 — O Roteiro como Documento Técnico</p>
     <h3 class="mod-h">O padrão <em>Master Scenes</em></h3>
     <div class="mod-2col">
@@ -507,8 +517,10 @@ Para ao ver a porta arrombada.
         </div>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
+</div><!-- /04 full-width -->
+
+<div class="cw"><!-- cw parte1-bloco3 -->
 
   <!-- 05 Tratamento Visual -->
   <div class="mod reveal">
@@ -536,11 +548,15 @@ Para ao ver a porta arrombada.
     </div>
   </div>
 
-  <!-- 06 Limitação como Filtro -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/pb-estacao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:brightness(.55) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.68);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+  </div><!-- fim mod 05 -->
+
+</div><!-- /cw parte1-bloco3 -->
+
+<!-- 06 Limitação como Filtro — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/pb-estacao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;filter:brightness(.7) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label">06 — A Limitação como Filtro</p>
     <h3 class="mod-h">Escrever para <em>o que você tem</em></h3>
     <div class="mod-2col">
@@ -561,15 +577,13 @@ Para ao ver a porta arrombada.
         </ul>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
-
-</div><!-- /cw -->
+</div><!-- /06 full-width -->
 
 <!-- ATIVIDADE 1 -->
 <div class="activity photo-bg-sec reveal" style="background:var(--terra-d)">
-  <img class="bg" src="fotos/bts-fabrica-conversa.png" alt="" style="opacity:.45;filter:brightness(.5) contrast(1.2)">
-  <div class="overlay" style="background:rgba(106,32,16,.72)"></div>
+  <img class="bg" src="fotos/bts-fabrica-conversa.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(106,32,16,.42)"></div>
   <p class="activity-kicker">_atividade · que história é essa?</p>
   <h3 class="activity-title">Que história<br>é essa?</h3>
   <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1rem;color:rgba(221,213,192,.5);margin-bottom:40px;max-width:680px;line-height:1.85;position:relative;z-index:1">O objetivo é estimular a criatividade e a colaboração, desafiando cada um a criar uma cena cinematográfica a partir de elementos aleatórios. Para entender como a mágica do cinema se desdobra quando combinamos lugares, ações, gêneros de filme e frases.</p>
@@ -603,8 +617,8 @@ Para ao ver a porta arrombada.
 
 <!-- EXERCÍCIO DE AQUECIMENTO -->
 <div class="activity photo-bg-sec reveal" style="background:var(--moss)">
-  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.5;filter:brightness(.55) contrast(1.2)">
-  <div class="overlay" style="background:rgba(46,61,24,.72)"></div>
+  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(46,61,24,.42)"></div>
   <p class="activity-kicker">_antes de começar · exercício de aquecimento</p>
   <h3 class="activity-title">Exercício de<br>aquecimento</h3>
   <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:1.22rem;color:rgba(221,213,192,.75);max-width:720px;line-height:2;position:relative;z-index:1">Ouça a música que vocês vão gravar. Você tem 10 minutos para jogar o maior número de ideias possíveis — não filtre, não julgue. De tudo que você escreveu, identifique a ideia que mais te provoca, a imagem que você não consegue tirar da cabeça. Escreva o conceito do seu clipe em uma única frase. Essa frase vai guiar todas as decisões do set.</p>
@@ -742,11 +756,15 @@ Para ao ver a porta arrombada.
     </div>
   </div>
 
-  <!-- 09 Decupagem -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/subaquatica-banda.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:brightness(.6) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.65);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+  </div><!-- fim mod 08 -->
+
+</div><!-- /cw parte2-bloco1 -->
+
+<!-- 09 Decupagem — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/subaquatica-banda.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;filter:brightness(.8) contrast(1.05);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.35);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label">09 — Decupagem</p>
     <h3 class="mod-h">Do conceito <em>ao plano</em></h3>
     <div class="mod-2col">
@@ -769,14 +787,14 @@ Para ao ver a porta arrombada.
         </ul>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
+</div><!-- /09 full-width -->
 
-  <!-- 10 Direção de Arte e Iluminação -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/subaquatica-cadeira.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;filter:brightness(.6) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.65);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+<!-- 10 Direção de Arte e Iluminação — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/subaquatica-cadeira.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;filter:brightness(.8) contrast(1.05);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.35);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label c-moss">10 — Direção de Arte e Iluminação</p>
     <h3 class="mod-h">O set como <em>linguagem</em></h3>
     <div class="mod-2col">
@@ -799,8 +817,10 @@ Para ao ver a porta arrombada.
         </ul>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
+</div><!-- /10 full-width -->
+
+<div class="cw"><!-- cw parte2-bloco2 -->
 
   <!-- 11 Direção de Artistas -->
   <div class="mod reveal">
@@ -855,11 +875,15 @@ Para ao ver a porta arrombada.
     </div>
   </div>
 
-  <!-- 13 Arte do Desapego -->
-  <div class="mod reveal" style="position:relative;overflow:hidden">
-    <img src="fotos/pb-rua-noite.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55;filter:brightness(.6) contrast(1.2);z-index:0;pointer-events:none">
-    <div style="position:absolute;inset:0;background:rgba(7,6,10,.65);z-index:1;pointer-events:none"></div>
-    <div style="position:relative;z-index:2">
+  </div><!-- fim mod 12 -->
+
+</div><!-- /cw parte2-bloco2 -->
+
+<!-- 13 Arte do Desapego — FULL WIDTH -->
+<div class="reveal" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/pb-rua-noite.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;filter:brightness(.75) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
     <p class="mod-label">13 — A Arte do Desapego</p>
     <h3 class="mod-h">Criatividade <em>na adversidade</em></h3>
     <div class="mod-2col">
@@ -878,15 +902,13 @@ Para ao ver a porta arrombada.
         <p>Dirigir, pra mim, é estar presente e atenta aos detalhes. Articular para que conceito e execução caminhem juntos — e quando eles se separam, <strong>saber o que preservar.</strong></p>
       </div>
     </div>
-    </div><!-- /z-index:2 -->
   </div>
-
-</div><!-- /cw -->
+</div><!-- /13 full-width -->
 
 <!-- QUOTE -->
 <div class="quote-block photo-bg-sec reveal">
-  <img class="bg" src="fotos/subaquatica-hero.png" alt="" style="opacity:.5;filter:brightness(.6) contrast(1.2)">
-  <div class="overlay" style="background:rgba(7,6,10,.7)"></div>
+  <img class="bg" src="fotos/subaquatica-hero.png" alt="" style="opacity:.9;filter:brightness(.8) contrast(1.05)">
+  <div class="overlay" style="background:rgba(7,6,10,.38)"></div>
   <p class="quote-text">&ldquo;Dirigir, pra mim, é estar presente e atenta aos detalhes. Articular para que conceito e execução caminhem juntos — e quando eles se separam, saber o que preservar.&rdquo;</p>
   <div class="quote-rule"></div>
   <p class="quote-author">Vini Poffo</p>
@@ -896,8 +918,8 @@ Para ao ver a porta arrombada.
      PROJETOS
 ═══════════════════════════════════════════════════ -->
 <div id="projetos" class="photo-bg-sec" style="background:var(--bg3)">
-  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.4;filter:brightness(.5) contrast(1.2)">
-  <div class="overlay" style="background:rgba(7,6,10,.75)"></div>
+  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(7,6,10,.55)"></div>
   <div class="content sec-head">
     <p class="sec-label c-petrol reveal">_projetos</p>
     <h2 class="sec-title reveal d1" style="font-size:clamp(3rem,8vw,7.5rem)">
@@ -1017,8 +1039,8 @@ Para ao ver a porta arrombada.
      ENCERRAMENTO
 ═══════════════════════════════════════════════════ -->
 <section id="enc" class="levar-big-sec photo-bg-sec">
-  <img class="bg" src="fotos/subaquatica-mergulho.png" alt="" style="opacity:.55;filter:brightness(.65) contrast(1.2)">
-  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,.82) 0%,rgba(13,50,72,.45) 50%,rgba(7,6,10,.82) 100%)"></div>
+  <img class="bg" src="fotos/subaquatica-mergulho.png" alt="" style="opacity:.9;filter:brightness(.8) contrast(1.05)">
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,.55) 0%,rgba(13,50,72,.22) 50%,rgba(7,6,10,.55) 100%)"></div>
   <p class="levar-big-kicker reveal">_para levar daqui</p>
   <div class="levar-big-items" id="levarBigItems">
     <div class="levar-big-item active">O roteiro é a <span class="c-ocre">primeira versão</span> da imagem</div>
