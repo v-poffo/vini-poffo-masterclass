@@ -71,7 +71,7 @@ nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;p
 .hero-content{position:relative;z-index:2;padding:0 60px 100px;width:100%}
 .hero-ey{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;display:flex;align-items:center;gap:16px}
 .hero-ey::before{content:'';width:32px;height:1px;background:var(--terra)}
-.hero-h1{font-family:'Epilogue', sans-serif;font-size:clamp(5rem,15.5vw,14.5rem);line-height:.82;color:var(--white);margin-bottom:26px;letter-spacing:-.01em}
+.hero-h1{font-family:'Epilogue', sans-serif;font-size:clamp(5rem,15.5vw,14.5rem);line-height:.82;color:var(--white);margin-bottom:26px;letter-spacing:-.01em;padding-left:8px}
 .hero-h1 .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.45);font-size:.62em;letter-spacing:.02em;display:block;line-height:1.1}
 .hero-h1 .accent{color:var(--terra)}
 .hero-sub{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:clamp(.95rem,1.5vw,1.25rem);color:var(--cream2);max-width:560px;line-height:1.7}
@@ -109,7 +109,7 @@ nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;p
 .sec-label::before{content:'';width:22px;height:1px;background:var(--terra)}
 .sec-label.c-moss{color:var(--moss-l)}.sec-label.c-moss::before{background:var(--moss-l)}
 .sec-label.c-petrol{color:var(--petrol-l)}.sec-label.c-petrol::before{background:var(--petrol-l)}
-.sec-title{font-family:'Epilogue', sans-serif;font-size:clamp(4rem,11.5vw,11rem);line-height:.84;color:var(--white);position:relative;z-index:1;letter-spacing:-.01em}
+.sec-title{font-family:'Epilogue', sans-serif;font-size:clamp(4rem,11.5vw,11rem);line-height:.84;color:var(--white);position:relative;z-index:1;letter-spacing:-.01em;padding-left:8px}
 .sec-title .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.38);font-size:.6em;letter-spacing:.02em;display:block;line-height:1.2}
 .sec-title .accent{color:var(--terra)}
 .sec-intro{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);margin-top:26px;max-width:560px;line-height:1.85;position:relative;z-index:1}
@@ -177,7 +177,7 @@ nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;p
 /* ─── ACTIVITY ─── */
 .activity{padding:80px 60px;position:relative;overflow:hidden}
 .activity-kicker{font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(221,213,192,.28);margin-bottom:16px;position:relative;z-index:1}
-.activity-title{font-family:'Epilogue', sans-serif;font-size:clamp(2.5rem,7vw,6.5rem);color:var(--white);line-height:.86;margin-bottom:48px;position:relative;z-index:1}
+.activity-title{font-family:'Epilogue', sans-serif;font-size:clamp(2.5rem,7vw,6.5rem);color:var(--white);line-height:.86;margin-bottom:48px;position:relative;z-index:1;padding-left:8px}
 .activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1060px;position:relative;z-index:1}
 .activity-step{border-left:1px solid rgba(221,213,192,.08);padding-left:22px;transition:border-color .5s}
 .activity-step.active{border-color:var(--terra)}
@@ -227,14 +227,6 @@ nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;p
 .pdf-trigger{display:inline-flex;align-items:center;gap:12px;padding:13px 26px;border:1px solid rgba(255,255,255,.1);color:var(--cream2);font-family:'Space Mono',monospace;font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s;background:transparent;margin-top:18px}
 .pdf-trigger:hover{border-color:var(--terra);color:var(--white);background:rgba(184,56,24,.07)}
 .pdf-trigger::before{content:'↗';font-size:.85rem;color:var(--terra)}
-.pdf-modal{position:fixed;inset:0;z-index:9000;display:none;align-items:center;justify-content:center;background:rgba(7,6,10,.94);backdrop-filter:blur(20px)}
-.pdf-modal.open{display:flex}
-.pdf-modal-inner{width:90vw;max-width:1080px;height:88vh;display:flex;flex-direction:column}
-.pdf-modal-header{display:flex;justify-content:space-between;align-items:center;padding:14px 0 12px;border-bottom:1px solid var(--line)}
-.pdf-modal-title{font-family:'Inter', sans-serif;font-style:italic;font-size:1.05rem;color:var(--cream2)}
-.pdf-close{background:none;border:none;color:var(--cream2);font-size:1.3rem;cursor:pointer;padding:4px 8px;transition:color .2s;line-height:1}
-.pdf-close:hover{color:var(--white)}
-.pdf-frame{flex:1;border:none;background:#111;margin-top:10px}
 
 /* ─── LEVAR GRANDÃO ─── */
 .levar-big-sec{padding:120px 60px;position:relative;overflow:hidden;min-height:90vh;display:flex;flex-direction:column;justify-content:center}
@@ -314,17 +306,6 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
 </head>
 <body >
 <div id="cur" style="left: 1021px; top: 18px;"></div><div id="cur2" style="left: 997.008px; top: 27.2855px; transform: translate(-50%, -50%) scale(1);"></div><div id="prog" style="width: 70.2671%;"></div>
-
-<!-- PDF MODAL -->
-<div class="pdf-modal" id="pdfModal">
-  <div class="pdf-modal-inner">
-    <div class="pdf-modal-header">
-      <span class="pdf-modal-title">Aranha — Tratamento Visual &amp; Set Design 3D</span>
-      <button class="pdf-close" onclick="closePDF()">✕</button>
-    </div>
-    <iframe class="pdf-frame" id="pdfFrame" src="" loading="lazy"></iframe>
-  </div>
-</div>
 
 <!-- NAV -->
 <nav id="nav" class="on">
@@ -906,7 +887,7 @@ Para ao ver a porta arrombada.
 
 <!-- 13 Arte do Desapego — FULL WIDTH -->
 <div class="reveal fade-up" data-section="mod13" style="position:relative;overflow:hidden;width:100%">
-  <img src="fotos/pb-rua-noite.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;filter:brightness(.75) contrast(1.1);z-index:0;pointer-events:none">
+  <img src="fotos/pb-rua-noite.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.85;filter:brightness(.75) contrast(1.1);z-index:0;pointer-events:none">
   <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
   <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)" >
     <p class="mod-label draggable">13 — A Arte do Desapego</p>
@@ -994,7 +975,7 @@ Para ao ver a porta arrombada.
       <span class="alt" style="font-size:.38em;display:block;margin-top:8px">Letrux</span>
     </h2>
     <p class="proj-sub">Letrux · Direção Vini Poffo &amp; Sillas H · Realização SUFE &amp; Lei Paulo Gustavo</p>
-    <button class="pdf-trigger" onclick="openPDF()">Ver tratamentoual completo (PDF)</button>
+    <a href="https://raw.githubusercontent.com/v-poffo/vini-poffo-masterclass/main/aranha_tratamento.pdf" target="_blank" class="pdf-trigger" style="text-decoration:none;display:inline-flex">Ver tratamento visual completo (PDF)</a>
   </div>
 </div>
 
@@ -1219,18 +1200,5 @@ if(vidDropar&&vidVira&&dualTitle){
   },5000);
 }
 
-// ── PDF Modal ──
-const pdfModal=document.getElementById('pdfModal');
-const pdfFrame=document.getElementById('pdfFrame');
-document.querySelectorAll('.pdf-trigger').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    if(pdfFrame)pdfFrame.src=btn.dataset.src||'';
-    if(pdfModal)pdfModal.style.display='flex';
-  });
-});
-document.getElementById('pdfClose')?.addEventListener('click',()=>{
-  if(pdfModal)pdfModal.style.display='none';
-  if(pdfFrame)pdfFrame.src='';
-});
 </script>
 </body></html>
