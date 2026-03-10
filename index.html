@@ -1270,5 +1270,60 @@ document.addEventListener('keydown', function(e) {
     closePDF();
   }
 });
+
+
+// ═══════════════════════════════════════════════════
+// PDF POPUP (ARANHA) - VERSÃO CORRIGIDA
+// ═══════════════════════════════════════════════════
+function openPDF() {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  
+  if (modal && frame) {
+    // URL do PDF (CONFIRMADO NO GITHUB: aranha_tratamento.pdf existe!)
+    frame.src = 'https://raw.githubusercontent.com/v-poffo/vini-poffo-masterclass/main/aranha_tratamento.pdf';
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    console.log('✓ PDF carregando:', frame.src);
+  }
+}
+
+function closePDF() {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  
+  if (modal && frame) {
+    modal.classList.remove('open');
+    // Aguardar animação antes de limpar
+    setTimeout(() => {
+      frame.src = '';
+    }, 300);
+    document.body.style.overflow = '';
+    console.log('✓ PDF fechado');
+  }
+}
+
+// FECHAR COM ESC
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('pdfModal');
+    if (modal && modal.classList.contains('open')) {
+      closePDF();
+    }
+  }
+});
+
+// FECHAR AO CLICAR FORA (no fundo escuro)
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('pdfModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      // Se clicou no fundo (não no conteúdo interno)
+      if (e.target === modal) {
+        closePDF();
+      }
+    });
+  }
+});
 </script>
 </body></html>
