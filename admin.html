@@ -381,13 +381,35 @@ async function doLogin() {
 // ═══════════════════════════════════════════════════
 function initAdmin() {
   const iframe = document.getElementById('site-iframe');
-  iframe.addEventListener('load', () => {
+
+  function onIframeReady() {
     iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-    injectAdminStyles();
-    setupIframeInteraction();
-    setStatus('', 'Pronto para editar');
-    showToast('Painel carregado. Clique em qualquer elemento para editar.', 'info');
-  });
+    // Aguardar o documento estar completo
+    if (iframeDoc.readyState === 'complete') {
+      injectAdminStyles();
+      setupIframeInteraction();
+      setStatus('', 'Pronto para editar');
+      showToast('Painel carregado. Clique em qualquer elemento para editar.', 'info');
+    } else {
+      iframeDoc.addEventListener('DOMContentLoaded', () => {
+        injectAdminStyles();
+        setupIframeInteraction();
+        setStatus('', 'Pronto para editar');
+        showToast('Painel carregado. Clique em qualquer elemento para editar.', 'info');
+      });
+    }
+  }
+
+  // Se o iframe já carregou (caso comum quando login é feito depois)
+  if (iframe.contentDocument && iframe.contentDocument.readyState === 'complete') {
+    onIframeReady();
+  } else {
+    // Ainda não carregou — aguardar o evento load
+    iframe.addEventListener('load', onIframeReady);
+    // Forçar reload para garantir que o evento dispare
+    iframe.src = '/';
+  }
+
   document.getElementById('save-btn').addEventListener('click', saveChanges);
 }
 
