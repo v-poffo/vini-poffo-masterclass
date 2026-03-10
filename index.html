@@ -4,340 +4,378 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Roteiro & Direção de Videoclipe — Vini Poffo</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,700;1,9..144,900&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,700;1,300;1,500;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 :root{
-  --bg:#050504;
-  --terra:#c94a1a;
-  --terra-d:#7a2e10;
-  --moss:#5a7a4a;
-  --petrol:#1e4a52;
-  --mustard:#c8920a;
-  --cream:#e8e0cc;
-  --cream2:#a89880;
-  --muted:#504840;
-  --white:#f5f0e8;
-  --accent1:#c94a1a;
-  --accent2:#5a7a4a;
-  --accent3:#1e4a52;
+  --bg:#0a0905;
+  --bg2:#0f0e0b;
+  --petrol:#0e3a52;
+  --petrol-l:#1e6080;
+  --moss:#4a5c28;
+  --moss-l:#6b7a3a;
+  --sage:#8a9a5a;
+  --terra:#c94020;
+  --terra-d:#7a2810;
+  --ocre:#c9a030;
+  --cream:#e8dfc8;
+  --cream2:#a89870;
+  --muted:#504838;
+  --white:#f2ead8;
+  --cyan:#00c8e0;
 }
-body{background:var(--bg);color:var(--cream);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:none}
-body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
-#cur{position:fixed;width:8px;height:8px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:difference}
-#cur2{position:fixed;width:36px;height:36px;border:1px solid rgba(201,74,26,.4);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .25s ease-out}
-#prog{position:fixed;top:0;left:0;height:1px;z-index:9000;width:0%;background:var(--terra)}
+body{background:var(--bg);color:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
 
-/* REVEAL ANIMATIONS */
-.reveal{opacity:0;transform:translateY(60px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
-.reveal.from-l{transform:translateX(-70px) translateY(0)}
-.reveal.from-r{transform:translateX(70px) translateY(0)}
-.reveal.su{transform:scale(.96)}
+/* GRAIN TEXTURE */
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+/* CURSOR */
+#cur{position:fixed;width:6px;height:6px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:transform .1s}
+#cur2{position:fixed;width:32px;height:32px;border:1px solid rgba(201,64,32,.35);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .3s cubic-bezier(.16,1,.3,1)}
+
+/* PROGRESS */
+#prog{position:fixed;top:0;left:0;height:1px;z-index:9000;width:0%;background:var(--terra);transition:width .1s}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(48px);transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1)}
+.reveal.from-l{transform:translateX(-60px) translateY(0)}
+.reveal.from-r{transform:translateX(60px) translateY(0)}
+.reveal.scale-in{transform:scale(.94)}
 .reveal.visible{opacity:1;transform:none}
-.d1{transition-delay:.15s}.d2{transition-delay:.3s}.d3{transition-delay:.45s}.d4{transition-delay:.6s}
+.d1{transition-delay:.18s}.d2{transition-delay:.36s}.d3{transition-delay:.54s}.d4{transition-delay:.72s}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:20px 56px;display:flex;justify-content:flex-end;align-items:center;transition:background .5s}
-nav.scrolled{background:rgba(5,5,4,.96);backdrop-filter:blur(20px)}
-.nav-brand{display:none}
-.nav-links{display:flex;gap:36px;list-style:none}
-.nav-links a{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(232,224,204,.35);text-decoration:none;transition:color .3s;cursor:none;font-weight:500}
+nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:22px 60px;display:flex;justify-content:flex-end;align-items:center;transition:background .5s,backdrop-filter .5s}
+nav.scrolled{background:rgba(10,9,5,.94);backdrop-filter:blur(24px)}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.22em;text-transform:lowercase;color:rgba(232,223,200,.3);text-decoration:none;transition:color .3s;cursor:none}
+.nav-links a::before{content:'_'}
 .nav-links a:hover{color:var(--white)}
 
 /* HERO */
 #hero{position:relative;height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.45;z-index:0}
-#hero video.hero-bg{opacity:.5}
-.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,0) 0%,rgba(5,5,4,.3) 40%,rgba(5,5,4,.95) 100%);z-index:1}
-.hero-content{position:relative;z-index:2;padding:0 56px 90px;width:100%}
-.hero-ey{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--terra);margin-bottom:18px;display:flex;align-items:center;gap:18px;font-weight:500}
-.hero-ey::before{content:'';width:44px;height:1px;background:var(--terra)}
-.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,17vw,16rem);line-height:.82;color:var(--white);margin-bottom:32px;letter-spacing:-.01em}
-.hero-h1 .acc{color:var(--terra);-webkit-text-stroke:0}
-.hero-sub{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--cream2);line-height:1.5}
-.scroll-hint{position:absolute;right:56px;bottom:40px;font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(232,224,204,.3);display:flex;flex-direction:column;align-items:center;gap:12px;cursor:none;animation:scrollPulse 2.5s ease-in-out infinite}
-@keyframes scrollPulse{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:.7;transform:translateY(6px)}}
-.scroll-hint::after{content:'';width:1px;height:60px;background:linear-gradient(to bottom,rgba(232,224,204,.3),transparent)}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.5;z-index:0}
+#hero video.hero-bg{opacity:.55}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,5,0) 0%,rgba(10,9,5,.25) 45%,rgba(10,9,5,.97) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;padding:0 60px 100px;width:100%}
+.hero-eyebrow{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;display:flex;align-items:center;gap:20px;font-weight:400}
+.hero-eyebrow::before{content:'';width:40px;height:1px;background:var(--terra)}
+.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(6rem,17vw,16rem);line-height:.82;color:var(--white);margin-bottom:28px;letter-spacing:-.01em}
+.hero-h1 span{color:var(--terra)}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,1.8vw,1.4rem);color:var(--cream2);line-height:1.5}
+.scroll-hint{position:absolute;right:60px;bottom:44px;font-size:.42rem;letter-spacing:.22em;text-transform:lowercase;color:rgba(232,223,200,.25);display:flex;flex-direction:column;align-items:center;gap:14px;cursor:none;animation:spulse 2.5s ease-in-out infinite}
+@keyframes spulse{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:.6;transform:translateY(6px)}}
+.scroll-hint::after{content:'';width:1px;height:56px;background:linear-gradient(to bottom,rgba(232,223,200,.25),transparent)}
 
-/* ABERTURA — EDITORIAL SPLIT */
-#abertura{padding:120px 56px;position:relative;overflow:hidden}
-.ab-g{display:grid;grid-template-columns:1.2fr 1fr;gap:100px;align-items:start}
-.ab-q{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;color:var(--white)}
+/* ABERTURA */
+#abertura{padding:130px 60px;position:relative;overflow:hidden}
+.ab-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:110px;align-items:start}
+.ab-q{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(2.2rem,4.5vw,4rem);line-height:1.0;color:var(--white);letter-spacing:-.01em}
 .ab-q em{font-style:italic;color:var(--terra)}
-.ab-b p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.15rem;color:var(--cream2);line-height:1.9;margin-bottom:1.2rem}
-.ab-div{width:40px;height:2px;background:var(--terra);margin:22px 0}
+.ab-body p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.2rem;color:var(--cream2);line-height:1.95;margin-bottom:1.2rem}
+.ab-rule{width:36px;height:1px;background:var(--terra);margin:24px 0}
+
+/* STATEMENT SECTION — texto enorme */
+.statement{padding:90px 60px 70px;position:relative;overflow:hidden}
+.statement-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,8.5rem);line-height:.86;color:var(--white);letter-spacing:-.01em;max-width:1200px}
+.statement-big span{color:var(--terra)}
+.statement-cols{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:60px;max-width:1000px}
+.statement-cols p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.15rem;color:var(--cream2);line-height:1.9}
 
 /* FULL-WIDTH IMAGE */
 .fw{width:100%;display:block;object-fit:cover}
-.fw.h50{height:50vh}.fw.h65{height:70vh}.fw.h80{height:85vh}
+.fw.h50{height:50vh}.fw.h65{height:68vh}.fw.h80{height:85vh}
 
-/* SECTION HEADERS — PARTE 01 / 02 */
-.pw{position:relative;overflow:visible;padding:100px 56px 60px;max-width:none}
-.pg{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:32vw;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.03);right:-2%;top:-15%;pointer-events:none;user-select:none;line-height:1;z-index:0}
-.pk{font-size:.52rem;letter-spacing:.35em;text-transform:uppercase;color:var(--terra);margin-bottom:16px;display:flex;align-items:center;gap:14px;font-weight:500;position:relative;z-index:1}
-.pk::before{content:'';width:28px;height:1px;background:var(--terra)}
-.ph2{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,14vw,13rem);line-height:.84;color:var(--white);position:relative;z-index:1;letter-spacing:-.01em}
-.ph2 em{color:var(--terra);font-style:italic;font-family:'Fraunces',serif;font-weight:900}
-.pi{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);margin-top:28px;max-width:600px;line-height:1.75;position:relative;z-index:1}
+/* SECTION HEADER */
+.sec-head{position:relative;overflow:visible;padding:110px 60px 60px}
+.sec-num{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:30vw;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.025);right:-1%;top:-12%;pointer-events:none;user-select:none;line-height:1;z-index:0}
+.sec-label{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--terra);margin-bottom:18px;display:flex;align-items:center;gap:14px;font-weight:400;position:relative;z-index:1}
+.sec-label::before{content:'';width:26px;height:1px;background:var(--terra)}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,13vw,12rem);line-height:.84;color:var(--white);position:relative;z-index:1;letter-spacing:-.01em}
+.sec-title em{color:var(--terra);font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:700}
+.sec-intro{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);margin-top:28px;max-width:600px;line-height:1.8;position:relative;z-index:1}
 
 /* CONTENT MODULES */
-.cw{max-width:1280px;margin:0 auto;padding:0 56px}
-.mod{padding:64px 0;border-top:1px solid rgba(255,255,255,.06)}
-.mn{font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);margin-bottom:12px;font-weight:500}
-.mh{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.5rem,2.5vw,2.2rem);color:var(--white);margin-bottom:20px;line-height:1.1}
-.mh em{font-style:italic;color:rgba(232,224,204,.4)}
-.mb{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.9;max-width:640px;margin-bottom:20px}
-.m2{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.cw{max-width:1300px;margin:0 auto;padding:0 60px}
+.mod{padding:68px 0;border-top:1px solid rgba(255,255,255,.055)}
+.mod-label{font-size:.46rem;letter-spacing:.26em;text-transform:uppercase;color:var(--terra);margin-bottom:14px;font-weight:400}
+.mod-h{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(1.6rem,2.8vw,2.4rem);color:var(--white);margin-bottom:22px;line-height:1.05}
+.mod-h em{font-style:italic;color:rgba(232,223,200,.35)}
+.mod-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.9;max-width:640px;margin-bottom:22px}
+.mod-2col{display:grid;grid-template-columns:1fr 1fr;gap:68px;align-items:start}
 .il{list-style:none;padding:0}
-.il li{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.95rem;color:rgba(232,224,204,.55);display:flex;gap:12px;line-height:1.6}
-.il li::before{content:'—';color:var(--terra);flex-shrink:0;font-style:normal;font-size:.75rem;margin-top:3px}
+.il li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.045);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1rem;color:rgba(232,223,200,.5);display:flex;gap:14px;line-height:1.65}
+.il li::before{content:'—';color:var(--terra);flex-shrink:0;font-style:normal;font-size:.75rem;margin-top:4px}
 .il li strong{color:var(--cream);font-style:normal}
-.co{background:rgba(255,255,255,.025);padding:40px 36px;border-left:3px solid var(--terra)}
-.co-t{font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--terra);margin-bottom:16px;font-weight:500}
-.co p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);line-height:1.85}
-.co strong{color:var(--white);font-style:normal}
+.callout{background:rgba(255,255,255,.02);padding:40px 36px;border-left:2px solid var(--terra)}
+.callout-label{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin-bottom:14px;font-weight:400}
+.callout p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);line-height:1.9}
+.callout strong{color:var(--white);font-style:normal}
 
 /* IMAGE GRIDS */
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px}
-.g21{display:grid;grid-template-columns:2fr 1fr;gap:4px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:3px}
 .gi{width:100%;display:block;object-fit:cover}
-.gi.h3{height:320px}.gi.h4{height:440px}.gi.h5{height:560px}
+.gi.h3{height:300px}.gi.h4{height:420px}.gi.h5{height:540px}
 
-/* EDITORIAL IMAGE OVERLAP SECTION */
-.editorial{position:relative;min-height:80vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
-.editorial-img{position:relative;overflow:hidden}
-.editorial-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease}
-.editorial-img:hover img{transform:scale(1.04)}
-.editorial-text{display:flex;flex-direction:column;justify-content:flex-end;padding:80px 56px;background:var(--bg)}
-.editorial-text .big-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);line-height:.85;color:var(--white);margin-bottom:28px}
-.editorial-text .big-label em{color:var(--terra);font-family:'Fraunces',serif;font-style:italic;font-weight:900}
+/* EDITORIAL SPLIT */
+.ed-split{display:grid;grid-template-columns:1fr 1fr;min-height:75vh;overflow:hidden}
+.ed-img{position:relative;overflow:hidden}
+.ed-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 8s ease}
+.ed-img:hover img{transform:scale(1.04)}
+.ed-txt{display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px;background:var(--bg2)}
+.ed-big{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6.5rem);line-height:.86;color:var(--white);margin-bottom:28px}
+.ed-big em{color:var(--terra);font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700}
+
+/* TEXTURE BG SECTION */
+.tex-sec{position:relative;overflow:hidden;padding:120px 60px}
+.tex-sec .tex-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.tex-sec .tex-overlay{position:absolute;inset:0;z-index:1}
+.tex-sec .tex-content{position:relative;z-index:2}
 
 /* VIDEO SECTIONS */
-.vw{position:relative;background:#000}
-.vw video{width:100%;display:block;max-height:85vh;object-fit:cover;opacity:.9}
-.vo{position:absolute;inset:0;background:linear-gradient(to top,rgba(5,5,4,.95) 0%,transparent 55%);pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;padding:56px}
-.vt{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--white);line-height:1}
-.vm{font-size:.45rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.vid-wrap{position:relative;background:#000}
+.vid-wrap video{width:100%;display:block;max-height:88vh;object-fit:cover;opacity:.88}
+.vid-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,5,.95) 0%,transparent 55%);pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;padding:60px}
+.vid-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--white);line-height:1}
+.vid-meta{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:10px}
 
 /* YOUTUBE GRID */
-.yw{position:relative;width:100%;aspect-ratio:16/9;background:#0a0a0a;margin:0 auto}
-.yw iframe{width:100%;height:100%;display:block;border:none}
-.y-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:none;margin:0}
-.y-grid .yw{aspect-ratio:16/9;width:100%}
-.y-grid .yl{padding:14px 0;background:none}
-@media (max-width: 768px){.y-grid{grid-template-columns:1fr}}
-.yl{padding:18px 56px;background:rgba(0,0,0,.5)}
-.yl-t{font-family:'Fraunces',serif;font-style:italic;font-size:1rem;color:var(--cream2)}
-.yl-m{font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+.yt-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.yt-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#080808}
+.yt-wrap iframe{width:100%;height:100%;display:block;border:none}
+.yt-label{padding:16px 24px;background:rgba(0,0,0,.6)}
+.yt-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.05rem;color:var(--cream2)}
+.yt-meta{font-size:.4rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+@media(max-width:768px){.yt-grid{grid-template-columns:1fr}}
 
-/* CANVA / TREATMENT SECTIONS */
-.cs{background:#070706;padding:70px 56px}
-.ck{font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;color:var(--moss);margin-bottom:16px;display:flex;align-items:center;gap:14px;font-weight:500}
-.ck::before{content:'';width:22px;height:1px;background:var(--moss)}
-.ct{font-family:'Fraunces',serif;font-weight:700;font-size:1.4rem;color:var(--white);margin-bottom:8px}
-.cs2{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.95rem;color:var(--cream2);margin-bottom:28px}
-.cf{width:100%;aspect-ratio:16/9;border:none;display:block;background:#111}
+/* CANVA TREATMENT */
+.treatment{padding:72px 60px;background:var(--bg2)}
+.treatment-label{font-size:.46rem;letter-spacing:.26em;text-transform:uppercase;color:var(--moss-l);margin-bottom:16px;display:flex;align-items:center;gap:14px;font-weight:400}
+.treatment-label::before{content:'';width:20px;height:1px;background:var(--moss-l)}
+.treatment-title{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.5rem;color:var(--white);margin-bottom:8px}
+.treatment-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);margin-bottom:28px}
+.treatment-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#111}
 
 /* ARANHA HERO */
-.ow{position:relative;overflow:hidden}
-.ow img{width:100%;height:80vh;object-fit:cover;display:block}
-.ot{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 56px;background:linear-gradient(to top,rgba(5,5,4,.9) 0%,transparent 60%)}
-.ob{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,13vw,12rem);line-height:.82;color:var(--white);letter-spacing:-.01em}
-.os{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.2rem;color:var(--cream2);margin-top:24px;max-width:500px;line-height:1.65}
+.project-hero{position:relative;overflow:hidden}
+.project-hero img{width:100%;height:80vh;object-fit:cover;display:block}
+.project-hero-overlay{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 60px;background:linear-gradient(to top,rgba(10,9,5,.92) 0%,transparent 60%)}
+.project-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,13vw,12rem);line-height:.82;color:var(--white);letter-spacing:-.01em}
+.project-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.2rem;color:var(--cream2);margin-top:24px;max-width:520px;line-height:1.65}
 
-/* QUOTE BLOCK */
-.qb{padding:120px 56px;text-align:center;position:relative;overflow:hidden}
-.qb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,74,26,.08) 0%,transparent 70%)}
-.qb-t{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1.8rem,3.5vw,3.2rem);color:var(--white);line-height:1.3;max-width:900px;margin:0 auto 24px;position:relative}
-.qb-l{width:44px;height:1px;background:var(--terra);margin:22px auto}
-.qb-a{font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+/* QUOTE */
+.quote-block{padding:130px 60px;text-align:center;position:relative;overflow:hidden}
+.quote-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,64,32,.06) 0%,transparent 70%)}
+.quote-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:clamp(1.8rem,3.5vw,3.2rem);color:var(--white);line-height:1.3;max-width:900px;margin:0 auto 24px;position:relative}
+.quote-rule{width:40px;height:1px;background:var(--terra);margin:24px auto}
+.quote-author{font-size:.46rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted)}
 
 /* ATIVIDADE */
-.atv{background:var(--terra-d);padding:72px 56px}
-.atv-k{font-size:.48rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(240,236,228,.4);margin-bottom:16px}
-.atv-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);color:var(--white);line-height:.85;margin-bottom:40px}
-.atv-g{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;margin:0 auto}
-.atv-s{border-left:2px solid rgba(240,236,228,.15);padding-left:22px}
-.atv-n{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;color:rgba(240,236,228,.1);line-height:1}
-.atv-ti{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:8px}
-.atv-d{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.95rem;color:rgba(240,236,228,.6);line-height:1.8}
-.pdg{display:grid;grid-template-columns:1fr 1fr;gap:4px}
-.pdg img{width:100%;display:block;object-fit:cover;height:380px}
+.activity{padding:80px 60px}
+.activity-label{font-size:.46rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(240,235,220,.35);margin-bottom:18px}
+.activity-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7rem);color:var(--white);line-height:.85;margin-bottom:44px}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1100px;margin:0 auto}
+.activity-step{border-left:1px solid rgba(240,235,220,.12);padding-left:24px}
+.activity-num{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(240,235,220,.08);line-height:1}
+.activity-step-title{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:10px}
+.activity-step-body{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.98rem;color:rgba(240,235,220,.55);line-height:1.85}
+
+/* LINGUAGEM HIBRIDA — seção animada */
+.hybrid{padding:120px 60px;position:relative;overflow:hidden;min-height:80vh;display:flex;flex-direction:column;justify-content:center}
+.hybrid-kicker{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cyan);margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.hybrid-kicker::before{content:'';width:26px;height:1px;background:var(--cyan)}
+.hybrid-items{display:flex;flex-direction:column;gap:0}
+.hybrid-item{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,9vw,8rem);line-height:.9;color:rgba(255,255,255,.08);transition:color .4s,transform .4s;cursor:default;padding:8px 0;letter-spacing:-.01em}
+.hybrid-item.active,.hybrid-item:hover{color:var(--white);transform:translateX(12px)}
+.hybrid-item span{color:var(--terra)}
+
+/* MOSAICO */
+.mosaic-sec{position:relative;overflow:hidden}
+.mosaic-sec img{width:100%;display:block;max-height:90vh;object-fit:cover;object-position:center top}
+.mosaic-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,9,5,.6) 0%,transparent 30%,transparent 70%,rgba(10,9,5,.8) 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:60px}
+.mosaic-label{font-size:.46rem;letter-spacing:.26em;text-transform:uppercase;color:rgba(232,223,200,.4);margin-bottom:10px}
+.mosaic-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);color:var(--white);line-height:.88}
 
 /* ENCERRAMENTO */
-#enc{background:var(--bg);position:relative;overflow:hidden}
-#enc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(90,122,74,.04) 0%,rgba(30,74,82,.04) 100%);pointer-events:none}
-.enc-in{padding:100px 56px 70px;max-width:1400px;margin:0 auto}
-.enc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);line-height:.84;color:var(--white);letter-spacing:-.01em}
-.enc-h em{color:var(--terra);font-style:italic;font-family:'Fraunces',serif;font-weight:900}
-.pills{display:grid;grid-template-columns:1fr 1fr;gap:3px;position:relative;z-index:1}
-.pill{padding:56px 48px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:background .4s;border-top:2px solid transparent}
-.pill:hover{background:rgba(255,255,255,.04)}
+#enc{background:var(--bg);position:relative;overflow:hidden;padding:110px 60px 80px}
+.enc-label{font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ocre);margin-bottom:20px;display:flex;align-items:center;gap:14px}
+.enc-label::before{content:'';width:26px;height:1px;background:var(--ocre)}
+.enc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);line-height:.84;color:var(--white);letter-spacing:-.01em;margin-bottom:70px}
+.enc-h em{color:var(--terra);font-style:italic;font-family:'Cormorant Garamond',serif;font-weight:700}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.pill{padding:56px 48px;background:rgba(255,255,255,.018);position:relative;overflow:hidden;transition:background .4s;border-top:1px solid transparent}
+.pill:hover{background:rgba(255,255,255,.035)}
 .pill:nth-child(1){border-top-color:var(--terra)}
-.pill:nth-child(2){border-top-color:var(--moss)}
-.pill:nth-child(3){border-top-color:var(--petrol)}
-.pill:nth-child(4){border-top-color:var(--mustard)}
-.pill-n{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(255,255,255,.04);line-height:1;margin-bottom:16px}
-.pill h3{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:10px;line-height:1.2}
-.pill p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.95rem;color:var(--cream2);line-height:1.8}
+.pill:nth-child(2){border-top-color:var(--moss-l)}
+.pill:nth-child(3){border-top-color:var(--petrol-l)}
+.pill:nth-child(4){border-top-color:var(--ocre)}
+.pill-n{font-family:'Bebas Neue',sans-serif;font-size:6rem;color:rgba(255,255,255,.035);line-height:1;margin-bottom:18px}
+.pill h3{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:1.25rem;color:var(--white);margin-bottom:12px;line-height:1.2}
+.pill p{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:.98rem;color:var(--cream2);line-height:1.85}
 
 /* NUVEM NEGRA */
 #nn{padding:100px 0 0}
-.nn-h2{padding:0 56px 48px;max-width:1400px;margin:0 auto}
-.nn-k{font-size:.48rem;letter-spacing:.28em;text-transform:uppercase;color:var(--mustard);margin-bottom:14px;display:flex;align-items:center;gap:14px;font-weight:500}
-.nn-k::before{content:'';width:22px;height:1px;background:var(--mustard)}
-.nn-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);color:var(--white);line-height:.84;margin-bottom:16px;letter-spacing:-.01em}
-.nn-s{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);max-width:500px;line-height:1.7}
+.nn-head{padding:0 60px 50px}
+.nn-label{font-size:.46rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ocre);margin-bottom:16px;display:flex;align-items:center;gap:14px;font-weight:400}
+.nn-label::before{content:'';width:20px;height:1px;background:var(--ocre)}
+.nn-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);color:var(--white);line-height:.84;margin-bottom:18px;letter-spacing:-.01em}
+.nn-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);max-width:500px;line-height:1.75}
 
 /* REFS */
-#refs{padding:100px 56px;max-width:1280px;margin:0 auto}
-.refs-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);color:var(--white);margin-bottom:60px;letter-spacing:-.01em}
-.r2{display:grid;grid-template-columns:1fr 1fr;gap:90px}
-.rct{font-size:.45rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:24px;font-weight:500}
-.ri{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;gap:14px;align-items:start}
-.rd{width:4px;height:4px;background:var(--mustard);border-radius:50%;flex-shrink:0;margin-top:10px}
-.rn{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--cream);margin-bottom:4px}
-.rdesc{font-size:.44rem;letter-spacing:.08em;color:var(--muted);line-height:1.65}
-.mv{padding:14px 18px;border-left:2px solid rgba(255,255,255,.05);margin-bottom:6px;transition:all .25s}
-.mv:hover{border-color:var(--mustard);background:rgba(255,255,255,.02)}
-.mn2{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--cream)}
-.my{font-size:.42rem;letter-spacing:.1em;color:var(--muted);margin-top:4px}
+#refs{padding:100px 60px;max-width:1300px;margin:0 auto}
+.refs-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,6rem);color:var(--white);margin-bottom:64px;letter-spacing:-.01em}
+.refs-2col{display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.ref-cat{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.055);margin-bottom:26px;font-weight:400}
+.ref-item{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.035);display:flex;gap:14px;align-items:start}
+.ref-dot{width:4px;height:4px;background:var(--ocre);border-radius:50%;flex-shrink:0;margin-top:11px}
+.ref-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.98rem;color:var(--cream);margin-bottom:4px}
+.ref-desc{font-size:.42rem;letter-spacing:.07em;color:var(--muted);line-height:1.7}
+.ref-movie{padding:14px 18px;border-left:1px solid rgba(255,255,255,.045);margin-bottom:6px;transition:all .25s}
+.ref-movie:hover{border-color:var(--ocre);background:rgba(255,255,255,.018)}
+.ref-movie-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.98rem;color:var(--cream)}
+.ref-movie-year{font-size:.4rem;letter-spacing:.1em;color:var(--muted);margin-top:4px}
 
 /* FOOTER */
-footer{border-top:1px solid rgba(255,255,255,.05);padding:52px 56px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:28px;margin-top:100px}
-.fn{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.5rem;color:var(--cream2)}
-.fi{font-size:.44rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:2.2;text-align:right}
-.fc{font-family:'Fraunces',serif;font-style:italic;font-size:.85rem;color:var(--muted);text-align:right}
+footer{border-top:1px solid rgba(255,255,255,.045);padding:52px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:28px;margin-top:100px}
+.footer-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:700;font-size:1.5rem;color:var(--cream2)}
+.footer-info{font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:2.2;text-align:right}
 
 /* RESPONSIVE */
 @media(max-width:900px){
-.ab-g,.m2,.atv-g,.r2,.pills,.g2,.g3,.g21,.pdg,.editorial,.y-grid{grid-template-columns:1fr}
+.ab-grid,.mod-2col,.activity-grid,.refs-2col,.pills,.g2,.g3,.g21,.ed-split,.yt-grid,.statement-cols{grid-template-columns:1fr}
 nav{padding:16px 24px}.nav-links{display:none}
 #cur,#cur2{display:none}body{cursor:auto}
-.cw,#abertura,#refs,.pw,.cs,.atv,.enc-in,.nn-h2,.yl,footer{padding-left:24px;padding-right:24px}
-.hero-content{padding:0 24px 60px}.ot{padding:44px 24px}.qb{padding:70px 24px}.vo{padding:32px 24px}
-.editorial-text{padding:48px 24px}
+.cw,#abertura,#refs,.sec-head,.treatment,.activity,.enc-in,.nn-head,.quote-block,footer,.statement,.hybrid{padding-left:24px;padding-right:24px}
+.hero-content{padding:0 24px 64px}.project-hero-overlay{padding:44px 24px}.vid-overlay{padding:32px 24px}.mosaic-overlay{padding:44px 24px}
+.ed-txt{padding:48px 24px}
 }
 </style>
 </head>
 <body>
 <div id="cur"></div><div id="cur2"></div><div id="prog"></div>
 
+<!-- NAV -->
 <nav id="nav">
-  <span class="nav-brand">Vini Poffo</span>
   <ul class="nav-links">
-    <li><a href="#roteiro">Roteiro</a></li>
-    <li><a href="#direcao">Direção</a></li>
-    <li><a href="#enc">Encerramento</a></li>
-    <li><a href="#refs">Referências</a></li>
+    <li><a href="#roteiro">roteiro</a></li>
+    <li><a href="#direcao">direção</a></li>
+    <li><a href="#enc">encerramento</a></li>
+    <li><a href="#refs">referências</a></li>
   </ul>
 </nav>
 
+<!-- HERO — vídeo de fundo -->
 <section id="hero">
   <video class="hero-bg" autoplay muted loop playsinline>
     <source src="video/dropar_portfolio_video.mp4" type="video/mp4">
   </video>
+  <img class="hero-bg" src="fotos/subaquatica-hero.png" alt="still" style="display:none" onerror="this.style.display='none'" onload="if(!document.querySelector('#hero video source').src.includes('dropar'))this.style.display='block'">
   <div class="hero-grad"></div>
   <div class="hero-content">
-    <p class="hero-ey reveal">Masterclass · Imagem, Processo e Decisão</p>
-    <h1 class="hero-h1 reveal d1">Roteiro<br><span class="acc">&amp;</span> Direção<br>de Videoclipe</h1>
+    <p class="hero-eyebrow reveal">Masterclass · Imagem, Processo e Decisão</p>
+    <h1 class="hero-h1 reveal d1">Roteiro<br><span>&amp;</span> Direção<br>de Videoclipe</h1>
     <p class="hero-sub reveal d2">Cineasta e Diretora Criativa</p>
   </div>
   <div class="scroll-hint reveal d3">rolar</div>
 </section>
 
-<section id="abertura" style="position:relative; overflow:hidden; padding: 130px 56px;">
-  <img src="fotos/pb-rua-noite.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.12; z-index:0; filter:brightness(.6) contrast(1.1);" alt="bg">
-  <div class="ab-g" style="position:relative; z-index:1;">
+<!-- ABERTURA — pergunta inicial -->
+<section id="abertura">
+  <img src="fotos/pb-rua-noite.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.1;z-index:0;filter:brightness(.5) contrast(1.1)" alt="">
+  <div class="ab-grid" style="position:relative;z-index:1">
     <div class="reveal from-l">
-<div class="ab-q" style="font-size:clamp(1.8rem,3.2vw,2.8rem);">&ldquo;Qual imagem de um videoclipe ou filme ficou gravada em você <em>— e por quê?&rdquo;</em></div> </div>
+      <p class="ab-q">&ldquo;Qual imagem de um videoclipe ou filme ficou gravada em você <em>&mdash; e por quê?&rdquo;</em></p>
+    </div>
     <div class="reveal from-r d2">
-      <div class="ab-b">
-        <p style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,5vw,4.5rem);line-height:.9;color:var(--white);margin-bottom:1.2rem;letter-spacing:-.01em;">o que faz uma imagem atravessar o corpo?</p>
-        <div class="ab-div"></div>
-        <p style="font-size:1.2rem; line-height:1.9; font-family:'Fraunces',serif; font-style:italic; font-weight:300;">Não é uma aula sobre seguir regras. É sobre desenvolver um olhar — e depois colocar esse olhar em forma.</p>
+      <div class="ab-body">
+        <div class="ab-rule"></div>
+        <p>Não é uma aula sobre seguir regras. É sobre desenvolver um olhar &mdash; e depois colocar esse olhar em forma.</p>
       </div>
     </div>
   </div>
 </section>
 
-<div class="reveal su" style="position:relative;overflow:hidden;">
-  <img class="fw h65" src="fotos/subaquatica-mergulho.png" alt="still do clipe" style="object-position:center 30%;filter:brightness(.85) contrast(1.05)">
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 60%,var(--bg) 100%)"></div>
+<!-- FOTO FULL-WIDTH — subaquática -->
+<div class="reveal scale-in" style="position:relative;overflow:hidden">
+  <img class="fw h65" src="fotos/subaquatica-hero.png" alt="still subaquático" style="object-position:center 40%;filter:brightness(.88) contrast(1.05)">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,var(--bg) 100%)"></div>
 </div>
 
-<!-- FRASE EDITORIAL GRANDE -->
-<div style="padding:80px 56px 60px;position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,.04)">
-  <p class="reveal" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,7.5rem);line-height:.88;color:var(--white);letter-spacing:-.01em;max-width:1100px;">No cinema, você só existe<br><span style="color:var(--terra);">se der para ver.</span></p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px;max-width:1000px;">
-    <p class="reveal d1" style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.85;">Um personagem que sente saudade na literatura pode ser descrito. No cinema, ele precisa ser mostrado.</p>
-    <p class="reveal d2" style="font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.85;">Literatura narra, descreve. Cinema mostra, sugere. Roteiro traduz — transforma o invisível em imagem possível.</p>
+<!-- STATEMENT — frase grande -->
+<div class="statement">
+  <p class="statement-big reveal">No cinema, você só existe<br><span>se der para ver.</span></p>
+  <div class="statement-cols">
+    <p class="reveal d1">Um personagem que sente saudade na literatura pode ser descrito em três parágrafos. No roteiro, você precisa decidir: qual é a imagem da saudade?</p>
+    <p class="reveal d2">Literatura narra, descreve, acessa o interno. Cinema mostra, sugere, externaliza. Roteiro traduz &mdash; transforma o invisível em imagem possível.</p>
   </div>
 </div>
 
-<div id="roteiro" style="position:relative; overflow:hidden;">
-  <img src="fotos/pb-estacao.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.15; z-index:0; filter:brightness(.5) contrast(1.1);" alt="bg">
-  <div class="pw" style="position:relative; z-index:1;">
-    <div class="pg parallax">01</div>
-    <p class="pk reveal">Parte 01</p>
-    <h2 class="ph2 reveal d1 parallax">Roteiro<br><em>Da Imagem</em><br>à Página</h2>
-    <p class="pi reveal d2">Um videoclipe não nasce de um texto. Ele nasce de uma sensação, de um ritmo ou de uma imagem que se recusa a ir embora. O roteiro é apenas o mapa para que essa imagem possa ser encontrada por outras pessoas.</p>
+<!-- ===== PARTE 01 — ROTEIRO ===== -->
+<div id="roteiro" style="position:relative;overflow:hidden">
+  <img src="fotos/textura-floresta.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12;z-index:0;filter:brightness(.4) contrast(1.2)" alt="">
+  <div class="sec-head" style="position:relative;z-index:1">
+    <div class="sec-num">01</div>
+    <p class="sec-label reveal">Parte 01</p>
+    <h2 class="sec-title reveal d1">Roteiro<br><em>Da Imagem</em><br>à Página</h2>
+    <p class="sec-intro reveal d2">Um videoclipe não nasce de um texto. Ele nasce de uma sensação, de um ritmo ou de uma imagem que se recusa a ir embora. O roteiro é apenas o mapa para que essa imagem possa ser encontrada por outras pessoas.</p>
   </div>
 </div>
 
 <div class="cw">
   <div class="mod reveal">
-    <div class="m2">
+    <div class="mod-2col">
       <div>
-        <p class="mn">01 — Linguagem Audiovisual</p>
-        <h3 class="mh">O cinema não descreve, <em>ele mostra</em></h3>
-        <p class="mb">No cinema, você só existe se der pra ver. Um personagem que 'sente saudade' na literatura pode ser descrito em três parágrafos. No roteiro, você precisa decidir: qual é a imagem da saudade?</p>
+        <p class="mod-label">01 — Linguagem Audiovisual</p>
+        <h3 class="mod-h">O cinema não descreve, <em>ele mostra</em></h3>
+        <p class="mod-body">No cinema, você só existe se der pra ver. Um personagem que 'sente saudade' na literatura pode ser descrito em três parágrafos. No roteiro, você precisa decidir: qual é a imagem da saudade?</p>
         <ul class="il">
           <li>Literatura narra, descreve, acessa o interno</li>
           <li>Cinema mostra, sugere, externaliza</li>
           <li>Roteiro traduz estado interno em imagem e som</li>
         </ul>
       </div>
-      <div class="co">
-        <p class="co-t">✦ Exercício de olhar</p>
-        <p>Escolham um sentimento.<br><br>Agora: qual seria a <strong>imagem</strong> desse sentimento? Não a explicação — a imagem.</p>
+      <div class="callout">
+        <p class="callout-label">✦ Exercício de olhar</p>
+        <p>Escolham um sentimento.<br><br>Agora: qual seria a <strong>imagem</strong> desse sentimento? Não a explicação &mdash; a imagem.</p>
       </div>
     </div>
   </div>
 
   <div class="mod reveal">
-    <p class="mn">02 — Da Ideia ao Roteiro</p>
-    <h3 class="mh">Conflito, storyline, <em>escaleta</em></h3>
-    <div class="m2">
+    <p class="mod-label">02 — Da Ideia ao Roteiro</p>
+    <h3 class="mod-h">Conflito, storyline, <em>escaleta</em></h3>
+    <div class="mod-2col">
       <ul class="il">
         <li><strong>Conflito externo:</strong> personagem vs. ambiente, personagem vs. outro</li>
         <li><strong>Conflito interno:</strong> personagem vs. seus próprios limites, medos, desejos</li>
         <li><strong>O Argumento:</strong> a síntese — testa se a ideia aguenta ser contada</li>
         <li><strong>A Escaleta:</strong> lista sequencial de cenas antes de desenvolvê-las</li>
       </ul>
-      <p class="mb">No videoclipe, a escaleta muitas vezes substitui o roteiro formal — organiza ambiências, performances e micro-narrativas sem precisar de diálogos ou estrutura dramática clássica.</p>
+      <p class="mod-body">No videoclipe, a escaleta muitas vezes substitui o roteiro formal — organiza ambiências, performances e micro-narrativas sem precisar de diálogos ou estrutura dramática clássica.</p>
     </div>
   </div>
 
   <div class="mod reveal">
-    <p class="mn">03 — Construção de Personagens</p>
-    <h3 class="mh">O perfil <em>tridimensional</em></h3>
-    <div class="m2">
+    <p class="mod-label">03 — Construção de Personagens</p>
+    <h3 class="mod-h">O perfil <em>tridimensional</em></h3>
+    <div class="mod-2col">
       <ul class="il">
         <li><strong>Dimensão física:</strong> aparência, forma de se mover — o corpo como linguagem</li>
         <li><strong>Dimensão psicológica:</strong> medos, traumas, desejos, contradições internas</li>
         <li><strong>Dimensão social:</strong> contexto familiar, cultural, o que molda a visão de mundo</li>
       </ul>
-      <p class="mb">Os personagens mais memoráveis não são coerentes — são contraditórios. O herói que tem medo. O vilão que ama. A contradição gera empatia porque o público reconhece: é assim que a gente é.</p>
+      <p class="mod-body">Os personagens mais memoráveis não são coerentes — são contraditórios. O herói que tem medo. O vilão que ama. A contradição gera empatia porque o público reconhece: é assim que a gente é.</p>
     </div>
   </div>
 
   <div class="mod reveal">
-    <p class="mn">04 — O Roteiro como Documento Técnico</p>
-    <h3 class="mh">O padrão <em>Master Scenes</em></h3>
-    <div class="m2">
+    <p class="mod-label">04 — O Roteiro como Documento Técnico</p>
+    <h3 class="mod-h">O padrão <em>Master Scenes</em></h3>
+    <div class="mod-2col">
       <ul class="il">
         <li>Courier New 12pt · Margem esq: 3,5cm | dir: 2,5cm</li>
         <li>1 página bem formatada ≈ 1 minuto de tela</li>
@@ -345,28 +383,27 @@ nav{padding:16px 24px}.nav-links{display:none}
         <li><strong>AÇÃO:</strong> frases curtas, verbos no presente</li>
         <li><strong>DIÁLOGO:</strong> nome em maiúsculas centralizado</li>
       </ul>
-      <p class="mb">O roteiro não existe para impressionar. Existe para que a equipe inteira — câmera, arte, produção, atores — saiba o que precisa ser filmado. Essa clareza é um ato de respeito.</p>
+      <p class="mod-body">O roteiro não existe para impressionar. Existe para que a equipe inteira — câmera, arte, produção, atores — saiba o que precisa ser filmado. Essa clareza é um ato de respeito.</p>
     </div>
   </div>
 </div>
 
-<div class="editorial reveal">
-  <div class="editorial-img">
-    <img src="fotos/bts-fabrica-camera.png" alt="BTS set">
-  </div>
-  <div style="display:grid;grid-template-rows:1fr 1fr;gap:4px">
-    <div class="editorial-img"><img src="fotos/bts-externo-camera.png" alt="BTS externo"></div>
-    <div class="editorial-img"><img src="fotos/bts-fabrica-conversa.png" alt="BTS conversa"></div>
+<!-- GRID BTS ROTEIRO -->
+<div class="g21 reveal" style="margin-top:4px">
+  <div class="ed-img"><img class="gi h5" src="fotos/bts-fabrica-camera.png" alt="BTS set" style="filter:brightness(.85)"></div>
+  <div style="display:grid;grid-template-rows:1fr 1fr;gap:3px">
+    <div class="ed-img"><img class="gi h3" src="fotos/bts-externo-camera.png" alt="BTS externo" style="filter:brightness(.85)"></div>
+    <div class="ed-img"><img class="gi h3" src="fotos/bts-fabrica-conversa.png" alt="BTS conversa" style="filter:brightness(.85)"></div>
   </div>
 </div>
 
 <div class="cw">
   <div class="mod reveal">
-    <p class="mn">05 — O Tratamento Visual</p>
-    <h3 class="mh">Defender uma ideia <em>antes do set</em></h3>
-    <div class="m2">
+    <p class="mod-label">05 — O Tratamento Visual</p>
+    <h3 class="mod-h">Defender uma ideia <em>antes do set</em></h3>
+    <div class="mod-2col">
       <div>
-        <p class="mb">No mercado de videoclipes, o roteiro formal é precedido pelo Tratamento Visual — a apresentação da visão criativa do diretor para o artista e a gravadora.</p>
+        <p class="mod-body">No mercado de videoclipes, o roteiro formal é precedido pelo Tratamento Visual — a apresentação da visão criativa do diretor para o artista e a gravadora.</p>
         <ul class="il">
           <li>Documento em slides com imagens, referências visuais e conceito</li>
           <li>Responde ao briefing com uma proposta de linguagem, não de enredo</li>
@@ -381,17 +418,13 @@ nav{padding:16px 24px}.nav-links{display:none}
       </ul>
     </div>
   </div>
-</div>
 
-
-
-<div class="cw">
   <div class="mod reveal">
-    <p class="mn">06 — A Limitação como Filtro</p>
-    <h3 class="mh">Escrever para <em>o que você tem</em></h3>
-    <div class="m2">
+    <p class="mod-label">06 — A Limitação como Filtro</p>
+    <h3 class="mod-h">Escrever para <em>o que você tem</em></h3>
+    <div class="mod-2col">
       <div>
-        <p class="mb">O cinema independente não é pior que o cinema de estúdio. A diferença mais poderosa está na necessidade de tomar decisões mais precisas — porque não tem dinheiro para desperdiçar.</p>
+        <p class="mod-body">O cinema independente não é pior que o cinema de estúdio. A diferença mais poderosa está na necessidade de tomar decisões mais precisas — porque não tem dinheiro para desperdiçar.</p>
         <ul class="il">
           <li>Liste o que você tem acesso: lugares, objetos, pessoas, luz natural</li>
           <li>Uma câmera de celular com uma ideia forte bate uma câmera de cinema com uma ideia fraca</li>
@@ -405,317 +438,351 @@ nav{padding:16px 24px}.nav-links{display:none}
   </div>
 </div>
 
-<div class="atv reveal" style="background:var(--terra-d);">
-  <p class="atv-k">🎲 Atividade</p>
-  <h3 class="atv-h">Que história<br>é essa?</h3>
-  <div class="atv-g">
-    <div class="atv-s"><div class="atv-n">01</div><p class="atv-ti">Elementos</p><p class="atv-d">Vocês receberão papeis em branco. Escreva palavras representando: "Onde/quando", "Personagem", "Gênero de Filme" e "Frase". Coloque na urna.</p></div>
-    <div class="atv-s"><div class="atv-n">02</div><p class="atv-ti">Escolha</p><p class="atv-d">Retirem uma palavra de cada categoria da urna. Estas serão os elementos-chave para a criação da sua cena cinematográfica.</p></div>
-    <div class="atv-s"><div class="atv-n">03</div><p class="atv-ti">Roteiro</p><p class="atv-d">Com seus elementos em mãos, usem o tempo para planejar como essas palavras se encaixarão em uma cena. Se deixem levar pela criatividade!</p></div>
-    <div class="atv-s"><div class="atv-n">04</div><p class="atv-ti">Apresentação</p><p class="atv-d">Compartilhem as cenas individualmente. Analisem juntos como as diferentes combinações de palavras afetaram as histórias.</p></div>
+<!-- ATIVIDADE 1 -->
+<div class="activity reveal" style="background:var(--terra-d)">
+  <p class="activity-label">_atividade</p>
+  <h3 class="activity-title">Que história<br>é essa?</h3>
+  <div class="activity-grid">
+    <div class="activity-step"><div class="activity-num">01</div><p class="activity-step-title">Elementos</p><p class="activity-step-body">Vocês receberão papeis em branco. Escreva palavras representando: "Onde/quando", "Personagem", "Gênero de Filme" e "Frase". Coloque na urna.</p></div>
+    <div class="activity-step"><div class="activity-num">02</div><p class="activity-step-title">Escolha</p><p class="activity-step-body">Retirem uma palavra de cada categoria da urna. Estas serão os elementos-chave para a criação da sua cena cinematográfica.</p></div>
+    <div class="activity-step"><div class="activity-num">03</div><p class="activity-step-title">Roteiro</p><p class="activity-step-body">Com seus elementos em mãos, usem o tempo para planejar como essas palavras se encaixarão em uma cena. Se deixem levar pela criatividade!</p></div>
+    <div class="activity-step"><div class="activity-num">04</div><p class="activity-step-title">Apresentação</p><p class="activity-step-body">Compartilhem as cenas individualmente. Analisem juntos como as diferentes combinações de palavras afetaram as histórias.</p></div>
   </div>
 </div>
 
-<div id="direcao" style="position:relative; overflow:hidden; background:#000;">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.35; z-index:0;">
+<!-- ===== PARTE 02 — DIREÇÃO ===== -->
+<div id="direcao" style="position:relative;overflow:hidden;background:#000">
+  <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35;z-index:0">
     <source src="video/vira_essa_boca_portfolio_video.mp4" type="video/mp4">
   </video>
-  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,5,4,.5) 0%,rgba(5,5,4,.1) 50%,rgba(5,5,4,.8) 100%);z-index:0"></div>
-  <div class="pw" style="position:relative; z-index:1;">
-    <div class="pg parallax">02</div>
-    <p class="pk reveal">Parte 02</p>
-    <h2 class="ph2 reveal d1 parallax">Direção<br><em>Do Papel</em><br>ao Set</h2>
-    <p class="pi reveal d2">Se antes foi sobre como a ideia ganha forma antes de chegar ao set, agora é sobre o que acontece quando você chega lá. Dirigir é uma sequência de decisões — algumas planejadas, muitas não.</p>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,5,.55) 0%,rgba(10,9,5,.1) 50%,rgba(10,9,5,.85) 100%);z-index:0"></div>
+  <div class="sec-head" style="position:relative;z-index:1">
+    <div class="sec-num">02</div>
+    <p class="sec-label reveal">Parte 02</p>
+    <h2 class="sec-title reveal d1">Direção<br><em>Do Papel</em><br>ao Set</h2>
+    <p class="sec-intro reveal d2">Se antes foi sobre como a ideia ganha forma antes de chegar ao set, agora é sobre o que acontece quando você chega lá. Dirigir é uma sequência de decisões — algumas planejadas, muitas não.</p>
   </div>
 </div>
 
-<div class="cs reveal">
-  <p class="ck">Exemplo de Tratamento Visual</p>
-  <h3 class="ct">Letrux + Nouvella — Vira Essa Boca Pra Cá / Dropar Teu Nome</h3>
-  <p class="cs2">Tratamento visual · Direção Vini Poffo · 21 slides</p>
-  <iframe class="cf" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
-</div>
-
-<div class="y-grid reveal" style="padding:0;margin:0;">
-  <div>
-    <div class="yw"><iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Letrux & Nouvella — Vira Essa Boca Pra Cá" allowfullscreen loading="lazy"></iframe></div>
-    <div class="yl"><p class="yl-t">Vira Essa Boca Pra Cá</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
-  </div>
-  <div>
-    <div class="yw"><iframe src="https://www.youtube.com/embed/PUFx8Z9AEtU" title="Letrux & Nouvella — Dropar Teu Nome" allowfullscreen loading="lazy"></iframe></div>
-    <div class="yl"><p class="yl-t">Dropar Teu Nome</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
-  </div>
-</div>
-
-<div class="cs reveal" style="position:relative; overflow:hidden; background:linear-gradient(135deg,rgba(122,46,16,0.08) 0%,rgba(160,120,24,0.08) 100%);">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.1; z-index:0;">
-    <source src="video/outres_portfolio_video.mp4" type="video/mp4">
-  </video>
-  <div style="position:relative; z-index:1;">
-    <p class="ck">Tratamento Visual — Exemplo</p>
-    <h3 class="ct">Outrês de Nós — Jesus Lumma e Dandara Manoela</h3>
-    <p class="cs2">Tratamento visual · Direção Vini Poffo · 17 slides</p>
-    <iframe class="cf" src="https://www.canva.com/design/DAEgdZg_ZM4/zeQqiT5TRb92Vbfe2kHUow/view?embed" allowfullscreen loading="lazy"></iframe>
-  </div>
-</div>
-
-<div class="reveal" style="max-width:1200px; margin: 0 auto; padding: 0 52px 40px;">
-  <div class="yw"><iframe src="https://www.youtube.com/embed/w2uoe7uvmQQ" title="Outrês de Nós" allowfullscreen loading="lazy"></iframe></div>
-  <div class="yl"><p class="yl-t">Outrês de Nós — Jesus Lumma e Dandara Manoela</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
-</div>
-
-<div class="editorial reveal">
-  <div class="editorial-img">
-    <img src="fotos/bts-externo-megafone.png" alt="making of set">
-  </div>
-  <div class="editorial-img">
-    <img src="fotos/bts-fabrica-elenco.png" alt="making of câmera">
+<!-- LINGUAGEM HÍBRIDA — seção animada -->
+<div class="hybrid" style="background:var(--bg2)">
+  <img src="fotos/textura-fantasmas.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;z-index:0;filter:brightness(.6)" alt="">
+  <div style="position:relative;z-index:1">
+    <p class="hybrid-kicker reveal">_conceito ao plano</p>
+    <div class="hybrid-items reveal d1">
+      <div class="hybrid-item active">O set <span>como linguagem</span></div>
+      <div class="hybrid-item">Cor, <span>textura</span>, sistema</div>
+      <div class="hybrid-item">Câmera <span>como ponto de vista</span></div>
+      <div class="hybrid-item">Luz <span>como emoção</span></div>
+      <div class="hybrid-item">Movimento <span>como ritmo</span></div>
+    </div>
   </div>
 </div>
 
 <div class="cw">
   <div class="mod reveal">
-    <div class="co"><p class="co-t">✦ Antes de começar — Aquecimento</p><p>Tocar a música que será gravada. Os alunos têm <strong>10 minutos</strong> para jogar o maior número de ideias possíveis.</p></div>
-  </div>
-
-  <div class="mod reveal">
-    <p class="mn">07 — O Videoclipe</p>
-    <h3 class="mh">Linguagem híbrida e <em>identidade visual</em></h3>
-    <div class="m2">
+    <p class="mod-label">07 — O Set como Linguagem</p>
+    <h3 class="mod-h">Cada decisão visual <em>comunica</em></h3>
+    <div class="mod-2col">
       <div>
-        <p class="mb">O videoclipe não é um mini-filme com música. É um formato com linguagem própria, que mistura cinema, publicidade, performance e videoarte — com a canção como suporte, referência e limite.</p>
+        <p class="mod-body">No set, não existe detalhe neutro. A cor da parede, a altura da câmera, o ângulo de luz — tudo é escolha. E toda escolha não-intencional também comunica algo, mesmo que não seja o que você queria dizer.</p>
         <ul class="il">
-          <li>A música define o tempo, o ritmo da edição, a duração das cenas</li>
-          <li><strong>Narrativo:</strong> conta uma história · <strong>Performático:</strong> foco no artista</li>
-          <li><strong>Conceitual:</strong> imagem como ideia · <strong>Híbrido:</strong> a maioria</li>
+          <li><strong>Cor:</strong> temperatura emocional da cena</li>
+          <li><strong>Textura:</strong> a materialidade do mundo do personagem</li>
+          <li><strong>Profundidade de campo:</strong> o que importa, o que some</li>
         </ul>
       </div>
-      <div class="co"><p class="co-t">O conceito como bússola</p><p>Toda decisão de set tem que responder: <strong>isso serve ao conceito?</strong><br><br>A câmera que você vai usar, a roupa do artista, o ângulo do close — tudo precisa ter um por quê.</p></div>
-    </div>
-  </div>
-
-  <div class="mod reveal">
-    <p class="mn">08 — A Câmera Musical</p>
-    <h3 class="mh">Vocabulário e <em>ritmo</em></h3>
-    <div class="m2">
-      <div>
-        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 8px">Escala de planos</p>
-        <ul class="il">
-          <li><strong>PG — Plano Geral:</strong> espaço, relação personagem/ambiente</li>
-          <li><strong>PM — Plano Médio:</strong> cintura para cima, foco na ação</li>
-          <li><strong>PP — Primeiro Plano:</strong> rosto, emoção, intimidade</li>
-          <li><strong>PD — Plano Detalhe:</strong> objeto, gesto, fragmento de significado</li>
-        </ul>
-      </div>
-      <div>
-        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 8px">Movimentos / Ângulos</p>
-        <ul class="il">
-          <li><strong>Travelling:</strong> câmera se move com o sujeito</li>
-          <li><strong>Câmera na mão:</strong> instabilidade, urgência, subjetividade</li>
-          <li><strong>Plongée:</strong> reduz o sujeito · <strong>Contra-plongée:</strong> heroifica</li>
-        </ul>
+      <div class="callout">
+        <p class="callout-label">✦ Princípio</p>
+        <p>Antes de qualquer decisão técnica, pergunte: <strong>o que essa escolha diz sobre o personagem ou sobre o mundo em que ele vive?</strong></p>
       </div>
     </div>
   </div>
 
   <div class="mod reveal">
-    <p class="mn">09 — Decupagem</p>
-    <h3 class="mh">Do conceito ao <em>plano</em></h3>
-    <div class="m2">
+    <p class="mod-label">08 — Câmera como Ponto de Vista</p>
+    <h3 class="mod-h">Onde a câmera está <em>é o que você sente</em></h3>
+    <div class="mod-2col">
       <ul class="il">
-        <li>Número do plano, tipo e ângulo</li>
-        <li>Movimento de câmera (se houver)</li>
-        <li>Ação do artista, posição, timing</li>
-        <li>Referência da música: em qual trecho a imagem entra</li>
+        <li><strong>Câmera baixa:</strong> poder, grandiosidade, ameaça</li>
+        <li><strong>Câmera alta:</strong> vulnerabilidade, insignificância, visão de deus</li>
+        <li><strong>Câmera na mão:</strong> urgência, presença, instabilidade emocional</li>
+        <li><strong>Câmera estática:</strong> observação, distância, frieza</li>
+        <li><strong>Câmera em movimento:</strong> acompanhamento, descoberta, perseguição</li>
       </ul>
-      <div class="co"><p class="co-t">O storyboard como contrato visual</p><p>A decupagem em imagens. Não precisa ser perfeito artisticamente. Precisa comunicar a ideia com clareza. <strong>Funciona como contrato visual da ideia.</strong></p></div>
+      <p class="mod-body">No videoclipe, a câmera não só registra a performance — ela participa dela. A câmera pode ser o público, o amante, o inimigo, a memória. Essa decisão muda tudo.</p>
     </div>
   </div>
 
   <div class="mod reveal">
-    <p class="mn">10 — Direção de Arte e Iluminação</p>
-    <h3 class="mh">O set como <em>linguagem</em></h3>
-    <div class="m2">
+    <p class="mod-label">09 — Luz como Emoção</p>
+    <h3 class="mod-h">Iluminar é <em>revelar e esconder</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body">A luz não existe para que a câmera veja. A luz existe para que o espectador sinta. Cada fonte de luz tem uma temperatura, uma direção, uma intenção.</p>
+        <ul class="il">
+          <li><strong>Luz dura:</strong> contraste, drama, conflito</li>
+          <li><strong>Luz difusa:</strong> suavidade, sonho, memória</li>
+          <li><strong>Contraluz:</strong> silhueta, mistério, transcendência</li>
+        </ul>
+      </div>
       <ul class="il">
-        <li><strong>Cor:</strong> paleta define o estado emocional</li>
-        <li><strong>Textura:</strong> as superfícies carregam significado</li>
-        <li><strong>Sistema de 3 pontos:</strong> key, fill, back</li>
-        <li><strong>Luz dura:</strong> contraste alto — dramaticidade, conflito</li>
-        <li><strong>Luz difusa:</strong> sombras suaves — intimidade, melancolia</li>
+        <li><strong>Temperatura quente:</strong> intimidade, nostalgia, desejo</li>
+        <li><strong>Temperatura fria:</strong> solidão, alienação, tecnologia</li>
+        <li><strong>Luz natural:</strong> realismo, urgência, verdade</li>
+        <li><strong>Luz artificial:</strong> construção, artifício, performance</li>
       </ul>
+    </div>
+  </div>
+
+  <div class="mod reveal">
+    <p class="mod-label">10 — Direção de Arte e Set Design</p>
+    <h3 class="mod-h">O espaço como <em>extensão do personagem</em></h3>
+    <div class="mod-2col">
+      <p class="mod-body">O set não é apenas o lugar onde a cena acontece. É o lugar que revela quem o personagem é, o que ele deseja, o que ele teme. Cada objeto tem uma história. Cada cor tem uma intenção.</p>
       <ul class="il">
-        <li><strong>Props:</strong> cada objeto é uma escolha — o que está no quadro diz algo</li>
-        <li><strong>Temperatura fria:</strong> frieza, solidão</li>
-        <li><strong>Temperatura quente:</strong> aconchego ou perigo</li>
+        <li>Pesquise referências visuais antes de qualquer decisão</li>
+        <li>Crie uma paleta de cores para cada personagem ou estado emocional</li>
+        <li>Pense em camadas: o que está no fundo, no meio, no primeiro plano</li>
+        <li>A câmera vai enquadrar — pense em termos de quadro, não de espaço</li>
       </ul>
     </div>
   </div>
 </div>
 
-<div class="g3 reveal" style="height:480px">
-  <img class="gi" style="height:100%;object-fit:cover" src="fotos/bts-fabrica-camera.png" alt="set">
-  <img class="gi" style="height:100%;object-fit:cover" src="fotos/bts-fabrica-expressao.png" alt="câmera">
-  <img class="gi" style="height:100%;object-fit:cover" src="fotos/bts-externo-camera.png" alt="set">
+<!-- GRID BTS DIREÇÃO -->
+<div class="g2 reveal" style="margin-top:4px">
+  <div class="ed-img"><img class="gi h4" src="fotos/bts-externo-megafone.png" alt="BTS megafone" style="filter:brightness(.85)"></div>
+  <div class="ed-img"><img class="gi h4" src="fotos/bts-fabrica-elenco.png" alt="BTS elenco" style="filter:brightness(.85)"></div>
+</div>
+
+<!-- QUOTE -->
+<div class="quote-block reveal" style="background:var(--bg2)">
+  <img src="fotos/textura-multidao.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.08;z-index:0;filter:brightness(.5)" alt="">
+  <div style="position:relative;z-index:1">
+    <p class="quote-text">&ldquo;Dirigir é estar presente. A melhor decisão no set quase sempre é a que você toma olhando para o que está na sua frente &mdash; não para o que estava no papel.&rdquo;</p>
+    <div class="quote-rule"></div>
+    <p class="quote-author">Vini Poffo</p>
+  </div>
 </div>
 
 <div class="cw">
   <div class="mod reveal">
-    <p class="mn">11 — Direção de Artistas</p>
-    <h3 class="mh">O <em>action</em> musical</h3>
-    <div class="m2">
-      <p class="mb">Dirigir um artista num videoclipe é diferente de dirigir um ator num filme. O artista já carrega uma relação com aquela canção. Sua função como diretora é saber usar isso.</p>
-      <ul class="il">
-        <li><strong>Clareza:</strong> saber onde fica, o que faz, quando começa</li>
-        <li><strong>Segurança:</strong> confiar que o que você está pedindo faz sentido</li>
-        <li><strong>Liberdade dentro do frame:</strong> espaço para a performance ser real</li>
-        <li>Mostrar referências visuais antes de pedir</li>
-        <li>O playback cria presença, não apenas marcação de lipsync</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mod reveal">
-    <p class="mn">12 — Continuidade e Montagem</p>
-    <h3 class="mh">Um set bem dirigido é um set que vai <em>dar um bom corte</em></h3>
-    <div class="m2">
-      <ul class="il">
-        <li><strong>Raccord de ação:</strong> o movimento continua no próximo plano</li>
-        <li><strong>Raccord de olhar:</strong> se olha para a esquerda, o que vê está à direita</li>
-        <li><strong>Regra dos 180°:</strong> nunca cruzar o eixo da ação</li>
-      </ul>
-      <ul class="il">
-        <li>Filme sempre mais do que você acha que vai precisar</li>
-        <li>Varie os planos: abertos e fechados, perfis e frontais</li>
-        <li>Os planos detalhe dão textura à montagem</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mod reveal">
-    <p class="mn">13 — A Arte do Desapego</p>
-    <h3 class="mh">Criatividade <em>na adversidade</em></h3>
-    <div class="m2">
+    <p class="mod-label">11 — Trabalhando com Elenco</p>
+    <h3 class="mod-h">A direção de atores <em>no videoclipe</em></h3>
+    <div class="mod-2col">
       <div>
-        <p class="mb">Nenhum set acontece exatamente como o planejado. A questão não é evitar o improviso. É saber improvisar bem.</p>
-        <p style="font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:rgba(232,224,204,.4);line-height:1.8;border-left:2px solid var(--terra);padding-left:16px;margin-top:16px">Dirigir, pra mim, é estar presente e atenta aos detalhes. Articular para que conceito e execução caminhem juntos — e quando eles se separam, saber o que preservar.</p>
+        <p class="mod-body">No videoclipe, o artista raramente é ator. Sua função como diretora é criar um ambiente onde a performance natural do artista se torne cinematográfica — sem que ele precise "atuar".</p>
+        <ul class="il">
+          <li>Dê referências de sensação, não de ação</li>
+          <li>Crie o ambiente emocional antes de ligar a câmera</li>
+          <li>Trabalhe com a música — ela já carrega a emoção</li>
+        </ul>
       </div>
+      <div class="callout">
+        <p class="callout-label">✦ Técnica</p>
+        <p>Em vez de dizer <strong>"fique triste"</strong>, diga <strong>"pense em um lugar que você não pode mais voltar"</strong>. A câmera captura o que é real.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="mod reveal">
+    <p class="mod-label">12 — Da Decupagem ao Set</p>
+    <h3 class="mod-h">O plano que <em>muda no set</em></h3>
+    <div class="mod-2col">
+      <p class="mod-body">A decupagem é um mapa, não uma lei. Ela existe para que você chegue ao set com clareza suficiente para improvisar com intenção. O melhor plano é o que você consegue executar com o que tem na sua frente.</p>
       <ul class="il">
-        <li><strong>Perguntar:</strong> o conceito continua intacto?</li>
-        <li><strong>Usar o ambiente:</strong> o que o local oferece que você não previu?</li>
-        <li><strong>Envolver a equipe:</strong> os melhores problemas são resolvidos em conversa</li>
-        <li><strong>Confiar no acidente:</strong> o que deu errado pode ser melhor</li>
+        <li>Decupe em casa, mas abra os olhos no set</li>
+        <li>O inesperado é parte do processo — não lute contra ele</li>
+        <li>Saiba o que é inegociável e o que pode ser adaptado</li>
+        <li>A limitação de tempo é um filtro de criatividade</li>
       </ul>
     </div>
   </div>
 </div>
 
-
-
-<div class="editorial reveal">
-  <div class="editorial-img">
-    <img src="fotos/praia-duas-mulheres.png" alt="still">
-  </div>
-  <div class="editorial-img">
-    <img src="fotos/subaquatica-cadeira.png" alt="still">
-  </div>
-</div>
-
-<div class="qb reveal" style="background:var(--petrol);">
-  <p class="qb-t">"Dirigir é estar presente. A melhor decisão no set quase sempre é a que você toma olhando para o que está na sua frente — não para o que estava no papel."</p>
-  <div class="qb-l"></div>
-  <p class="qb-a">Vini Poffo</p>
-</div>
-
-<div class="ow reveal" style="position:relative; overflow:hidden; min-height:72vh;">
-  <img src="fotos/aranha-bonecas.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.55; z-index:0;" alt="Aranha bg">
-  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.25; z-index:1; mix-blend-mode:overlay;">
-    <source src="video/aranha_portfolio_video.mp4" type="video/mp4">
-  </video>
-  <div class="ot" style="position:relative; z-index:2;">
-    <div class="ob">Letrux<br>Aranha</div>
-    <p class="os">Set Design e Direção de Arte ARPA · Direção Vini Poffo<br>Um exemplo completo de tratamento visual executado</p>
+<!-- ATIVIDADE 2 -->
+<div class="activity reveal" style="background:var(--moss)">
+  <p class="activity-label">_atividade</p>
+  <h3 class="activity-title">Decupa<br>em 5 planos</h3>
+  <div class="activity-grid">
+    <div class="activity-step"><div class="activity-num">01</div><p class="activity-step-title">Escolha uma cena</p><p class="activity-step-body">Escolha uma cena de 30 segundos de um videoclipe que você admira. Assista três vezes sem parar.</p></div>
+    <div class="activity-step"><div class="activity-num">02</div><p class="activity-step-title">Identifique os planos</p><p class="activity-step-body">Liste cada corte: qual é o plano? Onde está a câmera? O que está em foco? Quanto tempo dura?</p></div>
+    <div class="activity-step"><div class="activity-num">03</div><p class="activity-step-title">Analise a intenção</p><p class="activity-step-body">Por que essa sequência de planos? O que cada escolha comunica sobre a emoção da música?</p></div>
+    <div class="activity-step"><div class="activity-num">04</div><p class="activity-step-title">Recrie</p><p class="activity-step-body">Agora recrie a mesma cena com 5 planos diferentes. O que muda na emoção transmitida?</p></div>
   </div>
 </div>
 
-<div class="cs reveal">
-  <p class="ck">Tratamento Visual — PDF</p>
-  <h3 class="ct">Letrux — Aranha</h3>
-  <p class="cs2">Tratamento visual completo · Direção Vini Poffo</p>
-  <div style="width:100%; height:80vh; background:#111; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.1);">
-    <iframe src="aranha_tratamento.pdf" style="width:100%; height:100%; border:none;" title="Tratamento Aranha">
-      <p>Seu navegador não suporta a visualização de PDFs. <a href="aranha_tratamento.pdf">Clique aqui para baixar.</a></p>
-    </iframe>
+<!-- ===== TRATAMENTOS — após direção ===== -->
+
+<!-- TRATAMENTO: Vira essa boca / Dropar teu nome -->
+<div class="treatment reveal" style="background:var(--bg2)">
+  <p class="treatment-label">Exemplo de Tratamento Visual</p>
+  <h3 class="treatment-title">Letrux + Nouvella — Vira Essa Boca Pra Cá / Dropar Teu Nome</h3>
+  <p class="treatment-sub">Tratamento visual · Direção Vini Poffo · 21 slides</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<!-- YOUTUBE: Vira essa boca + Dropar teu nome lado a lado -->
+<div class="yt-grid reveal">
+  <div>
+    <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Letrux & Nouvella — Vira Essa Boca Pra Cá" allowfullscreen loading="lazy"></iframe></div>
+    <div class="yt-label"><p class="yt-title">Vira Essa Boca Pra Cá</p><p class="yt-meta">Clipe · Direção Vini Poffo</p></div>
+  </div>
+  <div>
+    <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/PUFx8Z9AEtU" title="Letrux & Nouvella — Dropar Teu Nome" allowfullscreen loading="lazy"></iframe></div>
+    <div class="yt-label"><p class="yt-title">Dropar Teu Nome</p><p class="yt-meta">Clipe · Direção Vini Poffo</p></div>
   </div>
 </div>
 
-<div class="g2 reveal">
-  <img class="gi h5" src="fotos/aranha-bonecas.png" alt="Letrux Aranha">
-  <img class="gi h5" src="fotos/aranha-floresta.png" alt="Letrux Aranha floresta">
+<!-- ARANHA — hero com foto -->
+<div class="project-hero reveal scale-in">
+  <img src="fotos/aranha-bonecas.png" alt="Aranha — still" style="filter:brightness(.8) contrast(1.05)">
+  <div class="project-hero-overlay">
+    <h2 class="project-title">Aranha</h2>
+    <p class="project-sub">Videoclipe · Direção Vini Poffo · Tratamento visual e set design 3D</p>
+  </div>
 </div>
 
+<!-- ARANHA — PDF do tratamento -->
+<div class="treatment reveal" style="background:var(--bg2)">
+  <p class="treatment-label">Tratamento Visual — Aranha</p>
+  <h3 class="treatment-title">Tratamento & Set Design 3D</h3>
+  <p class="treatment-sub">PDF completo do tratamento visual · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="aranha_tratamento.pdf" style="aspect-ratio:4/3;background:#111"></iframe>
+</div>
+
+<!-- GRID ARANHA -->
+<div class="g2 reveal" style="margin-top:4px">
+  <div class="ed-img"><img class="gi h4" src="fotos/aranha-bonecas.png" alt="Aranha" style="filter:brightness(.85)"></div>
+  <div class="ed-img"><img class="gi h4" src="fotos/aranha-floresta.png" alt="Aranha floresta" style="filter:brightness(.85)"></div>
+</div>
+
+<!-- OUTRÊS DE NÓS — hero com foto -->
+<div class="project-hero reveal scale-in" style="position:relative">
+  <img src="fotos/subaquatica-banda.png" alt="Outrês de Nós" style="filter:brightness(.8)">
+  <div class="project-hero-overlay">
+    <h2 class="project-title">Outrês<br>de Nós</h2>
+    <p class="project-sub">Videoclipe · Direção Vini Poffo</p>
+  </div>
+</div>
+
+<!-- TRATAMENTO: Outrês de Nós -->
+<div class="treatment reveal" style="background:var(--bg2)">
+  <p class="treatment-label">Exemplo de Tratamento Visual</p>
+  <h3 class="treatment-title">Outrês de Nós — Tratamento Visual</h3>
+  <p class="treatment-sub">Tratamento visual · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<!-- YOUTUBE: Outrês de Nós -->
+<div class="reveal" style="padding:0 60px 60px;max-width:900px;margin:0 auto">
+  <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Outrês de Nós" allowfullscreen loading="lazy"></iframe></div>
+  <div class="yt-label"><p class="yt-title">Outrês de Nós</p><p class="yt-meta">Clipe · Direção Vini Poffo</p></div>
+</div>
+
+<!-- GRID SUBAQUÁTICO -->
 <div class="g3 reveal">
-  <img class="gi h4" src="fotos/subaquatica-banda.png" alt="subaquatica banda">
-  <img class="gi h4" src="fotos/subaquatica-vestido-amarelo.png" alt="subaquatica vestido">
-  <img class="gi h4" src="fotos/subaquatica-cadeira.png" alt="subaquatica cadeira">
+  <div class="ed-img"><img class="gi h4" src="fotos/subaquatica-vestido-amarelo.png" alt="still" style="filter:brightness(.85)"></div>
+  <div class="ed-img"><img class="gi h4" src="fotos/subaquatica-cadeira.png" alt="still" style="filter:brightness(.85)"></div>
+  <div class="ed-img"><img class="gi h4" src="fotos/praia-duas-mulheres.png" alt="still" style="filter:brightness(.85)"></div>
 </div>
 
-<div class="reveal">
-  <div class="yw"><iframe src="https://www.youtube.com/embed/b-a2mUsEfOE" title="Letrux — Aranha" allowfullscreen loading="lazy"></iframe></div>
-  <div class="yl"><p class="yl-t">Letrux — Aranha</p><p class="yl-m">Clipe · Direção Vini Poffo · Set Design ARPA</p></div>
+<!-- MOSAICO BTS -->
+<div class="mosaic-sec reveal scale-in">
+  <img src="fotos/mosaico-vini.png" alt="Vini Poffo — BTS mosaico">
+  <div class="mosaic-overlay">
+    <p class="mosaic-label">_bastidores</p>
+    <h3 class="mosaic-title">Do set<br>à tela</h3>
+  </div>
 </div>
 
-<div class="reveal su"><img class="fw h65" src="fotos/aranha-floresta.png" alt="still Letrux Aranha"></div>
+<!-- ===== NUVEM NEGRA ===== -->
+<div id="nn" style="position:relative;overflow:hidden">
+  <img src="fotos/pb-tvs.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.1;z-index:0;filter:brightness(.4)" alt="">
+  <div class="nn-head" style="position:relative;z-index:1">
+    <p class="nn-label reveal">Projeto</p>
+    <h2 class="nn-title reveal d1">Nuvem<br>Negra</h2>
+    <p class="nn-sub reveal d2">Videoclipe · Direção Vini Poffo · Tratamento visual e set design</p>
+  </div>
+</div>
 
+<div class="g21 reveal" style="margin-top:4px">
+  <div class="ed-img"><img class="gi h5" src="fotos/pb-estacao.png" alt="Nuvem Negra" style="filter:brightness(.8)"></div>
+  <div style="display:grid;grid-template-rows:1fr 1fr;gap:3px">
+    <div class="ed-img"><img class="gi h3" src="fotos/pb-estacao-2.png" alt="Nuvem Negra 2" style="filter:brightness(.8)"></div>
+    <div class="ed-img"><img class="gi h3" src="fotos/pb-rua-noite.png" alt="Nuvem Negra 3" style="filter:brightness(.8)"></div>
+  </div>
+</div>
+
+<!-- TRATAMENTO: Nuvem Negra -->
+<div class="treatment reveal" style="background:var(--bg2)">
+  <p class="treatment-label">Tratamento Visual — Nuvem Negra</p>
+  <h3 class="treatment-title">Nuvem Negra — Tratamento Visual</h3>
+  <p class="treatment-sub">Tratamento visual · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<!-- ===== ENCERRAMENTO ===== -->
 <section id="enc">
-  <div class="enc-in">
-    <h2 class="enc-h reveal">Para <em>levar</em><br>daqui</h2>
-  </div>
+  <p class="enc-label reveal">_para levar daqui</p>
+  <h2 class="enc-h reveal d1">Para<br><em>Levar</em><br>Daqui</h2>
   <div class="pills">
-    <div class="pill reveal d1"><div class="pill-n">01</div><h3>O roteiro é a primeira versão da imagem.</h3><p>O set é a segunda. A edição é a terceira. Cada etapa transforma — e isso é bom.</p></div>
-    <div class="pill reveal d2"><div class="pill-n">02</div><h3>A limitação não é inimiga da criatividade.</h3><p>É o filtro que revela o que importa.</p></div>
-    <div class="pill reveal d3"><div class="pill-n">03</div><h3>Dirigir é estar presente.</h3><p>A melhor decisão no set quase sempre é a que você toma olhando para o que está na sua frente — não para o que estava no papel.</p></div>
-    <div class="pill reveal d4"><div class="pill-n">04</div><h3>Imagem que atravessa o corpo não precisa ser cara.</h3><p>Precisa ser verdadeira.</p></div>
-  </div>
-</section>
-
-<section id="nn" style="position:relative; overflow:hidden;">
-  <img src="fotos/pb-tvs.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.07; z-index:0;" alt="bg">
-  <div class="nn-h2" style="position:relative; z-index:1;">
-    <p class="nn-k reveal">Último trabalho em andamento</p>
-    <h2 class="nn-t reveal d1">Nuvem<br>Negra</h2>
-    <p class="nn-s reveal d2">Linn da Quebrada · Tratamento visual e direção de arte — em produção</p>
-  </div>
-  <div class="cs reveal" style="padding-top:0">
-    <p class="ck">Tratamento Visual</p>
-    <h3 class="ct">Nuvem Negra — Linn da Quebrada</h3>
-    <p class="cs2">Tratamento visual · Direção Vini Poffo · 20 slides</p>
-    <iframe class="cf" src="https://www.canva.com/design/DAG-3ZdqBdQ/tu14hZtIiEQhflfyKLzcgQ/view?embed" allowfullscreen loading="lazy"></iframe>
-  </div>
-</section>
-
-<section id="refs">
-  <h2 class="refs-h reveal">Referências</h2>
-  <div class="r2">
-    <div class="reveal from-l">
-      <p class="rct">Leituras Sugeridas</p>
-      <div class="ri"><div class="rd"></div><div><p class="rn">Syd Field — Manual do Roteiro</p><p class="rdesc">A bíblia da estrutura em três atos. Fundamentos do roteiro comercial e como construir narrativas que funcionam.</p></div></div>
-      <div class="ri"><div class="rd"></div><div><p class="rn">Robert McKee — Story</p><p class="rdesc">Narrativa para roteiristas, romancistas e outros. A estrutura dramática como ferramenta de criação.</p></div></div>
-      <div class="ri"><div class="rd"></div><div><p class="rn">Glauber Rocha — Revolução do Cinema Novo</p><p class="rdesc">Manifesto e teoria do cinema de guerrilha. A câmera como instrumento político e poético.</p></div></div>
-      <div class="ri"><div class="rd"></div><div><p class="rn">Walter Murch — Em Um Piscar de Olhos</p><p class="rdesc">A arte da montagem. Como o corte funciona e por que algumas sequências simplesmente funcionam.</p></div></div>
+    <div class="pill reveal">
+      <div class="pill-n">01</div>
+      <h3>A imagem antes do texto</h3>
+      <p>Antes de escrever qualquer palavra, pergunte: qual é a imagem? O roteiro é o mapa para chegar até ela — não o destino.</p>
     </div>
-    <div class="reveal from-r d2">
-      <p class="rct">Movimentos para Conhecer</p>
-      <div class="mv"><p class="mn2">Cinema Novo Brasileiro</p><p class="my">Anos 60 · Glauber Rocha, Nelson Pereira dos Santos, Cacá Diegues</p></div>
-      <div class="mv"><p class="mn2">Nouvelle Vague Francesa</p><p class="my">Anos 60 · Godard, Truffaut, Resnais</p></div>
-      <div class="mv"><p class="mn2">Dogma 95</p><p class="my">Anos 90 · Lars von Trier, Thomas Vinterberg — regras como libertação</p></div>
-      <div class="mv"><p class="mn2">Mumblecore</p><p class="my">Anos 2000 · Cinema ultra-low budget, câmera na mão, personagens reais</p></div>
+    <div class="pill reveal d1">
+      <div class="pill-n">02</div>
+      <h3>A limitação como filtro</h3>
+      <p>Você não precisa de mais recursos — precisa de mais precisão. A restrição força a escolha. A escolha revela o olhar.</p>
+    </div>
+    <div class="pill reveal d2">
+      <div class="pill-n">03</div>
+      <h3>Estar presente no set</h3>
+      <p>O melhor plano é o que você abandona quando algo melhor aparece na sua frente. Decupe para ter clareza, não para ter controle.</p>
+    </div>
+    <div class="pill reveal d3">
+      <div class="pill-n">04</div>
+      <h3>Cada detalhe comunica</h3>
+      <p>Não existe detalhe neutro. A cor da parede, a altura da câmera, o ângulo de luz — tudo é escolha. E toda escolha não-intencional também comunica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOTO FINAL — praia -->
+<div class="reveal scale-in" style="position:relative;overflow:hidden;margin-top:3px">
+  <img class="fw h65" src="fotos/praia-tapete.png" alt="still final" style="filter:brightness(.75) contrast(1.05)">
+  <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,9,5,.9) 0%,transparent 50%)"></div>
+</div>
+
+<!-- ===== REFERÊNCIAS ===== -->
+<section id="refs">
+  <h2 class="refs-title reveal">_referências</h2>
+  <div class="refs-2col">
+    <div>
+      <p class="ref-cat reveal">Filmes &amp; Videoclipes</p>
+      <div class="ref-item reveal"><div class="ref-dot"></div><div><p class="ref-name">Eternal Sunshine of the Spotless Mind</p><p class="ref-desc">Michel Gondry, 2004 — memória, fragmentação, imagem como sentimento</p></div></div>
+      <div class="ref-item reveal"><div class="ref-dot"></div><div><p class="ref-name">Moonlight</p><p class="ref-desc">Barry Jenkins, 2016 — luz, cor, corpo como linguagem</p></div></div>
+      <div class="ref-item reveal"><div class="ref-dot"></div><div><p class="ref-name">Formation — Beyoncé</p><p class="ref-desc">Melina Matsoukas, 2016 — set design, simbologia, poder visual</p></div></div>
+      <div class="ref-item reveal"><div class="ref-dot"></div><div><p class="ref-name">Lemonade — Beyoncé</p><p class="ref-desc">Vários diretores, 2016 — narrativa visual, tratamento como obra de arte</p></div></div>
+      <div class="ref-item reveal"><div class="ref-dot"></div><div><p class="ref-name">Cidade de Deus</p><p class="ref-desc">Fernando Meirelles, 2002 — câmera na mão, realidade como matéria</p></div></div>
+    </div>
+    <div>
+      <p class="ref-cat reveal">Leituras &amp; Recursos</p>
+      <div class="ref-movie reveal"><p class="ref-movie-name">O Roteiro — Syd Field</p><p class="ref-movie-year">Estrutura dramática clássica</p></div>
+      <div class="ref-movie reveal"><p class="ref-movie-name">Sobre Escrever — Stephen King</p><p class="ref-movie-year">Processo criativo e limitação como ferramenta</p></div>
+      <div class="ref-movie reveal"><p class="ref-movie-name">Sculpting in Time — Andrei Tarkovsky</p><p class="ref-movie-year">Filosofia do cinema e da imagem</p></div>
+      <div class="ref-movie reveal"><p class="ref-movie-name">In the Blink of an Eye — Walter Murch</p><p class="ref-movie-year">Montagem, ritmo e emoção</p></div>
+      <div class="ref-movie reveal"><p class="ref-movie-name">Ways of Seeing — John Berger</p><p class="ref-movie-year">Como olhamos e o que isso revela</p></div>
     </div>
   </div>
 </section>
 
 <footer>
-  <div><p class="fn">Vini Poffo</p><p class="fc">Cineasta e Diretora Criativa</p></div>
-  <div><p class="fi">Roteiro & Direção de Videoclipe<br>Masterclass — Material da Aula</p></div>
+  <div><p class="footer-name">Vini Poffo</p><p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:var(--muted);margin-top:4px">Cineasta e Diretora Criativa</p></div>
+  <div><p class="footer-info">Roteiro &amp; Direção de Videoclipe<br>Masterclass — Material da Aula</p></div>
 </footer>
 
 <script>
@@ -723,51 +790,61 @@ nav{padding:16px 24px}.nav-links{display:none}
 const cur=document.getElementById('cur'),cur2=document.getElementById('cur2'),prog=document.getElementById('prog'),nav=document.getElementById('nav');
 let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
-const ac=()=>{cx+=(mx-cx)*.1;cy+=(my-cy)*.1;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}if(cur2){cur2.style.left=cx+'px';cur2.style.top=cy+'px';}requestAnimationFrame(ac);};
-ac();
+const anim=()=>{cx+=(mx-cx)*.1;cy+=(my-cy)*.1;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}if(cur2){cur2.style.left=cx+'px';cur2.style.top=cy+'px';}requestAnimationFrame(anim);};
+anim();
 
-// Progress bar + nav
+// Progress + nav
 window.addEventListener('scroll',()=>{
   const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;
   if(prog)prog.style.width=(s/d*100)+'%';
   if(nav)nav.classList.toggle('scrolled',s>80);
-},{ passive:true });
+},{passive:true});
 
-// Reveal on scroll
+// Reveal
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{
-  if(e.isIntersecting){e.target.classList.add('visible');}
+  if(e.isIntersecting)e.target.classList.add('visible');
 }),{threshold:0.06,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// Parallax on section titles
-const parallaxEls=document.querySelectorAll('.pg');
-const onScroll=()=>{
-  parallaxEls.forEach(el=>{
-    const rect=el.closest('.pw')?.getBoundingClientRect();
+// Parallax nos números de seção
+const secNums=document.querySelectorAll('.sec-num');
+window.addEventListener('scroll',()=>{
+  secNums.forEach(el=>{
+    const rect=el.closest('.sec-head')?.getBoundingClientRect();
     if(!rect)return;
-    const progress=(window.innerHeight-rect.top)/window.innerHeight;
-    el.style.transform=`translateY(${progress*-40}px)`;
+    const p=(window.innerHeight-rect.top)/window.innerHeight;
+    el.style.transform=`translateY(${p*-35}px)`;
   });
-};
-window.addEventListener('scroll',onScroll,{passive:true});
+},{passive:true});
 
-// Parallax on full-width images
-document.querySelectorAll('.fw,.ow img').forEach(img=>{
+// Parallax em imagens full-width
+document.querySelectorAll('.fw,.project-hero img').forEach(img=>{
   const parent=img.parentElement;
+  img.style.transition='transform .12s linear';
   window.addEventListener('scroll',()=>{
     const rect=parent.getBoundingClientRect();
     if(rect.bottom<0||rect.top>window.innerHeight)return;
-    const progress=(window.innerHeight-rect.top)/(window.innerHeight+rect.height);
-    img.style.transform=`scale(1.08) translateY(${(progress-.5)*30}px)`;
+    const p=(window.innerHeight-rect.top)/(window.innerHeight+rect.height);
+    img.style.transform=`scale(1.06) translateY(${(p-.5)*28}px)`;
   },{passive:true});
-  img.style.transition='transform .1s linear';
 });
 
-// Cursor expand on links
-document.querySelectorAll('a,button,iframe').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{if(cur2)cur2.style.transform='translate(-50%,-50%) scale(2.2)';});
+// Cursor expand
+document.querySelectorAll('a,button,iframe,.pill').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{if(cur2)cur2.style.transform='translate(-50%,-50%) scale(2.4)';});
   el.addEventListener('mouseleave',()=>{if(cur2)cur2.style.transform='translate(-50%,-50%) scale(1)';});
 });
+
+// Hybrid items — rotação automática
+const hybridItems=document.querySelectorAll('.hybrid-item');
+let current=0;
+if(hybridItems.length){
+  setInterval(()=>{
+    hybridItems[current].classList.remove('active');
+    current=(current+1)%hybridItems.length;
+    hybridItems[current].classList.add('active');
+  },2200);
+}
 </script>
 </body>
 </html>
