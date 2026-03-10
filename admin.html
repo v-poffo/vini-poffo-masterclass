@@ -338,6 +338,58 @@ textarea.field-input{min-height:70px;line-height:1.6}
       </div>
 
       <button class="apply-btn" id="photo-apply-btn" style="display:none" onclick="applyPhotoChanges()">Aplicar Alterações</button>
+
+      <!-- ADICIONAR FOTO EM SEÇÃO SEM FOTO -->
+      <div class="sdivider" style="margin-top:18px"></div>
+      <p style="font-size:.42rem;color:var(--muted);margin-bottom:10px;line-height:1.6;margin-top:14px">Adicionar foto em seção que ainda não tem:</p>
+      <div id="add-photo-section-list" style="margin-bottom:12px">
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('hero','hero')">Hero (abertura)</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod01','mod01')">01 — O Roteiro</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod03','mod03')">03 — Construção de Personagens</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod05','mod05')">05 — Tratamento Visual</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod07','mod07')">07 — Câmera Musical</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod08','mod08')">08 — Vocabulário</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod11','mod11')">11 — Mise-en-scène</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('mod12','mod12')">12 — Iluminação</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('direcao','direcao')">Cabeçalho Direção</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('projetos','projetos')">Cabeçalho Projetos</div>
+        <div class="photo-sec-item photo-sec-add" onclick="selectNewPhotoSection('refs','refs')">Referências</div>
+      </div>
+
+      <!-- Info da nova seção -->
+      <div id="new-photo-info" style="font-size:.45rem;color:var(--accent2);margin-bottom:10px;display:none;padding:8px;background:rgba(74,96,40,.12);border:1px solid rgba(74,96,40,.3);line-height:1.6">
+        Nenhuma seção selecionada
+      </div>
+
+      <div class="field" id="new-photo-upload-field" style="display:none">
+        <label class="field-label">Foto de fundo para adicionar</label>
+        <div class="photo-upload-area">
+          <input type="file" accept="image/*" id="new-photo-upload" onchange="handleNewPhotoSelect(this)">
+          <p class="photo-upload-text"><strong>Clique para escolher</strong><br>ou arraste uma foto<br>JPG, PNG, WEBP</p>
+        </div>
+        <img id="new-upload-preview" class="upload-preview" alt="">
+        <p id="new-upload-name" style="font-size:.45rem;color:var(--accent2);margin-top:6px;display:none"></p>
+      </div>
+
+      <div class="field" id="new-photo-opacity-field" style="display:none">
+        <label class="field-label">Opacidade da foto</label>
+        <div class="range-wrap">
+          <input type="range" class="range-input" id="new-photo-opacity" min="0" max="1" step="0.05" value="0.8"
+            oninput="document.getElementById('new-photo-opacity-val').textContent=parseFloat(this.value).toFixed(2)">
+          <span class="range-val" id="new-photo-opacity-val">0.80</span>
+        </div>
+      </div>
+
+      <div class="field" id="new-overlay-opacity-field" style="display:none">
+        <label class="field-label">Escuridão do overlay</label>
+        <div class="range-wrap">
+          <input type="range" class="range-input" id="new-overlay-opacity" min="0" max="0.95" step="0.05" value="0.35"
+            oninput="document.getElementById('new-overlay-opacity-val').textContent=parseFloat(this.value).toFixed(2)">
+          <span class="range-val" id="new-overlay-opacity-val">0.35</span>
+        </div>
+      </div>
+
+      <button class="apply-btn" id="new-photo-apply-btn" style="display:none;background:rgba(74,96,40,.3);border-color:rgba(74,96,40,.6)" onclick="applyNewPhotoSection()">Adicionar Foto na Seção</button>
     </div>
 
   </div><!-- /sidebar -->
@@ -748,6 +800,146 @@ function updateOverlayOpacity(val) {
 
 function applyPhotoChanges() {
   showToast('Alterações aplicadas. Clique em Salvar para publicar.', 'info');
+}
+
+// ═══════════════════════════════════════════════════
+// ADICIONAR FOTO EM NOVA SEÇÃO
+// ═══════════════════════════════════════════════════
+let newPhotoTargetId = null;
+let newPhotoTargetEl = null;
+let newPhotoFile = null;
+let newPhotoBase64 = null;
+let newPhotoFileName = null;
+
+function selectNewPhotoSection(sectionId, elId) {
+  if (!iframeDoc) { showToast('Painel ainda carregando...', 'error'); return; }
+
+  // Marcar item ativo
+  document.querySelectorAll('.photo-sec-add').forEach(x => x.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  newPhotoTargetId = sectionId;
+
+  // Tentar encontrar o elemento no iframe
+  let el = iframeDoc.getElementById(elId) ||
+            iframeDoc.querySelector('[data-section="' + sectionId + '"]') ||
+            iframeDoc.querySelector('.' + sectionId);
+
+  newPhotoTargetEl = el;
+
+  // Mostrar info
+  const info = document.getElementById('new-photo-info');
+  info.style.display = 'block';
+  if (el) {
+    info.textContent = 'Seção selecionada: ' + sectionId + ' — pronta para receber foto de fundo';
+    // Navegar até a seção
+    el.scrollIntoView({behavior:'smooth', block:'center'});
+  } else {
+    info.textContent = 'Seção: ' + sectionId + ' — (será aplicada ao salvar)';
+  }
+
+  // Mostrar campos
+  document.getElementById('new-photo-upload-field').style.display = 'block';
+  document.getElementById('new-photo-opacity-field').style.display = 'block';
+  document.getElementById('new-overlay-opacity-field').style.display = 'block';
+  document.getElementById('new-photo-apply-btn').style.display = 'block';
+}
+
+function handleNewPhotoSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  newPhotoFile = file;
+  newPhotoFileName = file.name;
+
+  const preview = document.getElementById('new-upload-preview');
+  const nameEl = document.getElementById('new-upload-name');
+  const url = URL.createObjectURL(file);
+  preview.src = url;
+  preview.style.display = 'block';
+  nameEl.textContent = '✓ ' + file.name + ' — será enviada ao salvar';
+  nameEl.style.display = 'block';
+
+  // Preview imediato no iframe se o elemento existe
+  if (newPhotoTargetEl) {
+    // Verificar se já tem img de fundo
+    let existingImg = newPhotoTargetEl.querySelector('img.bg-new');
+    if (!existingImg) {
+      existingImg = iframeDoc.createElement('img');
+      existingImg.className = 'bg-new';
+      existingImg.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none';
+      // Garantir que o container tem position relative
+      const cs = window.getComputedStyle(newPhotoTargetEl);
+      if (cs.position === 'static') newPhotoTargetEl.style.position = 'relative';
+      newPhotoTargetEl.insertBefore(existingImg, newPhotoTargetEl.firstChild);
+    }
+    existingImg.src = url;
+    const op = document.getElementById('new-photo-opacity').value;
+    existingImg.style.opacity = op;
+  }
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    newPhotoBase64 = e.target.result.split(',')[1];
+  };
+  reader.readAsDataURL(file);
+}
+
+function applyNewPhotoSection() {
+  if (!newPhotoTargetId) { showToast('Selecione uma seção primeiro', 'error'); return; }
+  if (!newPhotoBase64) { showToast('Escolha uma foto primeiro', 'error'); return; }
+
+  const opacity = document.getElementById('new-photo-opacity').value;
+  const overlayOp = document.getElementById('new-overlay-opacity').value;
+  const fileName = newPhotoFileName;
+  const newSrc = 'fotos/' + fileName;
+
+  // Adicionar ao pendingUploads para ser salvo
+  pendingUploads.push({
+    name: fileName,
+    base64: newPhotoBase64,
+    targetEl: null, // será tratado pelo targetId
+    newSrc: newSrc,
+    isNewSection: true,
+    sectionId: newPhotoTargetId,
+    opacity: opacity,
+    overlayOp: overlayOp
+  });
+
+  // Aplicar visualmente no iframe imediatamente
+  if (newPhotoTargetEl) {
+    // Remover img temporária e adicionar a definitiva
+    const existing = newPhotoTargetEl.querySelector('img.bg-new');
+    if (existing) existing.remove();
+
+    const img = iframeDoc.createElement('img');
+    img.className = 'bg';
+    img.setAttribute('src', newSrc);
+    img.setAttribute('data-new-bg', newPhotoTargetId);
+    img.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:' + opacity + ';z-index:0;pointer-events:none';
+
+    const cs = iframeDoc.defaultView.getComputedStyle(newPhotoTargetEl);
+    if (cs.position === 'static') newPhotoTargetEl.style.position = 'relative';
+    newPhotoTargetEl.insertBefore(img, newPhotoTargetEl.firstChild);
+
+    // Adicionar overlay
+    const overlay = iframeDoc.createElement('div');
+    overlay.setAttribute('data-new-overlay', newPhotoTargetId);
+    overlay.style.cssText = 'position:absolute;inset:0;background:rgba(7,6,10,' + overlayOp + ');z-index:1;pointer-events:none';
+    newPhotoTargetEl.insertBefore(overlay, img.nextSibling);
+
+    // Garantir que o conteúdo fica acima
+    Array.from(newPhotoTargetEl.children).forEach(child => {
+      if (!child.hasAttribute('data-new-bg') && !child.hasAttribute('data-new-overlay') && child.className !== 'bg' && child.className !== 'bg-new') {
+        if (!child.style.zIndex || parseInt(child.style.zIndex) < 2) {
+          child.style.position = child.style.position || 'relative';
+          child.style.zIndex = '2';
+        }
+      }
+    });
+  }
+
+  showToast('Foto adicionada na seção ' + newPhotoTargetId + '. Clique em Salvar para publicar.', 'info');
 }
 
 // ═══════════════════════════════════════════════════
