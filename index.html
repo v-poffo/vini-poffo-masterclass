@@ -8,15 +8,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-:root{
-  --bg:#070706;--terra:#7a2e10;--terra-l:#b84828;
-  --olive-l:#5a6028;--mustard-l:#a07818;--teal-l:#2a7090;
-  --cream:#e8e0cc;--cream2:#a89880;--muted:#484038;--white:#f0ece4
-}
+:root{--bg:#070706;--terra:#7a2e10;--terra-l:#b84828;--olive:#2e3318;--olive-l:#5a6028;--mustard:#5a4010;--mustard-l:#a07818;--teal:#0e3038;--teal-l:#2a7090;--cream:#e8e0cc;--cream2:#a89880;--muted:#484038;--white:#f0ece4}
 body{background:var(--bg);color:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
-body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  mix-blend-mode:overlay}
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
 #cur{position:fixed;width:6px;height:6px;background:var(--terra-l);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
 #cur2{position:fixed;width:28px;height:28px;border:1px solid rgba(184,72,40,.3);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .2s ease-out}
 #prog{position:fixed;top:0;left:0;height:2px;z-index:9000;width:0%;background:linear-gradient(90deg,var(--terra),var(--olive-l),var(--mustard-l))}
@@ -24,18 +18,15 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .reveal.from-l{transform:translateX(-50px)}.reveal.from-r{transform:translateX(50px)}.reveal.su{transform:scale(.94)}
 .reveal.visible{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.52s}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:18px 52px;display:flex;justify-content:space-between;align-items:center;transition:background .4s}
 nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .nav-brand{font-family:'Fraunces',serif;font-style:italic;font-size:.9rem;color:var(--cream2);cursor:none}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;cursor:none}
 .nav-links a:hover{color:var(--cream)}
-
-/* HERO */
 #hero{position:relative;height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
-.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.32}
+	.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.3;z-index:0}
+	#hero video.hero-bg { opacity: 0.4; }
 .hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,6,.1) 0%,rgba(7,7,6,.5) 50%,rgba(7,7,6,1) 100%)}
 .hero-content{position:relative;z-index:2;padding:0 52px 80px;width:100%;max-width:1400px}
 .hero-ey{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra-l);margin-bottom:22px;display:flex;align-items:center;gap:16px}
@@ -45,86 +36,83 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .hero-sub{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1rem,1.8vw,1.4rem);color:var(--cream2);line-height:1.55}
 .scroll-hint{position:absolute;right:52px;bottom:36px;font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:10px;cursor:none}
 .scroll-hint::after{content:'';width:1px;height:52px;background:linear-gradient(to bottom,var(--muted),transparent)}
-
-/* SCENE MODULE — foto como fundo do texto */
-.scene{position:relative;overflow:hidden}
-.scene-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-.scene-dark{position:absolute;inset:0;background:rgba(7,7,6,.82)}
-.scene-grad-l{position:absolute;inset:0;background:linear-gradient(100deg,rgba(7,7,6,.98) 0%,rgba(7,7,6,.86) 55%,rgba(7,7,6,.55) 100%)}
-.scene-body{position:relative;z-index:2;padding:80px 52px;max-width:1200px;margin:0 auto}
-
-/* ABERTURA */
+#abertura{padding:110px 52px;max-width:1200px;margin:0 auto}
 .ab-g{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center}
 .ab-q{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;color:var(--white)}
 .ab-q em{font-style:italic;color:var(--terra-l)}
 .ab-b p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.85;margin-bottom:1.1rem}
 .ab-div{width:100%;height:1px;background:rgba(255,255,255,.05);margin:18px 0}
 .ab-tag{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
-
-/* PART HEADER */
-.pw{padding:90px 52px 56px;max-width:1400px;margin:0 auto;position:relative;overflow:hidden}
+.fw{width:100%;display:block;object-fit:cover}
+.fw.h50{height:50vh}.fw.h65{height:65vh}.fw.h80{height:80vh}
+.pw{position:relative;overflow:hidden;padding:90px 52px 56px;max-width:1400px;margin:0 auto}
 .pg{position:absolute;font-family:'Bebas Neue',sans-serif;font-size:30vw;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.025);right:-3%;top:-10%;pointer-events:none;user-select:none;line-height:1}
 .pk{font-size:.44rem;letter-spacing:.3em;text-transform:uppercase;color:var(--terra-l);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .pk::before{content:'';width:22px;height:1px;background:var(--terra-l)}
 .ph2{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,12vw,11rem);line-height:.87;color:var(--white)}
 .ph2 em{color:var(--terra-l);font-style:italic;font-family:'Fraunces',serif;font-weight:900}
 .pi{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);margin-top:22px;max-width:560px;line-height:1.7;border-left:2px solid rgba(255,255,255,.07);padding-left:18px}
-
-/* MODULE CONTENT */
+.cw{max-width:1200px;margin:0 auto;padding:0 52px}
+.mod{padding:56px 0;border-top:1px solid rgba(255,255,255,.05)}
 .mn{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-l);margin-bottom:10px}
 .mh{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.3rem,2.2vw,1.9rem);color:var(--white);margin-bottom:18px;line-height:1.15}
 .mh em{font-style:italic;color:rgba(232,224,204,.5)}
 .mb{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);line-height:1.85;max-width:620px;margin-bottom:18px}
 .m2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .il{list-style:none;padding:0}
-.il li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:rgba(232,224,204,.65);display:flex;gap:10px;line-height:1.55}
+.il li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:rgba(232,224,204,.6);display:flex;gap:10px;line-height:1.55}
 .il li::before{content:'—';color:var(--terra-l);flex-shrink:0;font-style:normal;font-size:.75rem;margin-top:2px}
 .il li strong{color:var(--cream);font-style:normal}
-.co{background:rgba(255,255,255,.03);padding:36px 32px;border-left:3px solid var(--terra)}
+.co{background:rgba(255,255,255,.025);padding:36px 32px;border-left:3px solid var(--terra)}
 .co-t{font-size:.42rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra-l);margin-bottom:14px}
 .co p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);line-height:1.8}
 .co strong{color:var(--white);font-style:normal}
-
-/* GRIDS */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:3px}
 .gi{width:100%;display:block;object-fit:cover}
-.gi.h4{height:400px}.gi.h5{height:500px}
-
-/* YOUTUBE — centralizado, não fullscreen */
-.yt-wrap{padding:60px 52px;display:flex;flex-direction:column;align-items:center}
-.yt-frame-box{width:100%;max-width:760px;aspect-ratio:16/9;background:#000}
-.yt-frame-box iframe{width:100%;height:100%;border:none;display:block}
-.yt-label{max-width:760px;width:100%;padding:14px 0 0;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid rgba(255,255,255,.05);margin-top:12px}
-.yl-t{font-family:'Fraunces',serif;font-style:italic;font-size:.95rem;color:var(--cream2)}
-.yl-m{font-size:.4rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
-
-/* CANVA */
-.cs{padding:60px 52px}
+.gi.h3{height:300px}.gi.h4{height:400px}.gi.h5{height:500px}
+.vw{position:relative;background:#000}
+.vw video{width:100%;display:block;max-height:85vh;object-fit:cover;opacity:.88}
+.vo{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,6,.9) 0%,transparent 55%);pointer-events:none;display:flex;flex-direction:column;justify-content:flex-end;padding:44px 52px}
+.vt{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--white);line-height:1}
+.vm{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+	.yw{position:relative;width:100%;aspect-ratio:16/9;background:#000;margin:0 auto}
+	.yw iframe{width:100%;height:100%;display:block;border:none}
+	.y-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:1200px;margin:40px auto;padding:0 52px}
+	.y-grid .yw{aspect-ratio:16/9;width:100%}
+	.y-grid .yl{padding:12px 0;background:none}
+	@media (max-width: 768px) { .y-grid { grid-template-columns: 1fr; } }
+.yl{padding:16px 52px;background:rgba(0,0,0,.4)}
+.yl-t{font-family:'Fraunces',serif;font-style:italic;font-size:1rem;color:var(--cream2)}
+.yl-m{font-size:.4rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.cs{background:#080807;padding:60px 52px}
 .ck{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--olive-l);margin-bottom:14px;display:flex;align-items:center;gap:12px}
 .ck::before{content:'';width:18px;height:1px;background:var(--olive-l)}
 .ct{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--white);margin-bottom:6px}
 .cs2{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:var(--cream2);margin-bottom:22px}
 .cf{width:100%;aspect-ratio:16/9;border:none;display:block;background:#111}
-
-/* ATIVIDADE */
-.atv{padding:64px 52px}
+.ow{position:relative;overflow:hidden}
+.ow img{width:100%;height:72vh;object-fit:cover;display:block;opacity:.55}
+.ot{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:80px 52px}
+.ob{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,11vw,10rem);line-height:.87;color:var(--white)}
+.os{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.15rem;color:var(--cream2);margin-top:22px;max-width:460px;line-height:1.65}
+.qb{padding:90px 52px;text-align:center;position:relative;overflow:hidden}
+.qb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(122,46,16,.12) 0%,transparent 70%)}
+.qb-t{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,3.2vw,2.8rem);color:var(--white);line-height:1.35;max-width:820px;margin:0 auto 20px;position:relative}
+.qb-l{width:36px;height:1px;background:var(--terra-l);margin:18px auto}
+.qb-a{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+.atv{background:var(--terra);padding:64px 52px}
 .atv-k{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,236,228,.45);margin-bottom:14px}
 .atv-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,8vw,6.5rem);color:var(--white);line-height:.88;margin-bottom:36px}
 .atv-g{display:grid;grid-template-columns:1fr 1fr;gap:44px;max-width:1100px;margin:0 auto}
 .atv-s{border-left:2px solid rgba(240,236,228,.18);padding-left:20px}
-.atv-n{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(240,236,228,.1);line-height:1}
+.atv-n{font-family:'Bebas Neue',sans-serif;font-size:4rem;color:rgba(240,236,228,.12);line-height:1}
 .atv-ti{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:7px}
 .atv-d{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:rgba(240,236,228,.65);line-height:1.75}
-
-/* QUOTE */
-.qb{padding:110px 52px;text-align:center;position:relative;overflow:hidden}
-.qb::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(122,46,16,.15) 0%,transparent 70%)}
-.qb-t{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:clamp(1.6rem,3.2vw,2.8rem);color:var(--white);line-height:1.35;max-width:820px;margin:0 auto 20px;position:relative}
-.qb-l{width:36px;height:1px;background:var(--terra-l);margin:18px auto}
-.qb-a{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-
-/* ENCERRAMENTO */
+.pdg{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.pdg img{width:100%;display:block;object-fit:cover;height:360px}
+#enc{background:var(--bg)}
 .enc-in{padding:90px 52px 60px;max-width:1200px;margin:0 auto}
 .enc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,9rem);line-height:.87;color:var(--white)}
 .enc-h em{color:var(--terra-l);font-style:italic;font-family:'Fraunces',serif;font-weight:900}
@@ -132,22 +120,17 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .pill{padding:48px 44px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:background .3s}
 .pill:hover{background:rgba(255,255,255,.04)}
 .pill::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
-.pill:nth-child(1)::after{background:var(--teal-l)}.pill:nth-child(2)::after{background:var(--terra-l)}
-.pill:nth-child(3)::after{background:var(--olive-l)}.pill:nth-child(4)::after{background:var(--mustard-l)}
+.pill:nth-child(1)::after{background:var(--teal-l)}.pill:nth-child(2)::after{background:var(--terra-l)}.pill:nth-child(3)::after{background:var(--olive-l)}.pill:nth-child(4)::after{background:var(--mustard-l)}
 .pill:hover::after{transform:scaleX(1)}
 .pill-n{font-family:'Bebas Neue',sans-serif;font-size:5rem;color:rgba(255,255,255,.04);line-height:1;margin-bottom:14px}
 .pill h3{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:8px;line-height:1.25}
 .pill p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.92rem;color:var(--cream2);line-height:1.75}
-
-/* NUVEM NEGRA */
 #nn{padding:80px 0 0}
 .nn-h2{padding:0 52px 40px;max-width:1200px;margin:0 auto}
 .nn-k{font-size:.44rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mustard-l);margin-bottom:12px;display:flex;align-items:center;gap:12px}
 .nn-k::before{content:'';width:18px;height:1px;background:var(--mustard-l)}
 .nn-t{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,9rem);color:var(--white);line-height:.87;margin-bottom:14px}
 .nn-s{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);max-width:460px;line-height:1.65}
-
-/* REFS */
 #refs{padding:80px 52px;max-width:1200px;margin:0 auto}
 .refs-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,5rem);color:var(--white);margin-bottom:52px}
 .r2{display:grid;grid-template-columns:1fr 1fr;gap:80px}
@@ -160,28 +143,21 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .mv:hover{border-color:var(--mustard-l);background:rgba(255,255,255,.02)}
 .mn2{font-family:'Fraunces',serif;font-style:italic;font-size:.92rem;color:var(--cream)}
 .my{font-size:.4rem;letter-spacing:.1em;color:var(--muted);margin-top:3px}
-
-/* FOOTER */
 footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:80px}
 .fn{font-family:'Fraunces',serif;font-style:italic;font-weight:700;font-size:1.4rem;color:var(--cream2)}
 .fi{font-size:.42rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);line-height:2;text-align:right}
 .fc{font-family:'Fraunces',serif;font-style:italic;font-size:.8rem;color:var(--muted);text-align:right}
-
-/* RESPONSIVE */
 @media(max-width:860px){
-  .ab-g,.m2,.atv-g,.r2,.pills,.g2,.g3{grid-template-columns:1fr}
-  nav{padding:14px 22px}.nav-links{display:none}
-  #cur,#cur2{display:none}body{cursor:auto}
-  .scene-body,.pw,.cs,.atv,.enc-in,.nn-h2,.yt-wrap,#refs,.qb,footer{padding-left:22px;padding-right:22px}
-  .hero-content{padding:0 22px 56px}
-  .yt-wrap{padding:40px 22px}
-}
+.ab-g,.m2,.atv-g,.r2,.pills,.g2,.g3,.g21,.pdg{grid-template-columns:1fr}
+nav{padding:14px 22px}.nav-links{display:none}
+#cur,#cur2{display:none}body{cursor:auto}
+.cw,#abertura,#refs,.pw,.cs,.atv,.enc-in,.nn-h2,.yl,footer{padding-left:22px;padding-right:22px}
+.hero-content{padding:0 22px 56px}.ot{padding:40px 22px}.qb{padding:60px 22px}.vo{padding:30px 22px}}
 </style>
 </head>
 <body>
 <div id="cur"></div><div id="cur2"></div><div id="prog"></div>
 
-<!-- NAV -->
 <nav id="nav">
   <span class="nav-brand">Vini Poffo</span>
   <ul class="nav-links">
@@ -192,10 +168,9 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </ul>
 </nav>
 
-<!-- HERO — vídeo como fundo -->
 <section id="hero">
   <video class="hero-bg" autoplay muted loop playsinline>
-    <source src="video/aranha_portfolio_video.mp4" type="video/mp4">
+    <source src="video/dropar_portfolio_video.mp4" type="video/mp4">
   </video>
   <div class="hero-grad"></div>
   <div class="hero-content">
@@ -206,42 +181,37 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   <div class="scroll-hint reveal d3">rolar</div>
 </section>
 
-<!-- ABERTURA — foto praia como fundo -->
-<section class="scene">
-  <img class="scene-img" src="fotos/praia-duas-mulheres.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
-    <div class="ab-g">
-      <div class="reveal from-l">
-        <div class="ab-q">"Qual imagem de um videoclipe ou filme ficou gravada em você <em>— e por quê?"</em></div>
-      </div>
-      <div class="reveal from-r d2">
-        <div class="ab-b">
-          <p>o que faz uma imagem atravessar o corpo?</p>
-          <div class="ab-div"></div>
-          <p>Não é uma aula sobre seguir regras. É sobre desenvolver um olhar — e depois colocar esse olhar em forma.</p>
-          <p class="ab-tag">Vini Poffo · Cineasta e Diretora Criativa</p>
-        </div>
+<section id="abertura" style="position:relative; overflow:hidden; padding: 110px 52px;">
+  <img src="fotos/pb-rua-noite.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.08; z-index:0;" alt="bg">
+  <div class="ab-g" style="position:relative; z-index:1;">
+    <div class="reveal from-l">
+      <div class="ab-q">"Qual imagem de um videoclipe ou filme ficou gravada em você <em>— e por quê?"</em></div>
+    </div>
+    <div class="reveal from-r d2">
+      <div class="ab-b">
+        <p>o que faz uma imagem atravessar o corpo?</p>
+        <div class="ab-div"></div>
+        <p>Não é uma aula sobre seguir regras. É sobre desenvolver um olhar — e depois colocar esse olhar em forma.</p>
+        <p class="ab-tag">Vini Poffo · Cineasta e Diretora Criativa</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PARTE 01 — ROTEIRO -->
-<div id="roteiro">
-  <div class="pw">
+<div class="reveal su"><img class="fw h65" src="fotos/NVLLETRUX_STILLS-086.jpg" alt="still do clipe"></div>
+
+<div id="roteiro" style="position:relative; overflow:hidden;">
+  <img src="fotos/pb-estacao.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.1; z-index:0;" alt="bg">
+  <div class="pw" style="position:relative; z-index:1;">
     <div class="pg">01</div>
     <p class="pk reveal">Parte 01</p>
     <h2 class="ph2 reveal d1">Roteiro<br><em>Da Imagem</em><br>à Página</h2>
-    <p class="pi reveal d2">Como a ideia ganha forma antes do set. O roteiro no cinema é um documento técnico — mas também é a primeira imagem que o filme existe.</p>
+    <p class="pi reveal d2">Um videoclipe não nasce de um texto. Ele nasce de uma sensação, de um ritmo ou de uma imagem que se recusa a ir embora. O roteiro é apenas o mapa para que essa imagem possa ser encontrada por outras pessoas.</p>
   </div>
 </div>
 
-<!-- MOD 01 — bg: pb-tvs -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/pb-tvs.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+<div class="cw">
+  <div class="mod reveal">
     <div class="m2">
       <div>
         <p class="mn">01 — Linguagem Audiovisual</p>
@@ -259,13 +229,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       </div>
     </div>
   </div>
-</div>
 
-<!-- MOD 02 — bg: pb-estacao -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/pb-estacao.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">02 — Da Ideia ao Roteiro</p>
     <h3 class="mh">Conflito, storyline, <em>escaleta</em></h3>
     <div class="m2">
@@ -278,13 +243,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       <p class="mb">No videoclipe, a escaleta muitas vezes substitui o roteiro formal — organiza ambiências, performances e micro-narrativas sem precisar de diálogos ou estrutura dramática clássica.</p>
     </div>
   </div>
-</div>
 
-<!-- MOD 03 — bg: pb-estacao-2 -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/pb-estacao-2.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">03 — Construção de Personagens</p>
     <h3 class="mh">O perfil <em>tridimensional</em></h3>
     <div class="m2">
@@ -296,13 +256,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       <p class="mb">Os personagens mais memoráveis não são coerentes — são contraditórios. O herói que tem medo. O vilão que ama. A contradição gera empatia porque o público reconhece: é assim que a gente é.</p>
     </div>
   </div>
-</div>
 
-<!-- MOD 04 — bg: pb-rua-noite -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/pb-rua-noite.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">04 — O Roteiro como Documento Técnico</p>
     <h3 class="mh">O padrão <em>Master Scenes</em></h3>
     <div class="m2">
@@ -318,11 +273,16 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- MOD 05 — bg: subaquatica-vestido-amarelo -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/subaquatica-vestido-amarelo.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+<div class="g2 reveal">
+  <img class="gi h5" src="fotos/NVLLETRUX_STILLS-044.JPG" alt="still Dropar Teu Nome">
+  <div style="display:grid;grid-template-rows:1fr 1fr;gap:3px;height:500px">
+    <img style="width:100%;height:100%;object-fit:cover;display:block" src="fotos/NVLLETRUX_STILLS-104.jpg" alt="still">
+    <img style="width:100%;height:100%;object-fit:cover;display:block" src="fotos/NVLLETRUX_STILLS-173.jpg" alt="still">
+  </div>
+</div>
+
+<div class="cw">
+  <div class="mod reveal">
     <p class="mn">05 — O Tratamento Visual</p>
     <h3 class="mh">Defender uma ideia <em>antes do set</em></h3>
     <div class="m2">
@@ -344,18 +304,10 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- GRID FOTOS — subaquáticas -->
-<div class="g3 reveal">
-  <img class="gi h5" src="fotos/subaquatica-cadeira.png" alt="cena subaquática">
-  <img class="gi h5" src="fotos/subaquatica-banda.png" alt="cena subaquática">
-  <img class="gi h5" src="fotos/subaquatica-mergulho.png" alt="cena subaquática">
-</div>
 
-<!-- MOD 06 — bg: praia-tapete -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/praia-tapete.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+
+<div class="cw">
+  <div class="mod reveal">
     <p class="mn">06 — A Limitação como Filtro</p>
     <h3 class="mh">Escrever para <em>o que você tem</em></h3>
     <div class="m2">
@@ -374,30 +326,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- YOUTUBE — Vira Essa Boca Pra Cá -->
-<div class="yt-wrap reveal">
-  <div class="yt-frame-box">
-    <iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Letrux & Nouvella — Vira Essa Boca Pra Cá" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="yt-label">
-    <p class="yl-t">Letrux &amp; Nouvella — Vira Essa Boca Pra Cá</p>
-    <p class="yl-m">Clipe · Direção Vini Poffo · 2025</p>
-  </div>
-</div>
-
-<!-- YOUTUBE — Dropar Teu Nome -->
-<div class="yt-wrap reveal">
-  <div class="yt-frame-box">
-    <iframe src="https://www.youtube.com/embed/PUFx8Z9AEtU" title="Letrux & Nouvella — Dropar Teu Nome" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="yt-label">
-    <p class="yl-t">Letrux &amp; Nouvella — Dropar Teu Nome</p>
-    <p class="yl-m">Clipe · Direção Vini Poffo · 2025</p>
-  </div>
-</div>
-
-<!-- ATIVIDADE -->
-<div class="atv reveal" style="background:var(--terra)">
+<div class="atv reveal">
   <p class="atv-k">🎲 Atividade</p>
   <h3 class="atv-h">Que história<br>é essa?</h3>
   <div class="atv-g">
@@ -408,9 +337,11 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- PARTE 02 — DIREÇÃO -->
-<div id="direcao">
-  <div class="pw">
+<div id="direcao" style="position:relative; overflow:hidden;">
+  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.15; z-index:0;">
+    <source src="video/vira_essa_boca_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="pw" style="position:relative; z-index:1;">
     <div class="pg">02</div>
     <p class="pk reveal">Parte 02</p>
     <h2 class="ph2 reveal d1">Direção<br><em>Do Papel</em><br>ao Set</h2>
@@ -418,23 +349,52 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- AQUECIMENTO — bg: bts-fabrica-conversa -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-fabrica-conversa.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
-    <div class="co" style="max-width:600px">
-      <p class="co-t">✦ Antes de começar — Aquecimento</p>
-      <p>Tocar a música que será gravada. Os alunos têm <strong>10 minutos</strong> para jogar o maior número de ideias possíveis.</p>
-    </div>
+<div class="cs reveal">
+  <p class="ck">Exemplo de Tratamento Visual</p>
+  <h3 class="ct">Letrux + Nouvella — Vira Essa Boca Pra Cá / Dropar Teu Nome</h3>
+  <p class="cs2">Tratamento visual · Direção Vini Poffo · 21 slides</p>
+  <iframe class="cf" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
+</div>
+
+<div class="y-grid reveal">
+  <div>
+    <div class="yw"><iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Letrux & Nouvella — Vira Essa Boca Pra Cá" allowfullscreen loading="lazy"></iframe></div>
+    <div class="yl"><p class="yl-t">Vira Essa Boca Pra Cá</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
+  </div>
+  <div>
+    <div class="yw"><iframe src="https://www.youtube.com/embed/PUFx8Z9AEtU" title="Letrux & Nouvella — Dropar Teu Nome" allowfullscreen loading="lazy"></iframe></div>
+    <div class="yl"><p class="yl-t">Dropar Teu Nome</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
   </div>
 </div>
 
-<!-- MOD 07 — bg: bts-fabrica-elenco -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-fabrica-elenco.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+<div class="cs reveal" style="position:relative; overflow:hidden;">
+  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.1; z-index:0;">
+    <source src="video/outres_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div style="position:relative; z-index:1;">
+    <p class="ck">Tratamento Visual — Exemplo</p>
+    <h3 class="ct">Outrês de Nós — Jesus Lumma e Dandara Manoela</h3>
+    <p class="cs2">Tratamento visual · Direção Vini Poffo · 17 slides</p>
+    <iframe class="cf" src="https://www.canva.com/design/DAEgdZg_ZM4/zeQqiT5TRb92Vbfe2kHUow/view?embed" allowfullscreen loading="lazy"></iframe>
+  </div>
+</div>
+
+<div class="reveal" style="max-width:1200px; margin: 0 auto; padding: 0 52px 40px;">
+  <div class="yw"><iframe src="https://www.youtube.com/embed/w2uoe7uvmQQ" title="Outrês de Nós" allowfullscreen loading="lazy"></iframe></div>
+  <div class="yl"><p class="yl-t">Outrês de Nós — Jesus Lumma e Dandara Manoela</p><p class="yl-m">Clipe · Direção Vini Poffo</p></div>
+</div>
+
+<div class="g21 reveal">
+  <img class="gi h5" src="fotos/bts1.png" alt="making of set">
+  <img class="gi h5" src="fotos/bts2.png" alt="making of câmera">
+</div>
+
+<div class="cw">
+  <div class="mod reveal">
+    <div class="co"><p class="co-t">✦ Antes de começar — Aquecimento</p><p>Tocar a música que será gravada. Os alunos têm <strong>10 minutos</strong> para jogar o maior número de ideias possíveis.</p></div>
+  </div>
+
+  <div class="mod reveal">
     <p class="mn">07 — O Videoclipe</p>
     <h3 class="mh">Linguagem híbrida e <em>identidade visual</em></h3>
     <div class="m2">
@@ -446,24 +406,16 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
           <li><strong>Conceitual:</strong> imagem como ideia · <strong>Híbrido:</strong> a maioria</li>
         </ul>
       </div>
-      <div class="co">
-        <p class="co-t">O conceito como bússola</p>
-        <p>Toda decisão de set tem que responder: <strong>isso serve ao conceito?</strong><br><br>A câmera que você vai usar, a roupa do artista, o ângulo do close — tudo precisa ter um por quê.</p>
-      </div>
+      <div class="co"><p class="co-t">O conceito como bússola</p><p>Toda decisão de set tem que responder: <strong>isso serve ao conceito?</strong><br><br>A câmera que você vai usar, a roupa do artista, o ângulo do close — tudo precisa ter um por quê.</p></div>
     </div>
   </div>
-</div>
 
-<!-- MOD 08 — bg: bts-externo-camera -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-externo-camera.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">08 — A Câmera Musical</p>
     <h3 class="mh">Vocabulário e <em>ritmo</em></h3>
     <div class="m2">
       <div>
-        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 10px">Escala de planos</p>
+        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 8px">Escala de planos</p>
         <ul class="il">
           <li><strong>PG — Plano Geral:</strong> espaço, relação personagem/ambiente</li>
           <li><strong>PM — Plano Médio:</strong> cintura para cima, foco na ação</li>
@@ -472,7 +424,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
         </ul>
       </div>
       <div>
-        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 10px">Movimentos / Ângulos</p>
+        <p style="font-size:.44rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra-l);margin:0 0 8px">Movimentos / Ângulos</p>
         <ul class="il">
           <li><strong>Travelling:</strong> câmera se move com o sujeito</li>
           <li><strong>Câmera na mão:</strong> instabilidade, urgência, subjetividade</li>
@@ -481,13 +433,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       </div>
     </div>
   </div>
-</div>
 
-<!-- MOD 09 — bg: bts-externo-megafone -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-externo-megafone.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">09 — Decupagem</p>
     <h3 class="mh">Do conceito ao <em>plano</em></h3>
     <div class="m2">
@@ -497,19 +444,11 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
         <li>Ação do artista, posição, timing</li>
         <li>Referência da música: em qual trecho a imagem entra</li>
       </ul>
-      <div class="co">
-        <p class="co-t">O storyboard como contrato visual</p>
-        <p>A decupagem em imagens. Não precisa ser perfeito artisticamente. Precisa comunicar a ideia com clareza. <strong>Funciona como contrato visual da ideia.</strong></p>
-      </div>
+      <div class="co"><p class="co-t">O storyboard como contrato visual</p><p>A decupagem em imagens. Não precisa ser perfeito artisticamente. Precisa comunicar a ideia com clareza. <strong>Funciona como contrato visual da ideia.</strong></p></div>
     </div>
   </div>
-</div>
 
-<!-- MOD 10 — bg: bts-fabrica-expressao -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-fabrica-expressao.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">10 — Direção de Arte e Iluminação</p>
     <h3 class="mh">O set como <em>linguagem</em></h3>
     <div class="m2">
@@ -529,11 +468,14 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- MOD 11 — bg: bts-fabrica-camera -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/bts-fabrica-camera.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+<div class="g3 reveal">
+  <img class="gi h4" src="fotos/bts5.png" alt="set">
+  <img class="gi h4" src="fotos/bts6.png" alt="câmera">
+  <img class="gi h4" src="fotos/bts7.png" alt="set">
+</div>
+
+<div class="cw">
+  <div class="mod reveal">
     <p class="mn">11 — Direção de Artistas</p>
     <h3 class="mh">O <em>action</em> musical</h3>
     <div class="m2">
@@ -547,13 +489,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       </ul>
     </div>
   </div>
-</div>
 
-<!-- MOD 12 — bg: aranha-floresta -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/aranha-floresta.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">12 — Continuidade e Montagem</p>
     <h3 class="mh">Um set bem dirigido é um set que vai <em>dar um bom corte</em></h3>
     <div class="m2">
@@ -569,13 +506,8 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
       </ul>
     </div>
   </div>
-</div>
 
-<!-- MOD 13 — bg: aranha-bonecas -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/aranha-bonecas.png" alt="">
-  <div class="scene-grad-l"></div>
-  <div class="scene-body">
+  <div class="mod reveal">
     <p class="mn">13 — A Arte do Desapego</p>
     <h3 class="mh">Criatividade <em>na adversidade</em></h3>
     <div class="m2">
@@ -593,76 +525,73 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </div>
 
-<!-- TRATAMENTOS VISUAIS — só na Parte 2 -->
 
-<!-- CANVA — Vira Essa Boca -->
-<div class="cs reveal">
-  <p class="ck">Tratamento Visual</p>
-  <h3 class="ct">Letrux + Nouvella — Vira Essa Boca Pra Cá</h3>
-  <p class="cs2">Tratamento visual · Direção Vini Poffo · 21 slides</p>
-  <iframe class="cf" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen loading="lazy"></iframe>
+
+<div class="g2 reveal">
+  <img class="gi h5" src="fotos/NVLLETRUX_STILLS-148.jpg" alt="still">
+  <img class="gi h5" src="fotos/NVLLETRUX_STILLS-166.jpg" alt="still">
 </div>
 
-<!-- CANVA — Outrês de Nós -->
-<div class="cs reveal">
-  <p class="ck">Tratamento Visual</p>
-  <h3 class="ct">Outrês de Nós — Jesus Lumma e Dandara Manoela</h3>
-  <p class="cs2">Tratamento visual · Direção Vini Poffo · 17 slides</p>
-  <iframe class="cf" src="https://www.canva.com/design/DAEgdZg_ZM4/zeQqiT5TRb92Vbfe2kHUow/view?embed" allowfullscreen loading="lazy"></iframe>
-</div>
-
-<!-- YOUTUBE — Outrês de Nós -->
-<div class="yt-wrap reveal">
-  <div class="yt-frame-box">
-    <iframe src="https://www.youtube.com/embed/w2uoe7uvmQQ" title="Outrês de Nós" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="yt-label">
-    <p class="yl-t">Outrês de Nós — Jesus Lumma e Dandara Manoela</p>
-    <p class="yl-m">Clipe · Direção Vini Poffo</p>
-  </div>
-</div>
-
-<!-- QUOTE -->
 <div class="qb reveal">
   <p class="qb-t">"Dirigir é estar presente. A melhor decisão no set quase sempre é a que você toma olhando para o que está na sua frente — não para o que estava no papel."</p>
   <div class="qb-l"></div>
   <p class="qb-a">Vini Poffo</p>
 </div>
 
-<!-- LETRUX ARANHA — fundo imersivo -->
-<div class="scene reveal">
-  <img class="scene-img" src="fotos/aranha-bonecas.png" alt="" style="opacity:.45">
-  <div class="scene-dark" style="background:rgba(7,7,6,.55)"></div>
-  <div class="scene-body" style="padding-top:120px;padding-bottom:120px">
-    <p class="mn" style="color:var(--mustard-l)">Tratamento Visual Completo</p>
-    <h2 class="ph2" style="font-size:clamp(4rem,12vw,10rem)">Letrux<br><em style="color:var(--mustard-l)">Aranha</em></h2>
-    <p class="pi" style="margin-top:18px">Set Design e Direção de Arte ARPA · Direção Vini Poffo</p>
+<div class="ow reveal" style="position:relative; overflow:hidden;">
+  <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.3; z-index:0;">
+    <source src="video/aranha_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="ot" style="position:relative; z-index:1;">
+    <div class="ob">Letrux<br>Aranha</div>
+    <p class="os">Set Design e Direção de Arte ARPA · Direção Vini Poffo<br>Um exemplo completo de tratamento visual executado</p>
   </div>
 </div>
 
-<!-- GRID BTS ARANHA -->
+<div class="cs reveal">
+  <p class="ck">Tratamento Visual — PDF</p>
+  <h3 class="ct">Letrux — Aranha</h3>
+  <p class="cs2">Tratamento visual completo · Direção Vini Poffo</p>
+  <div style="width:100%; height:80vh; background:#111; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.1);">
+    <iframe src="aranha_tratamento.pdf" style="width:100%; height:100%; border:none;" title="Tratamento Aranha">
+      <p>Seu navegador não suporta a visualização de PDFs. <a href="aranha_tratamento.pdf">Clique aqui para baixar.</a></p>
+    </iframe>
+  </div>
+</div>
+
+<div class="pdg reveal">
+  <img src="fotos/aranha_pdf-01.jpg" alt="jardim dos sonhos — 3D">
+  <img src="fotos/aranha_pdf-02.jpg" alt="jardim dos sonhos — refs">
+  <img src="fotos/aranha_pdf-05.jpg" alt="casa casulo">
+  <img src="fotos/aranha_pdf-04.jpg" alt="cura">
+</div>
+
+<div class="pdg reveal">
+  <img src="fotos/aranha_pdf-08.jpg" alt="figurino Operária">
+  <img src="fotos/aranha_pdf-09.jpg" alt="figurino Aranha de Jardim">
+  <img src="fotos/aranha_pdf-10.jpg" alt="figurino Viúva Negra">
+  <img src="fotos/aranha_pdf-11.jpg" alt="figurino Caranguejeira">
+</div>
+
 <div class="g2 reveal">
-  <img class="gi h5" src="fotos/bts-fabrica-elenco.png" alt="set Aranha">
-  <img class="gi h5" src="fotos/bts-fabrica-expressao.png" alt="set Aranha">
+  <img class="gi h5" src="fotos/bts3.png" alt="still Aranha">
+  <img class="gi h5" src="fotos/bts4.png" alt="still Aranha">
 </div>
 
-<!-- YOUTUBE — Letrux Aranha -->
-<div class="yt-wrap reveal">
-  <div class="yt-frame-box">
-    <iframe src="https://www.youtube.com/embed/b-a2mUsEfOE" title="Letrux — Aranha" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="yt-label">
-    <p class="yl-t">Letrux — Aranha</p>
-    <p class="yl-m">Clipe · Direção Vini Poffo · Set Design ARPA</p>
-  </div>
+<div class="pdg reveal">
+  <img src="fotos/aranha_pdf-14.jpg" alt="visuais referência">
+  <img src="fotos/aranha_pdf-15.jpg" alt="visuais referência">
+  <img src="fotos/aranha_pdf-16.jpg" alt="visuais referência">
+  <img src="fotos/aranha_pdf-17.jpg" alt="visuais referência">
 </div>
 
-<!-- FOTO FINAL -->
-<div class="reveal" style="overflow:hidden">
-  <img src="fotos/subaquatica-vestido-amarelo.png" alt="" style="width:100%;height:55vh;object-fit:cover;display:block;opacity:.7">
+<div class="reveal">
+  <div class="yw"><iframe src="https://www.youtube.com/embed/b-a2mUsEfOE" title="Letrux — Aranha" allowfullscreen loading="lazy"></iframe></div>
+  <div class="yl"><p class="yl-t">Letrux — Aranha</p><p class="yl-m">Clipe · Direção Vini Poffo · Set Design ARPA</p></div>
 </div>
 
-<!-- ENCERRAMENTO -->
+<div class="reveal su"><img class="fw h65" src="fotos/aranha4.png" alt="still Letrux Aranha"></div>
+
 <section id="enc">
   <div class="enc-in">
     <h2 class="enc-h reveal">Para <em>levar</em><br>daqui</h2>
@@ -675,7 +604,6 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </section>
 
-<!-- NUVEM NEGRA -->
 <section id="nn">
   <div class="nn-h2">
     <p class="nn-k reveal">Último trabalho em andamento</p>
@@ -690,7 +618,6 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
   </div>
 </section>
 
-<!-- REFERÊNCIAS -->
 <section id="refs">
   <h2 class="refs-h reveal">Referências</h2>
   <div class="r2">
@@ -713,7 +640,7 @@ footer{border-top:1px solid rgba(255,255,255,.05);padding:44px 52px;display:flex
 
 <footer>
   <div><p class="fn">Vini Poffo</p><p class="fc">Cineasta e Diretora Criativa</p></div>
-  <div><p class="fi">Roteiro &amp; Direção de Videoclipe<br>Masterclass — Material da Aula</p></div>
+  <div><p class="fi">Roteiro & Direção de Videoclipe<br>Masterclass — Material da Aula</p></div>
 </footer>
 
 <script>
@@ -721,11 +648,7 @@ const cur=document.getElementById('cur'),cur2=document.getElementById('cur2'),pr
 let mx=0,my=0,cx=0,cy=0;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
 const ac=()=>{cx+=(mx-cx)*.12;cy+=(my-cy)*.12;if(cur){cur.style.left=mx+'px';cur.style.top=my+'px';}if(cur2){cur2.style.left=cx+'px';cur2.style.top=cy+'px';}requestAnimationFrame(ac);};ac();
-window.addEventListener('scroll',()=>{
-  const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;
-  if(prog)prog.style.width=(s/d*100)+'%';
-  if(nav)nav.classList.toggle('scrolled',s>60);
-});
+window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;if(prog)prog.style.width=(s/d*100)+'%';if(nav)nav.classList.toggle('scrolled',s>60);});
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
