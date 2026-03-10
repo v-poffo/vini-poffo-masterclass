@@ -1325,5 +1325,76 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+
+// ═══════════════════════════════════════════════════
+// PDF POPUP - VERSÃO FINAL CORRIGIDA
+// ═══════════════════════════════════════════════════
+
+function openPDF() {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  
+  if (!modal || !frame) {
+    console.error('❌ Elementos do popup não encontrados');
+    return;
+  }
+  
+  // Carregar PDF
+  frame.src = 'https://raw.githubusercontent.com/v-poffo/vini-poffo-masterclass/main/aranha_tratamento.pdf';
+  
+  // Abrir modal
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  
+  console.log('✓ PDF aberto:', frame.src);
+}
+
+function closePDF() {
+  const modal = document.getElementById('pdfModal');
+  const frame = document.getElementById('pdfFrame');
+  
+  if (!modal || !frame) return;
+  
+  // Fechar modal
+  modal.classList.remove('open');
+  document.body.style.overflow = '';
+  
+  // Limpar iframe após animação (300ms)
+  setTimeout(() => {
+    frame.src = '';
+  }, 300);
+  
+  console.log('✓ PDF fechado');
+}
+
+// Aguardar DOM carregar
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // FECHAR COM ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+      const modal = document.getElementById('pdfModal');
+      if (modal && modal.classList.contains('open')) {
+        closePDF();
+        console.log('✓ PDF fechado com ESC');
+      }
+    }
+  });
+  
+  // FECHAR AO CLICAR FORA (no fundo escuro)
+  const modal = document.getElementById('pdfModal');
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      // Se clicou diretamente no modal (fundo), não no conteúdo interno
+      if (e.target === modal) {
+        closePDF();
+        console.log('✓ PDF fechado clicando fora');
+      }
+    });
+  }
+  
+  console.log('✓ Popup PDF configurado');
+});
 </script>
 </body></html>
