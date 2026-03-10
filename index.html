@@ -8,7 +8,7 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-:root{--bg:#070706;--terra:#7a2e10;--terra-l:#b84828;--olive:#2e3318;--olive-l:#5a6028;--mustard:#5a4010;--mustard-l:#a07818;--teal:#0e3038;--teal-l:#2a7090;--cream:#e8e0cc;--cream2:#a89880;--muted:#484038;--white:#f0ece4}
+:root{--bg:#070706;--terra:#7a2e10;--terra-l:#b84828;--olive:#2e3318;--olive-l:#5a6028;--mustard:#5a4010;--mustard-l:#a07818;--teal:#0e3038;--teal-l:#2a7090;--cream:#e8e0cc;--cream2:#a89880;--muted:#484038;--white:#f0ece4;--moss:#4a5d3d;--petrol:#1a3a3f;--moss-l:#6b8e5a;--petrol-l:#2d5a63}
 body{background:var(--bg);color:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
 body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
 #cur{position:fixed;width:6px;height:6px;background:var(--terra-l);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
@@ -17,10 +17,19 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .reveal{opacity:0;transform:translateY(44px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.from-l{transform:translateX(-50px)}.reveal.from-r{transform:translateX(50px)}.reveal.su{transform:scale(.94)}
 .reveal.visible{opacity:1;transform:none}
+	.parallax{transform-origin:center;will-change:transform}
+	.stagger-in{animation:staggerIn 0.8s cubic-bezier(0.16,1,0.3,1) forwards}
+	@keyframes staggerIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+	.fade-in-up{animation:fadeInUp 1s ease-out forwards}
+	@keyframes fadeInUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+	.slide-in-left{animation:slideInLeft 1s cubic-bezier(0.16,1,0.3,1) forwards}
+	@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+	.slide-in-right{animation:slideInRight 1s cubic-bezier(0.16,1,0.3,1) forwards}
+	@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
 .d1{transition-delay:.1s}.d2{transition-delay:.22s}.d3{transition-delay:.36s}.d4{transition-delay:.52s}
 nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:18px 52px;display:flex;justify-content:space-between;align-items:center;transition:background .4s}
 nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
-.nav-brand{font-family:'Fraunces',serif;font-style:italic;font-size:.9rem;color:var(--cream2);cursor:none}
+.nav-brand{display:none}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:.42rem;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;cursor:none}
 .nav-links a:hover{color:var(--cream)}
@@ -41,6 +50,8 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .ab-q{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,3rem);line-height:1.1;color:var(--white)}
 .ab-q em{font-style:italic;color:var(--terra-l)}
 .ab-b p{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.85;margin-bottom:1.1rem}
+	.ab-b p[style*="font-size:1.4rem"]{font-family:'Fraunces',serif;font-style:italic;font-weight:600;color:var(--white)}
+	.ab-b p[style*="font-size:1.15rem"]{font-family:'Fraunces',serif;font-style:italic;font-weight:300;color:var(--cream2)}
 .ab-div{width:100%;height:1px;background:rgba(255,255,255,.05);margin:18px 0}
 .ab-tag{font-size:.44rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .fw{width:100%;display:block;object-fit:cover}
@@ -57,7 +68,7 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .mn{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra-l);margin-bottom:10px}
 .mh{font-family:'Fraunces',serif;font-weight:700;font-size:clamp(1.3rem,2.2vw,1.9rem);color:var(--white);margin-bottom:18px;line-height:1.15}
 .mh em{font-style:italic;color:rgba(232,224,204,.5)}
-.mb{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);line-height:1.85;max-width:620px;margin-bottom:18px}
+.mb{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:1.1rem;color:var(--cream2);line-height:1.9;max-width:620px;margin-bottom:18px}
 .m2{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
 .il{list-style:none;padding:0}
 .il li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:rgba(232,224,204,.6);display:flex;gap:10px;line-height:1.55}
@@ -112,13 +123,20 @@ nav.scrolled{background:rgba(7,7,6,.92);backdrop-filter:blur(16px)}
 .atv-d{font-family:'Fraunces',serif;font-style:italic;font-weight:300;font-size:.9rem;color:rgba(240,236,228,.65);line-height:1.75}
 .pdg{display:grid;grid-template-columns:1fr 1fr;gap:3px}
 .pdg img{width:100%;display:block;object-fit:cover;height:360px}
-#enc{background:var(--bg)}
+#enc{background:var(--bg);position:relative}
+	#enc::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(74,93,61,0.05) 0%,rgba(26,58,63,0.05) 100%);pointer-events:none}
 .enc-in{padding:90px 52px 60px;max-width:1200px;margin:0 auto}
 .enc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,9rem);line-height:.87;color:var(--white)}
 .enc-h em{color:var(--terra-l);font-style:italic;font-family:'Fraunces',serif;font-weight:900}
-.pills{display:grid;grid-template-columns:1fr 1fr;gap:2px}
-.pill{padding:48px 44px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:background .3s}
-.pill:hover{background:rgba(255,255,255,.04)}
+.pills{display:grid;grid-template-columns:1fr 1fr;gap:2px;position:relative;z-index:1}
+.pill{padding:48px 44px;background:rgba(255,255,255,.02);position:relative;overflow:hidden;transition:background .3s;border-left:3px solid transparent}
+	.pill:hover{background:rgba(255,255,255,.04)}
+	.pill:nth-child(1){border-left-color:var(--terra-l)}
+	.pill:nth-child(2){border-left-color:var(--moss-l)}
+	.pill:nth-child(3){border-left-color:var(--petrol-l)}
+	.pill:nth-child(4){border-left-color:var(--mustard-l)}
+	.pill h3{font-size:1.15rem;margin-bottom:10px}
+	.pill p{font-size:0.95rem;line-height:1.7}
 .pill::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
 .pill:nth-child(1)::after{background:var(--teal-l)}.pill:nth-child(2)::after{background:var(--terra-l)}.pill:nth-child(3)::after{background:var(--olive-l)}.pill:nth-child(4)::after{background:var(--mustard-l)}
 .pill:hover::after{transform:scaleX(1)}
@@ -181,17 +199,17 @@ nav{padding:14px 22px}.nav-links{display:none}
   <div class="scroll-hint reveal d3">rolar</div>
 </section>
 
-<section id="abertura">
-  <div class="ab-g">
+<section id="abertura" style="position:relative; overflow:hidden; padding: 110px 52px;">
+  <img src="fotos/pb-rua-noite.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.08; z-index:0;" alt="bg">
+  <div class="ab-g" style="position:relative; z-index:1;">
     <div class="reveal from-l">
       <div class="ab-q">"Qual imagem de um videoclipe ou filme ficou gravada em você <em>— e por quê?"</em></div>
     </div>
     <div class="reveal from-r d2">
       <div class="ab-b">
-        <p>o que faz uma imagem atravessar o corpo?</p>
+        <p style="font-size:1.4rem; font-weight:600; margin-bottom:1.5rem;">o que faz uma imagem atravessar o corpo?</p>
         <div class="ab-div"></div>
-        <p>Não é uma aula sobre seguir regras. É sobre desenvolver um olhar — e depois colocar esse olhar em forma.</p>
-        <p class="ab-tag">Vini Poffo · Cineasta e Diretora Criativa</p>
+        <p style="font-size:1.15rem; line-height:1.9;">Não é uma aula sobre seguir regras. É sobre desenvolver um olhar — e depois colocar esse olhar em forma.</p>
       </div>
     </div>
   </div>
@@ -199,12 +217,15 @@ nav{padding:14px 22px}.nav-links{display:none}
 
 <div class="reveal su"><img class="fw h65" src="fotos/NVLLETRUX_STILLS-086.jpg" alt="still do clipe"></div>
 
-<div id="roteiro"><div class="pw">
-  <div class="pg">01</div>
-  <p class="pk reveal">Parte 01</p>
-  <h2 class="ph2 reveal d1">Roteiro<br><em>Da Imagem</em><br>à Página</h2>
-  <p class="pi reveal d2">Como a ideia ganha forma antes do set. O roteiro no cinema é um documento técnico — mas também é a primeira imagem que o filme existe.</p>
-</div></div>
+<div id="roteiro" style="position:relative; overflow:hidden;">
+  <img src="fotos/pb-estacao.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.1; z-index:0;" alt="bg">
+  <div class="pw" style="position:relative; z-index:1;">
+    <div class="pg parallax">01</div>
+    <p class="pk reveal">Parte 01</p>
+    <h2 class="ph2 reveal d1 parallax">Roteiro<br><em>Da Imagem</em><br>à Página</h2>
+    <p class="pi reveal d2">Um videoclipe não nasce de um texto. Ele nasce de uma sensação, de um ritmo ou de uma imagem que se recusa a ir embora. O roteiro é apenas o mapa para que essa imagem possa ser encontrada por outras pessoas.</p>
+  </div>
+</div>
 
 <div class="cw">
   <div class="mod reveal">
@@ -333,14 +354,14 @@ nav{padding:14px 22px}.nav-links{display:none}
   </div>
 </div>
 
-<div id="direcao" style="position:relative; overflow:hidden;">
+<div id="direcao" style="position:relative; overflow:hidden; background:linear-gradient(135deg,rgba(74,93,61,0.08) 0%,rgba(26,58,63,0.08) 100%);">
   <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.15; z-index:0;">
     <source src="video/vira_essa_boca_portfolio_video.mp4" type="video/mp4">
   </video>
   <div class="pw" style="position:relative; z-index:1;">
-    <div class="pg">02</div>
+    <div class="pg parallax">02</div>
     <p class="pk reveal">Parte 02</p>
-    <h2 class="ph2 reveal d1">Direção<br><em>Do Papel</em><br>ao Set</h2>
+    <h2 class="ph2 reveal d1 parallax">Direção<br><em>Do Papel</em><br>ao Set</h2>
     <p class="pi reveal d2">Se antes foi sobre como a ideia ganha forma antes de chegar ao set, agora é sobre o que acontece quando você chega lá. Dirigir é uma sequência de decisões — algumas planejadas, muitas não.</p>
   </div>
 </div>
@@ -363,7 +384,7 @@ nav{padding:14px 22px}.nav-links{display:none}
   </div>
 </div>
 
-<div class="cs reveal" style="position:relative; overflow:hidden;">
+<div class="cs reveal" style="position:relative; overflow:hidden; background:linear-gradient(135deg,rgba(122,46,16,0.08) 0%,rgba(160,120,24,0.08) 100%);">
   <video autoplay muted loop playsinline style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.1; z-index:0;">
     <source src="video/outres_portfolio_video.mp4" type="video/mp4">
   </video>
@@ -647,6 +668,10 @@ const ac=()=>{cx+=(mx-cx)*.12;cy+=(my-cy)*.12;if(cur){cur.style.left=mx+'px';cur
 window.addEventListener('scroll',()=>{const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;if(prog)prog.style.width=(s/d*100)+'%';if(nav)nav.classList.toggle('scrolled',s>60);});
 const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.08,rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{const parallaxElements=document.querySelectorAll('.parallax');parallaxElements.forEach(el=>{const scrollPos=window.scrollY;const elementPos=el.getBoundingClientRect().top+scrollPos;const distance=(scrollPos-elementPos)*0.5;el.style.transform=`translateY(${distance}px)`;});});
+</script>
+<script>
+window.addEventListener('load',()=>{const pills=document.querySelectorAll('.pill');pills.forEach((pill,idx)=>{pill.style.animationDelay=`${idx*0.15}s`;});});
 </script>
 </body>
 </html>
