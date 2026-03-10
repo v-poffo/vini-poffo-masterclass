@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Vini Poffo Masterclass</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0e13;--bg2:#1a1920;--bg3:#242330;
+  --accent:#b83818;--accent2:#b89030;--green:#4a9060;
+  --white:#eae3d0;--muted:#6a6460;--line:rgba(255,255,255,.08);
+}
+body{background:var(--bg);color:var(--white);font-family:'Space Mono',monospace;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;flex-direction:column}
+.login-box{background:var(--bg2);border:1px solid var(--line);padding:48px;width:360px;text-align:center}
+.login-logo{font-size:.42rem;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:28px}
+.login-title{font-size:1.3rem;margin-bottom:6px}
+.login-sub{font-size:.5rem;color:var(--muted);margin-bottom:28px;letter-spacing:.1em}
+.login-input{width:100%;background:var(--bg3);border:1px solid var(--line);color:var(--white);font-family:'Space Mono',monospace;font-size:.75rem;padding:12px 14px;outline:none;transition:border .2s}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{width:100%;margin-top:10px;background:var(--accent);border:none;color:var(--white);font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;padding:12px;cursor:pointer;transition:opacity .2s}
+.login-btn:hover{opacity:.85}
+.login-err{font-size:.55rem;color:#e05040;margin-top:8px;display:none}
+
+/* TOPBAR */
+#topbar{display:none;height:52px;background:rgba(15,14,19,.97);border-bottom:1px solid var(--line);padding:0 20px;align-items:center;gap:14px;flex-shrink:0;z-index:100}
+.tb-logo{font-size:.4rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent)}
+.tb-sep{width:1px;height:18px;background:var(--line)}
+.tb-mode{font-size:.45rem;color:var(--muted);letter-spacing:.1em}
+.tb-spacer{flex:1}
+.tb-status{font-size:.45rem;color:var(--muted);display:flex;align-items:center;gap:7px}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--muted)}
+.sdot.saving{background:var(--accent2);animation:pulse 1s infinite}
+.sdot.saved{background:var(--green)}
+.sdot.error{background:#e05040}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.tb-btn{background:var(--accent);border:none;color:var(--white);font-family:'Space Mono',monospace;font-size:.45rem;letter-spacing:.15em;text-transform:uppercase;padding:9px 18px;cursor:pointer;transition:opacity .2s}
+.tb-btn:hover{opacity:.85}
+.tb-btn:disabled{opacity:.4;cursor:not-allowed}
+.tb-btn-outline{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.tb-btn-outline:hover{border-color:var(--white);color:var(--white);opacity:1}
+
+/* LAYOUT */
+#workspace{display:none;flex:1;overflow:hidden;display:flex}
+
+/* SIDEBAR */
+#sidebar{width:280px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--line);overflow-y:auto;display:flex;flex-direction:column}
+#sidebar::-webkit-scrollbar{width:3px}
+#sidebar::-webkit-scrollbar-thumb{background:var(--line)}
+
+.sb-header{padding:16px;border-bottom:1px solid var(--line)}
+.sb-header-title{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--line)}
+.tab{flex:1;padding:10px 8px;font-size:.42rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-align:center;border-bottom:2px solid transparent;transition:all .15s}
+.tab:hover{color:var(--white)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* TAB CONTENT */
+.tab-content{display:none;flex:1;overflow-y:auto;padding:16px}
+.tab-content.active{display:block}
+
+/* EDIT PANEL */
+.edit-hint{font-size:.5rem;color:var(--muted);line-height:1.8;padding:12px;background:var(--bg3);border:1px solid var(--line);margin-bottom:16px}
+.edit-hint strong{color:var(--accent)}
+
+#selected-info{font-size:.5rem;color:var(--accent2);margin-bottom:12px;display:none;padding:8px;background:rgba(184,144,48,.08);border:1px solid rgba(184,144,48,.2)}
+
+.field{margin-bottom:16px}
+.field-label{font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:block}
+.field-input{width:100%;background:var(--bg3);border:1px solid var(--line);color:var(--white);font-family:'Space Mono',monospace;font-size:.65rem;padding:9px 11px;outline:none;transition:border .2s;resize:vertical}
+.field-input:focus{border-color:var(--accent)}
+textarea.field-input{min-height:70px;line-height:1.6}
+.apply-btn{width:100%;background:rgba(184,56,24,.15);border:1px solid rgba(184,56,24,.3);color:var(--accent);font-family:'Space Mono',monospace;font-size:.42rem;letter-spacing:.15em;text-transform:uppercase;padding:9px;cursor:pointer;transition:all .2s;margin-top:4px}
+.apply-btn:hover{background:var(--accent);color:var(--white)}
+
+/* RANGE */
+.range-wrap{display:flex;align-items:center;gap:10px}
+.range-input{flex:1;-webkit-appearance:none;height:3px;background:var(--line);outline:none;border-radius:2px}
+.range-input::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--accent);cursor:pointer}
+.range-val{font-size:.6rem;color:var(--accent2);min-width:32px;text-align:right}
+
+/* FONT CONTROLS */
+.font-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
+.font-opt{padding:8px 6px;background:var(--bg3);border:1px solid var(--line);cursor:pointer;text-align:center;font-size:.65rem;transition:all .15s;line-height:1.3}
+.font-opt:hover{border-color:var(--muted)}
+.font-opt.sel{border-color:var(--accent);background:rgba(184,56,24,.1);color:var(--accent)}
+.font-opt small{display:block;font-size:.35rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.weight-grid{display:flex;gap:6px;margin-top:6px}
+.weight-opt{flex:1;padding:7px 4px;background:var(--bg3);border:1px solid var(--line);cursor:pointer;text-align:center;font-size:.55rem;transition:all .15s}
+.weight-opt:hover{border-color:var(--muted)}
+.weight-opt.sel{border-color:var(--accent);background:rgba(184,56,24,.1);color:var(--accent)}
+
+/* COLOR */
+.color-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.cswatch{width:24px;height:24px;border-radius:2px;cursor:pointer;border:2px solid transparent;transition:border .15s}
+.cswatch:hover{border-color:rgba(255,255,255,.4)}
+.cswatch.sel{border-color:var(--white)}
+.color-custom{display:flex;align-items:center;gap:8px;margin-top:8px}
+.color-custom input[type=color]{width:32px;height:26px;border:none;background:none;cursor:pointer;padding:0}
+
+/* PHOTO UPLOAD */
+.photo-upload-area{border:1px dashed rgba(255,255,255,.15);padding:20px;text-align:center;cursor:pointer;transition:border .2s;position:relative;margin-top:6px}
+.photo-upload-area:hover{border-color:var(--accent)}
+.photo-upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.photo-upload-text{font-size:.5rem;color:var(--muted);letter-spacing:.08em;line-height:1.7}
+.photo-upload-text strong{color:var(--accent)}
+.upload-preview{width:100%;height:80px;object-fit:cover;margin-top:8px;border:1px solid var(--line);display:none}
+
+/* SECTIONS LIST */
+.sec-list-item{padding:10px 12px;cursor:pointer;border-bottom:1px solid var(--line);font-size:.5rem;color:rgba(234,227,208,.5);letter-spacing:.06em;transition:all .15s;display:flex;align-items:center;gap:8px}
+.sec-list-item:hover{background:rgba(255,255,255,.03);color:var(--white)}
+.sec-list-item.active{background:rgba(184,56,24,.08);color:var(--accent)}
+.sec-list-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+
+/* IFRAME */
+#preview-wrap{flex:1;position:relative;overflow:hidden}
+#site-iframe{width:100%;height:100%;border:none;display:block}
+#iframe-overlay{position:absolute;inset:0;pointer-events:none;z-index:10}
+
+/* HIGHLIGHT */
+.admin-highlight{outline:2px solid #b83818 !important;outline-offset:2px;cursor:pointer !important}
+.admin-selected{outline:3px solid #b89030 !important;outline-offset:3px}
+
+/* TOAST */
+#toast{position:fixed;bottom:24px;right:24px;background:var(--bg2);border:1px solid var(--line);padding:14px 20px;font-size:.55rem;letter-spacing:.08em;z-index:9999;transform:translateY(60px);opacity:0;transition:all .3s;max-width:340px;line-height:1.6}
+#toast.show{transform:translateY(0);opacity:1}
+#toast.success{border-color:var(--green);color:var(--green)}
+#toast.error{border-color:#e05040;color:#e05040}
+#toast.info{border-color:var(--accent2);color:var(--accent2)}
+
+/* DIVIDER */
+.sdivider{height:1px;background:var(--line);margin:14px 0}
+.slabel{font-size:.35rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding:10px 0 6px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <p class="login-logo">Masterclass · Painel Admin</p>
+    <h1 class="login-title">Editor Visual</h1>
+    <p class="login-sub">Acesso restrito · Vini Poffo</p>
+    <input type="password" class="login-input" id="pwd-input" placeholder="Senha de acesso" autocomplete="current-password">
+    <button class="login-btn" id="login-btn">Entrar</button>
+    <p class="login-err" id="login-err">Senha incorreta. Tente novamente.</p>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div id="topbar">
+  <span class="tb-logo">Vini Poffo · Admin</span>
+  <div class="tb-sep"></div>
+  <span class="tb-mode">Editor Visual</span>
+  <div class="tb-spacer"></div>
+  <div class="tb-status">
+    <div class="sdot" id="sdot"></div>
+    <span id="stext">Pronto para editar</span>
+  </div>
+  <button class="tb-btn tb-btn-outline" id="preview-btn" onclick="toggleEditMode()">Modo Visualização</button>
+  <button class="tb-btn" id="save-btn">Salvar e Publicar</button>
+</div>
+
+<!-- WORKSPACE -->
+<div id="workspace">
+
+  <!-- SIDEBAR -->
+  <div id="sidebar">
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('edit')">Editar</div>
+      <div class="tab" onclick="switchTab('sections')">Seções</div>
+      <div class="tab" onclick="switchTab('photos')">Fotos</div>
+    </div>
+
+    <!-- TAB: EDITAR -->
+    <div class="tab-content active" id="tab-edit">
+      <div class="edit-hint">
+        <strong>Como editar:</strong><br>
+        Passe o mouse sobre qualquer elemento na página ao lado — ele ficará destacado em vermelho. Clique para selecionar e editar aqui no painel.
+      </div>
+
+      <div id="selected-info">Nenhum elemento selecionado</div>
+
+      <!-- Texto -->
+      <div id="text-controls" style="display:none">
+        <p class="slabel">Conteúdo</p>
+        <div class="field">
+          <label class="field-label">Texto</label>
+          <textarea class="field-input" id="el-text" rows="4"></textarea>
+          <p style="font-size:.38rem;color:var(--muted);margin-top:4px">Use &lt;em&gt; para itálico, &lt;span class="c-terra"&gt; para vermelho, &lt;span class="c-ocre"&gt; para dourado</p>
+        </div>
+        <button class="apply-btn" onclick="applyText()">Aplicar Texto</button>
+      </div>
+
+      <div class="sdivider"></div>
+
+      <!-- Tipografia -->
+      <div id="typo-controls">
+        <p class="slabel">Tipografia</p>
+        <div class="field">
+          <label class="field-label">Fonte</label>
+          <div class="font-grid">
+            <div class="font-opt" onclick="selectFont(this,'Bebas Neue')" style="font-family:'Bebas Neue',sans-serif">Bebas Neue<small>Display</small></div>
+            <div class="font-opt" onclick="selectFont(this,'Cormorant Garamond')" style="font-family:'Cormorant Garamond',serif;font-style:italic">Cormorant<small>Serif</small></div>
+            <div class="font-opt" onclick="selectFont(this,'Space Mono')" style="font-family:'Space Mono',monospace">Space Mono<small>Mono</small></div>
+            <div class="font-opt" onclick="selectFont(this,'inherit')">Padrão<small>Herdar</small></div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Tamanho</label>
+          <div class="range-wrap">
+            <input type="range" class="range-input" id="font-size-range" min="0.5" max="12" step="0.1" value="1"
+              oninput="document.getElementById('font-size-val').textContent=parseFloat(this.value).toFixed(1)+'rem'">
+            <span class="range-val" id="font-size-val">1.0rem</span>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Peso</label>
+          <div class="weight-grid">
+            <div class="weight-opt" onclick="selectWeight(this,'300')">Light</div>
+            <div class="weight-opt" onclick="selectWeight(this,'400')">Regular</div>
+            <div class="weight-opt" onclick="selectWeight(this,'700')">Bold</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Estilo</label>
+          <div class="weight-grid">
+            <div class="weight-opt" onclick="selectStyle(this,'normal')">Normal</div>
+            <div class="weight-opt" onclick="selectStyle(this,'italic')">Itálico</div>
+          </div>
+        </div>
+        <div class="field">
+          <label class="field-label">Cor</label>
+          <div class="color-row">
+            <div class="cswatch" style="background:#eae3d0" onclick="selectColor(this,'#eae3d0')" title="Creme"></div>
+            <div class="cswatch" style="background:#b83818" onclick="selectColor(this,'#b83818')" title="Terra"></div>
+            <div class="cswatch" style="background:#b89030" onclick="selectColor(this,'#b89030')" title="Ocre"></div>
+            <div class="cswatch" style="background:#4a6028" onclick="selectColor(this,'#4a6028')" title="Musgo"></div>
+            <div class="cswatch" style="background:#1a5272" onclick="selectColor(this,'#1a5272')" title="Petróleo"></div>
+            <div class="cswatch" style="background:#ffffff" onclick="selectColor(this,'#ffffff')" title="Branco"></div>
+            <div class="cswatch" style="background:#888" onclick="selectColor(this,'#888888')" title="Cinza"></div>
+          </div>
+          <div class="color-custom">
+            <input type="color" id="color-picker" value="#eae3d0" oninput="selectColor(null,this.value)">
+            <input type="text" class="field-input" id="color-hex" placeholder="#eae3d0" style="font-size:.6rem" oninput="selectColor(null,this.value)">
+          </div>
+        </div>
+        <button class="apply-btn" onclick="applyTypography()">Aplicar Tipografia</button>
+      </div>
+    </div>
+
+    <!-- TAB: SEÇÕES -->
+    <div class="tab-content" id="tab-sections">
+      <div style="padding:12px 0">
+        <p style="font-size:.42rem;color:var(--muted);padding:0 12px 12px;line-height:1.7">Clique em uma seção para navegar até ela na página.</p>
+        <div class="sec-list-item" onclick="scrollIframeTo('#roteiro')"><span class="sec-list-dot"></span>01 — Roteiro</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod02]')"><span class="sec-list-dot"></span>02 — Conflito / Escaleta</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod04]')"><span class="sec-list-dot"></span>04 — Roteiro Técnico</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod06]')"><span class="sec-list-dot"></span>06 — Limitação</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('#direcao')"><span class="sec-list-dot"></span>Parte 02 — Direção</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod09]')"><span class="sec-list-dot"></span>09 — Decupagem</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod10]')"><span class="sec-list-dot"></span>10 — Set como Linguagem</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('[data-section=mod13]')"><span class="sec-list-dot"></span>13 — Criatividade</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('#projetos')"><span class="sec-list-dot"></span>Projetos</div>
+        <div class="sec-list-item" onclick="scrollIframeTo('#enc')"><span class="sec-list-dot"></span>Para Levar Daqui</div>
+      </div>
+    </div>
+
+    <!-- TAB: FOTOS -->
+    <div class="tab-content" id="tab-photos">
+      <p style="font-size:.42rem;color:var(--muted);margin-bottom:14px;line-height:1.7">Clique em uma foto de fundo na página para selecioná-la, depois troque aqui.</p>
+
+      <div id="photo-selected-info" style="font-size:.5rem;color:var(--accent2);margin-bottom:12px;display:none;padding:8px;background:rgba(184,144,48,.08);border:1px solid rgba(184,144,48,.2)">
+        Nenhuma foto selecionada
+      </div>
+
+      <div class="field">
+        <label class="field-label">Trocar foto de fundo</label>
+        <div class="photo-upload-area">
+          <input type="file" accept="image/*" id="photo-upload" onchange="handlePhotoSelect(this)">
+          <p class="photo-upload-text"><strong>Clique para escolher</strong><br>ou arraste uma foto<br>JPG, PNG, WEBP</p>
+        </div>
+        <img id="upload-preview" class="upload-preview" alt="">
+        <p id="upload-name" style="font-size:.45rem;color:var(--accent2);margin-top:6px;display:none"></p>
+      </div>
+
+      <div class="sdivider"></div>
+
+      <div class="field">
+        <label class="field-label">Opacidade da foto</label>
+        <div class="range-wrap">
+          <input type="range" class="range-input" id="photo-opacity" min="0" max="1" step="0.05" value="0.85"
+            oninput="updatePhotoOpacity(this.value)">
+          <span class="range-val" id="photo-opacity-val">0.85</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Escuridão do overlay</label>
+        <div class="range-wrap">
+          <input type="range" class="range-input" id="overlay-opacity" min="0" max="0.95" step="0.05" value="0.38"
+            oninput="updateOverlayOpacity(this.value)">
+          <span class="range-val" id="overlay-opacity-val">0.38</span>
+        </div>
+      </div>
+
+      <button class="apply-btn" onclick="applyPhotoChanges()">Aplicar Foto e Opacidade</button>
+    </div>
+
+  </div><!-- /sidebar -->
+
+  <!-- PREVIEW -->
+  <div id="preview-wrap">
+    <iframe id="site-iframe" src="/" sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+  </div>
+
+</div><!-- /workspace -->
+
+<div id="toast"></div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════════════════
+let adminPassword = '';
+let editMode = true;
+let selectedEl = null;
+let selectedFont = '';
+let selectedWeight = '';
+let selectedColor = '';
+let selectedStyle = '';
+let pendingUploads = []; // {name, base64, targetEl}
+let iframeDoc = null;
+
+// ═══════════════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════════════
+document.getElementById('pwd-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('login-btn').addEventListener('click', doLogin);
+
+async function doLogin() {
+  const pwd = document.getElementById('pwd-input').value.trim();
+  if (!pwd) return;
+  const btn = document.getElementById('login-btn');
+  btn.disabled = true; btn.textContent = 'Verificando...';
+
+  try {
+    const res = await fetch('/api/auth', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({password: pwd}),
+    });
+    const data = await res.json();
+    if (data.ok) {
+      adminPassword = pwd;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('topbar').style.display = 'flex';
+      document.getElementById('workspace').style.display = 'flex';
+      initAdmin();
+    } else {
+      document.getElementById('login-err').style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Entrar';
+    }
+  } catch(e) {
+    document.getElementById('login-err').textContent = 'Erro de conexão.';
+    document.getElementById('login-err').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Entrar';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+function initAdmin() {
+  const iframe = document.getElementById('site-iframe');
+  iframe.addEventListener('load', () => {
+    iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+    injectAdminStyles();
+    setupIframeInteraction();
+    setStatus('', 'Pronto para editar');
+    showToast('Painel carregado. Clique em qualquer elemento para editar.', 'info');
+  });
+  document.getElementById('save-btn').addEventListener('click', saveChanges);
+}
+
+function injectAdminStyles() {
+  if (!iframeDoc) return;
+  const style = iframeDoc.createElement('style');
+  style.id = 'admin-inject';
+  style.textContent = `
+    .admin-hover{outline:2px solid rgba(184,56,24,.7)!important;outline-offset:2px;cursor:crosshair!important}
+    .admin-selected{outline:3px solid #b89030!important;outline-offset:3px;cursor:crosshair!important}
+  `;
+  iframeDoc.head.appendChild(style);
+}
+
+function setupIframeInteraction() {
+  if (!iframeDoc) return;
+
+  // Hover
+  iframeDoc.addEventListener('mouseover', e => {
+    if (!editMode) return;
+    const el = e.target;
+    if (el.id === 'admin-inject') return;
+    iframeDoc.querySelectorAll('.admin-hover').forEach(x => x.classList.remove('admin-hover'));
+    el.classList.add('admin-hover');
+  });
+
+  iframeDoc.addEventListener('mouseout', e => {
+    e.target.classList.remove('admin-hover');
+  });
+
+  // Click — selecionar elemento
+  iframeDoc.addEventListener('click', e => {
+    if (!editMode) return;
+    e.preventDefault();
+    e.stopPropagation();
+
+    const el = e.target;
+    iframeDoc.querySelectorAll('.admin-selected').forEach(x => x.classList.remove('admin-selected'));
+    el.classList.add('admin-selected');
+    selectedEl = el;
+
+    updateSidebarForElement(el);
+  }, true);
+}
+
+// ═══════════════════════════════════════════════════
+// SIDEBAR UPDATE
+// ═══════════════════════════════════════════════════
+function updateSidebarForElement(el) {
+  const tag = el.tagName.toLowerCase();
+  const isImg = tag === 'img';
+  const isText = !isImg && el.textContent.trim().length > 0;
+
+  // Mostrar info do elemento selecionado
+  const info = document.getElementById('selected-info');
+  const classes = Array.from(el.classList).filter(c => c !== 'admin-selected' && c !== 'admin-hover').join('.');
+  info.textContent = `<${tag}${classes ? '.'+classes : ''}> selecionado`;
+  info.style.display = 'block';
+
+  // Mostrar/ocultar controles de texto
+  const textControls = document.getElementById('text-controls');
+  if (isText) {
+    textControls.style.display = 'block';
+    document.getElementById('el-text').value = el.innerHTML;
+    switchTab('edit');
+  } else {
+    textControls.style.display = 'none';
+  }
+
+  // Se for imagem, mudar para tab de fotos
+  if (isImg) {
+    switchTab('photos');
+    const photoInfo = document.getElementById('photo-selected-info');
+    const src = el.getAttribute('src') || '';
+    photoInfo.textContent = `Foto selecionada: ${src.split('/').pop()}`;
+    photoInfo.style.display = 'block';
+
+    // Ler opacidade atual
+    const style = el.getAttribute('style') || '';
+    const opMatch = style.match(/opacity:([\d.]+)/);
+    if (opMatch) {
+      const val = parseFloat(opMatch[1]);
+      document.getElementById('photo-opacity').value = val;
+      document.getElementById('photo-opacity-val').textContent = val.toFixed(2);
+    }
+
+    // Ler overlay do elemento pai
+    const parent = el.parentElement;
+    if (parent) {
+      const overlay = parent.querySelector('div[style*="rgba"]');
+      if (overlay) {
+        const os = overlay.getAttribute('style') || '';
+        const rgbaMatch = os.match(/rgba\([^)]+,\s*([\d.]+)\)/);
+        if (rgbaMatch) {
+          const ov = parseFloat(rgbaMatch[1]);
+          document.getElementById('overlay-opacity').value = ov;
+          document.getElementById('overlay-opacity-val').textContent = ov.toFixed(2);
+        }
+      }
+    }
+  }
+
+  // Ler tipografia atual
+  const cs = window.getComputedStyle ? null : null;
+  const inlineStyle = el.getAttribute('style') || '';
+  const fontMatch = inlineStyle.match(/font-size:([\d.]+)rem/);
+  if (fontMatch) {
+    document.getElementById('font-size-range').value = fontMatch[1];
+    document.getElementById('font-size-val').textContent = fontMatch[1] + 'rem';
+  }
+}
+
+// ═══════════════════════════════════════════════════
+// APPLY TEXT
+// ═══════════════════════════════════════════════════
+function applyText() {
+  if (!selectedEl) { showToast('Selecione um elemento primeiro', 'error'); return; }
+  const text = document.getElementById('el-text').value;
+  selectedEl.innerHTML = text;
+  showToast('Texto aplicado. Clique em Salvar para publicar.', 'info');
+}
+
+// ═══════════════════════════════════════════════════
+// APPLY TYPOGRAPHY
+// ═══════════════════════════════════════════════════
+function applyTypography() {
+  if (!selectedEl) { showToast('Selecione um elemento primeiro', 'error'); return; }
+
+  let style = selectedEl.getAttribute('style') || '';
+
+  if (selectedFont && selectedFont !== 'inherit') {
+    const fallback = selectedFont === 'Space Mono' ? 'monospace' : selectedFont === 'Bebas Neue' ? 'sans-serif' : 'serif';
+    style = setStyleProp(style, 'font-family', `'${selectedFont}',${fallback}`);
+  }
+
+  const fontSize = document.getElementById('font-size-range').value;
+  if (fontSize) style = setStyleProp(style, 'font-size', `${fontSize}rem`);
+
+  if (selectedWeight) style = setStyleProp(style, 'font-weight', selectedWeight);
+  if (selectedColor) style = setStyleProp(style, 'color', selectedColor);
+  if (selectedStyle) style = setStyleProp(style, 'font-style', selectedStyle);
+
+  selectedEl.setAttribute('style', style);
+  showToast('Tipografia aplicada. Clique em Salvar para publicar.', 'info');
+}
+
+function setStyleProp(styleStr, prop, value) {
+  const regex = new RegExp(`${prop}:[^;]+;?`, 'g');
+  styleStr = styleStr.replace(regex, '');
+  return styleStr.trim() + `;${prop}:${value}`;
+}
+
+// ═══════════════════════════════════════════════════
+// PHOTO HANDLING
+// ═══════════════════════════════════════════════════
+function handlePhotoSelect(input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const preview = document.getElementById('upload-preview');
+  const nameEl = document.getElementById('upload-name');
+  const url = URL.createObjectURL(file);
+  preview.src = url;
+  preview.style.display = 'block';
+  nameEl.textContent = `✓ ${file.name} — será enviada ao salvar`;
+  nameEl.style.display = 'block';
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    const base64 = e.target.result.split(',')[1];
+    pendingUploads.push({ name: file.name, base64, targetEl: selectedEl, newSrc: `fotos/${file.name}` });
+
+    // Atualizar preview no iframe imediatamente
+    if (selectedEl && selectedEl.tagName === 'IMG') {
+      selectedEl.src = url;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function updatePhotoOpacity(val) {
+  document.getElementById('photo-opacity-val').textContent = parseFloat(val).toFixed(2);
+  if (!selectedEl || selectedEl.tagName !== 'IMG') return;
+  let style = selectedEl.getAttribute('style') || '';
+  style = setStyleProp(style, 'opacity', val);
+  selectedEl.setAttribute('style', style);
+}
+
+function updateOverlayOpacity(val) {
+  document.getElementById('overlay-opacity-val').textContent = parseFloat(val).toFixed(2);
+  if (!selectedEl) return;
+
+  // Encontrar o overlay no contexto do elemento selecionado
+  let parent = selectedEl.parentElement;
+  if (!parent) return;
+  const overlay = parent.querySelector('div[style*="rgba"]');
+  if (!overlay) return;
+
+  const style = overlay.getAttribute('style') || '';
+  const newStyle = style.replace(/rgba\([^)]+\)/g, (match) => {
+    // Substituir apenas o alpha
+    return match.replace(/,\s*[\d.]+\)/, `,${val})`);
+  });
+  overlay.setAttribute('style', newStyle);
+}
+
+function applyPhotoChanges() {
+  showToast('Foto e opacidade aplicadas. Clique em Salvar para publicar.', 'info');
+}
+
+// ═══════════════════════════════════════════════════
+// TYPOGRAPHY SELECTORS
+// ═══════════════════════════════════════════════════
+function selectFont(el, font) {
+  selectedFont = font;
+  document.querySelectorAll('.font-opt').forEach(x => x.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selectWeight(el, w) {
+  selectedWeight = w;
+  document.querySelectorAll('.weight-opt').forEach(x => x.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function selectColor(el, c) {
+  selectedColor = c;
+  if (el) {
+    document.querySelectorAll('.cswatch').forEach(x => x.classList.remove('sel'));
+    el.classList.add('sel');
+  }
+  document.getElementById('color-hex').value = c;
+  if (c.match(/^#[0-9a-fA-F]{6}$/)) document.getElementById('color-picker').value = c;
+}
+function selectStyle(el, s) {
+  selectedStyle = s;
+  // Marcar apenas os botões de estilo (os últimos dois weight-opt)
+  const opts = document.querySelectorAll('#typo-controls .weight-opt');
+  opts.forEach(x => {
+    if (x.textContent.trim().toLowerCase() === s) x.classList.add('sel');
+    else if (x.textContent.trim().toLowerCase() === 'normal' || x.textContent.trim().toLowerCase() === 'itálico') x.classList.remove('sel');
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// TABS
+// ═══════════════════════════════════════════════════
+function switchTab(id) {
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const ids = ['edit','sections','photos'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(`tab-${id}`)?.classList.add('active');
+}
+
+// ═══════════════════════════════════════════════════
+// SCROLL IFRAME
+// ═══════════════════════════════════════════════════
+function scrollIframeTo(selector) {
+  if (!iframeDoc) return;
+  const el = iframeDoc.querySelector(selector);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ═══════════════════════════════════════════════════
+// EDIT MODE TOGGLE
+// ═══════════════════════════════════════════════════
+function toggleEditMode() {
+  editMode = !editMode;
+  const btn = document.getElementById('preview-btn');
+  btn.textContent = editMode ? 'Modo Visualização' : 'Modo Edição';
+  if (!editMode && iframeDoc) {
+    iframeDoc.querySelectorAll('.admin-hover,.admin-selected').forEach(x => {
+      x.classList.remove('admin-hover','admin-selected');
+    });
+  }
+  showToast(editMode ? 'Modo edição ativado' : 'Modo visualização — scroll livre', 'info');
+}
+
+// ═══════════════════════════════════════════════════
+// SAVE
+// ═══════════════════════════════════════════════════
+async function saveChanges() {
+  if (!iframeDoc) { showToast('Página ainda carregando', 'error'); return; }
+
+  setStatus('saving', 'Salvando...');
+  document.getElementById('save-btn').disabled = true;
+
+  try {
+    // Remover classes de admin do HTML antes de salvar
+    iframeDoc.querySelectorAll('.admin-hover,.admin-selected').forEach(x => {
+      x.classList.remove('admin-hover','admin-selected');
+    });
+    // Remover style de admin injetado
+    iframeDoc.getElementById('admin-inject')?.remove();
+
+    // Capturar HTML completo do iframe
+    const html = '<!DOCTYPE html>\n' + iframeDoc.documentElement.outerHTML;
+
+    // Enviar para API
+    const res = await fetch('/api/save', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        password: adminPassword,
+        html: html,
+        uploadedFiles: pendingUploads.map(u => ({ name: u.name, content: u.base64 })),
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setStatus('saved', 'Publicado!');
+      showToast('Publicado com sucesso! O site atualiza em ~30 segundos.', 'success');
+      pendingUploads = [];
+      // Re-injetar estilos admin
+      setTimeout(() => injectAdminStyles(), 500);
+    } else {
+      throw new Error(data.error || 'Erro desconhecido');
+    }
+  } catch(err) {
+    setStatus('error', 'Erro ao salvar');
+    showToast(`Erro: ${err.message}`, 'error');
+  }
+
+  document.getElementById('save-btn').disabled = false;
+}
+
+// ═══════════════════════════════════════════════════
+// STATUS & TOAST
+// ═══════════════════════════════════════════════════
+function setStatus(type, text) {
+  document.getElementById('sdot').className = `sdot ${type}`;
+  document.getElementById('stext').textContent = text;
+}
+
+function showToast(msg, type = 'info') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `show ${type}`;
+  setTimeout(() => t.className = '', 4500);
+}
+</script>
+</body>
+</html>
