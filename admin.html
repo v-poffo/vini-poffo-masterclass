@@ -117,6 +117,9 @@ textarea.field-input{min-height:70px;line-height:1.6}
 .sec-list-item:hover{background:rgba(255,255,255,.03);color:var(--white)}
 .sec-list-item.active{background:rgba(184,56,24,.08);color:var(--accent)}
 .sec-list-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+.photo-sec-item{padding:9px 12px;cursor:pointer;border-bottom:1px solid var(--line);font-size:.48rem;color:rgba(234,227,208,.55);letter-spacing:.05em;transition:all .15s}
+.photo-sec-item:hover{background:rgba(255,255,255,.04);color:var(--white)}
+.photo-sec-item.active{background:rgba(184,144,48,.1);color:var(--accent2);border-left:2px solid var(--accent2)}
 
 /* IFRAME */
 #preview-wrap{flex:1;position:relative;overflow:hidden}
@@ -274,14 +277,38 @@ textarea.field-input{min-height:70px;line-height:1.6}
 
     <!-- TAB: FOTOS -->
     <div class="tab-content" id="tab-photos">
-      <p style="font-size:.42rem;color:var(--muted);margin-bottom:14px;line-height:1.7">Clique em uma foto de fundo na página para selecioná-la, depois troque aqui.</p>
+      <p style="font-size:.42rem;color:var(--muted);margin-bottom:12px;line-height:1.6">Escolha uma seção para editar a foto de fundo:</p>
 
-      <div id="photo-selected-info" style="font-size:.5rem;color:var(--accent2);margin-bottom:12px;display:none;padding:8px;background:rgba(184,144,48,.08);border:1px solid rgba(184,144,48,.2)">
-        Nenhuma foto selecionada
+      <!-- Lista de seções com foto -->
+      <div id="photo-section-list" style="margin-bottom:14px">
+        <div class="photo-sec-item" onclick="selectPhotoSection('abertura','fotos/textura-floresta.png',342)">Abertura (hero)</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('statement','fotos/pb-pessoas-desfocadas.png',366)">No cinema, você só existe...</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('roteiro-header','fotos/bts-fabrica-camera.png',381)">Cabeçalho Roteiro</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod02','fotos/subaquatica-boiando.png',424)">02 — Conflito</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod04','fotos/bts-fabrica-expressao.png',474)">04 — Roteiro Técnico</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod06','fotos/pb-estacao.png',557)">06 — Limitação</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('ativ1','fotos/bts-fabrica-conversa.png',585)">Exercício Aquecimento</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('ativ2','fotos/bts-fabrica-elenco.png',620)">Exercício Câmera</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod09','fotos/subaquatica-banda.png',765)">09 — Decupagem</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod10','fotos/subaquatica-cadeira.png',795)">10 — Set como Linguagem</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('mod13','fotos/pb-rua-noite.png',884)">13 — Criatividade</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('quote','fotos/subaquatica-hero.png',910)">Citação</div>
+        <div class="photo-sec-item" onclick="selectPhotoSection('enc','fotos/subaquatica-mergulho.png',1042)">Para Levar Daqui</div>
       </div>
 
-      <div class="field">
-        <label class="field-label">Trocar foto de fundo</label>
+      <!-- Info da seção selecionada -->
+      <div id="photo-selected-info" style="font-size:.45rem;color:var(--accent2);margin-bottom:10px;display:none;padding:8px;background:rgba(184,144,48,.08);border:1px solid rgba(184,144,48,.2);line-height:1.6">
+        Nenhuma seção selecionada
+      </div>
+
+      <!-- Preview da foto atual -->
+      <div id="current-photo-preview-wrap" style="display:none;margin-bottom:10px">
+        <p style="font-size:.4rem;color:var(--muted);margin-bottom:5px">Foto atual:</p>
+        <img id="current-photo-preview" style="width:100%;height:80px;object-fit:cover;border:1px solid var(--line)" alt="">
+      </div>
+
+      <div class="field" id="photo-upload-field" style="display:none">
+        <label class="field-label">Nova foto de fundo</label>
         <div class="photo-upload-area">
           <input type="file" accept="image/*" id="photo-upload" onchange="handlePhotoSelect(this)">
           <p class="photo-upload-text"><strong>Clique para escolher</strong><br>ou arraste uma foto<br>JPG, PNG, WEBP</p>
@@ -290,9 +317,9 @@ textarea.field-input{min-height:70px;line-height:1.6}
         <p id="upload-name" style="font-size:.45rem;color:var(--accent2);margin-top:6px;display:none"></p>
       </div>
 
-      <div class="sdivider"></div>
+      <div class="sdivider" id="photo-controls-divider" style="display:none"></div>
 
-      <div class="field">
+      <div class="field" id="photo-opacity-field" style="display:none">
         <label class="field-label">Opacidade da foto</label>
         <div class="range-wrap">
           <input type="range" class="range-input" id="photo-opacity" min="0" max="1" step="0.05" value="0.85"
@@ -301,7 +328,7 @@ textarea.field-input{min-height:70px;line-height:1.6}
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" id="overlay-opacity-field" style="display:none">
         <label class="field-label">Escuridão do overlay</label>
         <div class="range-wrap">
           <input type="range" class="range-input" id="overlay-opacity" min="0" max="0.95" step="0.05" value="0.38"
@@ -310,7 +337,7 @@ textarea.field-input{min-height:70px;line-height:1.6}
         </div>
       </div>
 
-      <button class="apply-btn" onclick="applyPhotoChanges()">Aplicar Foto e Opacidade</button>
+      <button class="apply-btn" id="photo-apply-btn" style="display:none" onclick="applyPhotoChanges()">Aplicar Alterações</button>
     </div>
 
   </div><!-- /sidebar -->
@@ -565,6 +592,102 @@ function setStyleProp(styleStr, prop, value) {
 // ═══════════════════════════════════════════════════
 // PHOTO HANDLING
 // ═══════════════════════════════════════════════════
+
+// Elemento <img> da seção de foto atualmente selecionada
+let selectedPhotoImgEl = null;
+let selectedPhotoOverlayEl = null;
+
+function selectPhotoSection(sectionId, currentSrc, lineHint) {
+  if (!iframeDoc) { showToast('Painel ainda carregando...', 'error'); return; }
+
+  // Marcar item ativo na lista
+  document.querySelectorAll('.photo-sec-item').forEach(x => x.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  // Encontrar o elemento <img class="bg"> ou img inline da seção no iframe
+  let imgEl = null;
+
+  // Tentar por data-section
+  const secEl = iframeDoc.querySelector(`[data-section="${sectionId}"]`);
+  if (secEl) {
+    imgEl = secEl.querySelector('img');
+  }
+
+  // Tentar por id
+  if (!imgEl) {
+    const idEl = iframeDoc.getElementById(sectionId);
+    if (idEl) imgEl = idEl.querySelector('img.bg') || idEl.querySelector('img');
+  }
+
+  // Fallback: encontrar img com src correspondente
+  if (!imgEl) {
+    const allImgs = iframeDoc.querySelectorAll('img');
+    for (const img of allImgs) {
+      if (img.getAttribute('src') && img.getAttribute('src').includes(currentSrc.split('/').pop())) {
+        imgEl = img;
+        break;
+      }
+    }
+  }
+
+  selectedPhotoImgEl = imgEl;
+
+  // Encontrar overlay
+  selectedPhotoOverlayEl = null;
+  if (imgEl) {
+    const parent = imgEl.parentElement;
+    if (parent) {
+      selectedPhotoOverlayEl = parent.querySelector('div[style*="rgba"]');
+    }
+  }
+
+  // Mostrar info
+  const info = document.getElementById('photo-selected-info');
+  info.style.display = 'block';
+  if (imgEl) {
+    info.textContent = `Seção: ${sectionId} — Foto: ${(imgEl.getAttribute('src') || currentSrc).split('/').pop()}`;
+  } else {
+    info.textContent = `Seção: ${sectionId} — (foto não encontrada no DOM, será aplicada ao salvar)`;
+  }
+
+  // Mostrar preview da foto atual
+  const previewWrap = document.getElementById('current-photo-preview-wrap');
+  const preview = document.getElementById('current-photo-preview');
+  previewWrap.style.display = 'block';
+  preview.src = currentSrc;
+
+  // Ler opacidade atual
+  if (imgEl) {
+    const styleAttr = imgEl.getAttribute('style') || '';
+    const opMatch = styleAttr.match(/opacity:([\.\d]+)/);
+    const opVal = opMatch ? parseFloat(opMatch[1]) : 0.85;
+    document.getElementById('photo-opacity').value = opVal;
+    document.getElementById('photo-opacity-val').textContent = opVal.toFixed(2);
+
+    // Ler overlay
+    if (selectedPhotoOverlayEl) {
+      const os = selectedPhotoOverlayEl.getAttribute('style') || '';
+      const rgbaMatch = os.match(/rgba\([^)]+,\s*([\d.]+)\)/);
+      if (rgbaMatch) {
+        const ov = parseFloat(rgbaMatch[1]);
+        document.getElementById('overlay-opacity').value = ov;
+        document.getElementById('overlay-opacity-val').textContent = ov.toFixed(2);
+      }
+    }
+  }
+
+  // Mostrar controles
+  document.getElementById('photo-upload-field').style.display = 'block';
+  document.getElementById('photo-controls-divider').style.display = 'block';
+  document.getElementById('photo-opacity-field').style.display = 'block';
+  document.getElementById('overlay-opacity-field').style.display = 'block';
+  document.getElementById('photo-apply-btn').style.display = 'block';
+
+  // Navegar até a seção no iframe
+  if (secEl) secEl.scrollIntoView({behavior:'smooth', block:'center'});
+  else if (imgEl) imgEl.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
 function handlePhotoSelect(input) {
   const file = input.files[0];
   if (!file) return;
@@ -580,11 +703,15 @@ function handlePhotoSelect(input) {
   const reader = new FileReader();
   reader.onload = e => {
     const base64 = e.target.result.split(',')[1];
-    pendingUploads.push({ name: file.name, base64, targetEl: selectedEl, newSrc: `fotos/${file.name}` });
+    // Usar selectedPhotoImgEl se disponível, senão selectedEl
+    const targetImg = selectedPhotoImgEl || (selectedEl && selectedEl.tagName === 'IMG' ? selectedEl : null);
+    pendingUploads.push({ name: file.name, base64, targetEl: targetImg, newSrc: `fotos/${file.name}` });
 
     // Atualizar preview no iframe imediatamente
-    if (selectedEl && selectedEl.tagName === 'IMG') {
-      selectedEl.src = url;
+    if (targetImg) {
+      targetImg.src = url;
+      // Atualizar também o preview atual
+      document.getElementById('current-photo-preview').src = url;
     }
   };
   reader.readAsDataURL(file);
@@ -592,32 +719,35 @@ function handlePhotoSelect(input) {
 
 function updatePhotoOpacity(val) {
   document.getElementById('photo-opacity-val').textContent = parseFloat(val).toFixed(2);
-  if (!selectedEl || selectedEl.tagName !== 'IMG') return;
-  let style = selectedEl.getAttribute('style') || '';
+  const imgEl = selectedPhotoImgEl || (selectedEl && selectedEl.tagName === 'IMG' ? selectedEl : null);
+  if (!imgEl) return;
+  let style = imgEl.getAttribute('style') || '';
   style = setStyleProp(style, 'opacity', val);
-  selectedEl.setAttribute('style', style);
+  imgEl.setAttribute('style', style);
 }
 
 function updateOverlayOpacity(val) {
   document.getElementById('overlay-opacity-val').textContent = parseFloat(val).toFixed(2);
-  if (!selectedEl) return;
-
-  // Encontrar o overlay no contexto do elemento selecionado
-  let parent = selectedEl.parentElement;
-  if (!parent) return;
-  const overlay = parent.querySelector('div[style*="rgba"]');
-  if (!overlay) return;
-
-  const style = overlay.getAttribute('style') || '';
-  const newStyle = style.replace(/rgba\([^)]+\)/g, (match) => {
-    // Substituir apenas o alpha
-    return match.replace(/,\s*[\d.]+\)/, `,${val})`);
-  });
-  overlay.setAttribute('style', newStyle);
+  const overlayEl = selectedPhotoOverlayEl;
+  if (!overlayEl) {
+    // Tentar encontrar pelo selectedEl
+    if (!selectedEl) return;
+    const parent = selectedEl.parentElement;
+    if (!parent) return;
+    const ov = parent.querySelector('div[style*="rgba"]');
+    if (!ov) return;
+    const style = ov.getAttribute('style') || '';
+    const newStyle = style.replace(/rgba\([^)]+\)/g, m => m.replace(/,\s*[\d.]+\)/, `,${val})`));
+    ov.setAttribute('style', newStyle);
+    return;
+  }
+  const style = overlayEl.getAttribute('style') || '';
+  const newStyle = style.replace(/rgba\([^)]+\)/g, m => m.replace(/,\s*[\d.]+\)/, `,${val})`));
+  overlayEl.setAttribute('style', newStyle);
 }
 
 function applyPhotoChanges() {
-  showToast('Foto e opacidade aplicadas. Clique em Salvar para publicar.', 'info');
+  showToast('Alterações aplicadas. Clique em Salvar para publicar.', 'info');
 }
 
 // ═══════════════════════════════════════════════════
