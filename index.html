@@ -288,6 +288,8 @@ footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-c
   #cur,#cur2{display:none}body{cursor:auto}
   .cw,#abertura,#refs,.sec-head,.treatment,.activity,#enc,.quote-block,.statement,.hybrid-sec,footer,.yt-single-wrap{padding-left:22px;padding-right:22px}
   .hero-content{padding:0 22px 64px}.proj-overlay{padding:44px 22px}
+  /* Grid tabela+tips em mobile vira coluna única */
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
 }
 
 /* ANIMAÇÕES SCROLL */
@@ -709,68 +711,65 @@ Para ao ver a porta arrombada.
         </ul>
       </div>
     </div>
-    <!-- TABELA DE VOCABULÁRIO -->
-    <div style="margin-top:48px;overflow-x:auto">
-      <table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:.68rem">
-        <thead>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.12)">
-            <th style="text-align:left;padding:14px 20px;color:var(--terra);letter-spacing:.14em;text-transform:uppercase;font-weight:400" >Plano / Movimento</th>
-            <th style="text-align:left;padding:14px 20px;color:var(--petrol-l);letter-spacing:.14em;text-transform:uppercase;font-weight:400" >Função</th>
-            <th style="text-align:left;padding:14px 20px;color:var(--moss-l);letter-spacing:.14em;text-transform:uppercase;font-weight:400">Efeito emocional</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Plano Geral</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Estabelece espaço e contexto</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Distância, solidão, escala</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Plano Médio</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Ação e expressão corporal</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Presença, performance</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Primeiro Plano</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Rosto, emoção</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Intimidade, intensidade</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Plano Detalhe</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Objeto, gesto, fragmento</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Significado, símbolo</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Câmera na Mão</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Instabilidade intencional</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Urgência, subjetividade</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Travelling</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Câmera acompanha o sujeito</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Presença, acompanhamento</td>
-          </tr>
-          <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Plongée</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Câmera de cima</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Reduz, impõe perspectiva</td>
-          </tr>
-          <tr>
-            <td style="padding:13px 20px;color:var(--white);font-weight:700" >Contra-plongée</td>
-            <td style="padding:13px 20px;color:var(--cream2)" >Câmera de baixo</td>
-            <td style="padding:13px 20px;color:rgba(221,213,192,.45)">Engrandece, heroifica</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="tip reveal rotate">
-      <span class="tip-icon">
-</span>
-      <p ><strong >A câmera musical — chicotes e zooms no Intensamente:</strong> Chicotes e zooms bruscos em clipe não são aleatórios. Cada movimento de câmera é motivado por um beat específico da música — construído na decupagem ouvindo a canção em loop, mapeando os pontos de corte e de intensidade. A câmera não acompanhou a música: ela tocou junto.</p>
-    </div>
-    <div class="tip reveal d1 fade-up">
-      <span class="tip-icon"></span>
-      <p >Antes de chegar ao set, ouça a música muitas vezes com o roteiro na mão. Marque onde são os beats, onde a canção respira, onde explode. <strong >A decupagem de um videoclipe é uma partituraual.</strong></p>
+    <!-- TABELA + TIPS EM GRID -->
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start">
+      <!-- COLUNA ESQUERDA: TABELA -->
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:.75rem">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.12)">
+              <th style="text-align:left;padding:14px 20px;color:var(--terra);letter-spacing:.14em;text-transform:uppercase;font-weight:400">Plano / Movimento</th>
+              <th style="text-align:left;padding:14px 20px;color:var(--petrol-l);letter-spacing:.14em;text-transform:uppercase;font-weight:400">Função</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plano Geral</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Estabelece espaço e contexto</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plano Médio</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Ação e expressão corporal</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Primeiro Plano</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Rosto, emoção</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plano Detalhe</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Objeto, gesto, fragmento</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Câmera na Mão</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Instabilidade intencional</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Travelling</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Câmera acompanha o sujeito</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plongée</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Câmera de cima</td>
+            </tr>
+            <tr>
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Contra-plongée</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em">Câmera de baixo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- COLUNA DIREITA: TIPS -->
+      <div style="display:flex;flex-direction:column;gap:20px">
+        <div class="tip reveal rotate">
+          <span class="tip-icon">◆</span>
+          <p><strong>A câmera musical — chicotes e zooms no Intensamente:</strong> Chicotes e zooms bruscos em clipe não são aleatórios. Cada movimento de câmera é motivado por um beat específico da música — construído na decupagem ouvindo a canção em loop, mapeando os pontos de corte e de intensidade. A câmera não acompanhou a música: ela tocou junto.</p>
+        </div>
+        <div class="tip reveal d1 fade-up">
+          <span class="tip-icon">◆</span>
+          <p>Antes de chegar ao set, ouça a música muitas vezes com o roteiro na mão. Marque onde são os beats, onde a canção respira, onde explode. <strong>A decupagem de um videoclipe é uma partitura visual.</strong></p>
+        </div>
+      </div>
     </div>
   </div>
 
