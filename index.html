@@ -1,1 +1,1304 @@
-{{FILE:/home/claude/index_MOBILE.html}}
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roteiro &amp; Direção de Videoclipe — Vini Poffo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;500;700&amp;family=Inter:wght@300;400;500;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --bg:#07060a;
+  --bg2:#0c0b10;
+  --bg3:#100f14;
+  --petrol:#0d3248;
+  --petrol-l:#1a5272;
+  --petrol-t:#0d3248cc;
+  --moss:#2e3d18;
+  --moss-l:#4a6028;
+  --sage:#7a9050;
+  --terra:#b83818;
+  --terra-d:#6a2010;
+  --ocre:#b89030;
+  --cream:#ddd5c0;
+  --cream2:#8a8070;
+  --muted:#3a3428;
+  --white:#eae3d0;
+  --line:rgba(255,255,255,.05);
+  --line2:rgba(255,255,255,.09);
+}
+body{background:var(--bg);color:var(--cream);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
+
+/* GRAIN */
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");mix-blend-mode:overlay}
+
+/* CURSOR */
+#cur{position:fixed;width:5px;height:5px;background:var(--terra);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .2s,height .2s}
+#cur2{position:fixed;width:28px;height:28px;border:1px solid rgba(184,56,24,.25);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .35s cubic-bezier(.16,1,.3,1)}
+#prog{position:fixed;top:0;left:0;height:1px;z-index:9000;width:0%;background:linear-gradient(90deg,var(--terra),var(--ocre))}
+
+
+
+
+/* ANIMAÇÕES SCROLL */
+.reveal{
+  opacity:0;
+  transition:opacity 1.2s cubic-bezier(.16,1,.3,1),transform 1.2s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible{
+  opacity:1;
+  transform:translate(0,0)!important;
+}
+.reveal.fade-up{transform:translateY(60px)}
+.reveal.fade-left{transform:translateX(-60px)}
+.reveal.fade-right{transform:translateX(60px)}
+.reveal.zoom{transform:scale(0.92)}
+.reveal.rotate{transform:rotate(-2deg) scale(0.96)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;padding:22px 60px;display:flex;justify-content:flex-end;align-items:center;transition:background .5s,padding .4s}
+nav.on{background:rgba(7,6,10,.96);backdrop-filter:blur(24px);padding-top:14px;padding-bottom:14px}
+.nav-links{display:flex;gap:40px;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.46rem;letter-spacing:.22em;text-transform:lowercase;color:rgba(221,213,192,.22);text-decoration:none;transition:color .3s;cursor:none}
+.nav-links a::before{content:'_'}
+.nav-links a:hover{color:var(--white)}
+
+/* ─── HERO ─── */
+#hero{position:relative;height:100vh;display:flex;align-items:flex-end;overflow:hidden;background:#000}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.52;z-index:0}
+.hero-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,6,10,0) 0%,rgba(7,6,10,.25) 40%,rgba(7,6,10,.98) 100%);z-index:1}
+.hero-content{position:relative;z-index:2;padding:0 60px 100px;width:100%}
+.hero-ey{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.hero-ey::before{content:'';width:32px;height:1px;background:var(--terra)}
+.hero-h1{font-family:'Epilogue', sans-serif;font-size:clamp(5rem,15.5vw,14.5rem);line-height:.82;color:var(--white);margin-bottom:26px;letter-spacing:-.01em;padding-left:8px}
+.hero-h1 .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.45);font-size:.62em;letter-spacing:.02em;display:block;line-height:1.1}
+.hero-h1 .accent{color:var(--terra)}
+.hero-sub{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:clamp(.95rem,1.5vw,1.25rem);color:var(--cream2);max-width:560px;line-height:1.7}
+.scroll-hint{position:absolute;right:60px;bottom:44px;font-size:.38rem;letter-spacing:.22em;color:rgba(221,213,192,.18);display:flex;flex-direction:column;align-items:center;gap:10px;animation:sp 2.8s ease-in-out infinite}
+@keyframes sp{0%,100%{opacity:.18;transform:translateY(0)}50%{opacity:.42;transform:translateY(6px)}}
+.scroll-hint::after{content:'';width:1px;height:48px;background:linear-gradient(to bottom,rgba(221,213,192,.18),transparent)}
+
+/* ─── ABERTURA ─── */
+#abertura{padding:130px 60px 110px;position:relative;overflow:hidden}
+.ab-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.09;z-index:0;filter:brightness(.4) contrast(1.3)}
+.ab-inner{position:relative;z-index:1;max-width:1200px}
+.ab-kicker{font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;color:var(--terra);margin-bottom:28px;display:flex;align-items:center;gap:14px}
+.ab-kicker::before{content:'';width:24px;height:1px;background:var(--terra)}
+.ab-q{font-family:'Inter', sans-serif;font-weight:700;font-size:clamp(2.2rem,4.8vw,4.5rem);line-height:.96;color:var(--white);letter-spacing:-.02em;margin-bottom:52px}
+.ab-q em{font-style:italic;color:var(--terra)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.ab-body p{font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.28rem;color:var(--cream2);line-height:2.1;margin-bottom:1rem}
+.ab-rule{width:28px;height:1px;background:var(--terra);margin:0 0 22px}
+
+/* ─── STATEMENT ─── */
+.statement{padding:80px 60px 70px;position:relative;overflow:hidden}
+.statement-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;z-index:0;filter:brightness(.85) contrast(1.05) saturate(.4)}
+.statement-inner{position:relative;z-index:1}
+.statement-big{font-family:'Epilogue', sans-serif;font-size:clamp(3.5rem,9vw,9rem);line-height:.86;color:var(--white);letter-spacing:-.01em;max-width:1100px}
+.statement-big .c-petrol{color:var(--petrol-l)}
+.statement-big .c-terra{color:var(--terra)}
+.statement-big .c-moss{color:var(--moss-l)}
+.statement-cols{display:grid;grid-template-columns:1fr 1fr;gap:64px;margin-top:56px;max-width:960px}
+.statement-cols p{font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.22rem;color:var(--cream2);line-height:2}
+
+/* ─── SECTION HEADER ─── */
+.sec-head{position:relative;overflow:visible;padding:110px 60px 60px}
+.sec-num{position:absolute;font-family:'Epilogue', sans-serif;font-size:30vw;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.018);right:-2%;top:-12%;pointer-events:none;user-select:none;line-height:1;z-index:0}
+.sec-label{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--terra);margin-bottom:18px;display:flex;align-items:center;gap:12px;position:relative;z-index:1}
+.sec-label::before{content:'';width:22px;height:1px;background:var(--terra)}
+.sec-label.c-moss{color:var(--moss-l)}.sec-label.c-moss::before{background:var(--moss-l)}
+.sec-label.c-petrol{color:var(--petrol-l)}.sec-label.c-petrol::before{background:var(--petrol-l)}
+.sec-title{font-family:'Epilogue', sans-serif;font-size:clamp(4rem,11.5vw,11rem);line-height:.84;color:var(--white);position:relative;z-index:1;letter-spacing:-.01em;padding-left:8px}
+.sec-title .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.38);font-size:.6em;letter-spacing:.02em;display:block;line-height:1.2}
+.sec-title .accent{color:var(--terra)}
+.sec-intro{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:1.05rem;color:var(--cream2);margin-top:26px;max-width:560px;line-height:1.85;position:relative;z-index:1}
+
+/* ─── CONTENT BLOCKS ─── */
+.cw{max-width:1280px;margin:0 auto;padding:0 60px}
+.mod{padding:68px 0;border-top:1px solid var(--line)}
+.mod-label{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:var(--terra);margin-bottom:14px}
+.mod-label.c-moss{color:var(--moss-l)}
+.mod-label.c-petrol{color:var(--petrol-l)}
+.mod-h{font-family:'Inter', sans-serif;font-weight:700;font-size:clamp(1.6rem,2.8vw,2.4rem);color:var(--white);margin-bottom:22px;line-height:1.05}
+.mod-h em{font-style:italic;color:rgba(221,213,192,.28)}
+.mod-body{font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.22rem;color:var(--cream2);line-height:2;margin-bottom:22px}
+.mod-body strong{color:var(--white);font-style:normal}
+.mod-2col{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.il{list-style:none;padding:0}
+.il li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.035);font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.12rem;color:rgba(221,213,192,.6);display:flex;gap:14px;line-height:1.75}
+.il li::before{content:'—';color:var(--terra);flex-shrink:0;font-style:normal;font-size:.68rem;margin-top:5px}
+.il li strong{color:var(--cream);font-style:normal}
+.callout{background:rgba(255,255,255,.016);padding:36px 30px;border-left:2px solid var(--terra)}
+.callout.c-moss{border-color:var(--moss-l)}
+.callout.c-petrol{border-color:var(--petrol-l)}
+.callout-label{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);margin-bottom:12px}
+.callout.c-moss .callout-label{color:var(--moss-l)}
+.callout.c-petrol .callout-label{color:var(--petrol-l)}
+.callout p{font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.12rem;color:var(--cream2);line-height:2}
+.callout strong{color:var(--white);font-style:normal}
+.tip{display:flex;gap:16px;padding:28px 24px;background:rgba(184,144,48,.06);border-left:1px solid rgba(184,144,48,.3);margin-top:20px}
+.tip-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.tip p{font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.08rem;color:rgba(221,213,192,.65);line-height:1.9}
+.tip strong{color:var(--ocre);font-style:normal}
+
+/* ─── PHOTO BG SECTIONS ─── */
+.photo-bg-sec{position:relative;overflow:hidden}
+.photo-bg-sec img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.photo-bg-sec .overlay{position:absolute;inset:0;z-index:1}
+.photo-bg-sec .content{position:relative;z-index:2}
+
+/* ─── VIDEO BG SECTION ─── */
+.vid-bg-sec{position:relative;overflow:hidden;background:#000}
+.vid-bg-sec video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.vid-bg-sec .overlay{position:absolute;inset:0;z-index:1}
+.vid-bg-sec .content{position:relative;z-index:2}
+
+/* ─── HYBRID ANIMATED LIST ─── */
+.hybrid-sec{padding:120px 60px;position:relative;overflow:hidden;min-height:80vh;display:flex;flex-direction:column;justify-content:center}
+.hybrid-kicker{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--moss-l);margin-bottom:28px;display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.hybrid-kicker::before{content:'';width:20px;height:1px;background:var(--moss-l)}
+.hybrid-items{position:relative;z-index:1}
+.hybrid-item{font-family:'Epilogue', sans-serif;font-size:clamp(2.8rem,7.5vw,7rem);line-height:.9;color:rgba(255,255,255,.055);transition:color .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1);cursor:default;padding:5px 0;letter-spacing:-.01em}
+.hybrid-item.active{color:var(--white);transform:translateX(12px)}
+.hybrid-item .c-terra{color:inherit}
+.hybrid-item.active .c-terra{color:var(--terra)}
+.hybrid-item .c-petrol{color:inherit}
+.hybrid-item.active .c-petrol{color:var(--petrol-l)}
+.hybrid-item .c-moss{color:inherit}
+.hybrid-item.active .c-moss{color:var(--moss-l)}
+
+/* ─── QUOTE ─── */
+.quote-block{padding:120px 60px;text-align:center;position:relative;overflow:hidden}
+.quote-text{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:clamp(1.7rem,3.4vw,3.2rem);color:var(--white);line-height:1.28;max-width:820px;margin:0 auto 22px;position:relative;z-index:1}
+.quote-rule{width:32px;height:1px;background:var(--terra);margin:22px auto;position:relative;z-index:1}
+.quote-author{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);position:relative;z-index:1}
+
+/* ─── ACTIVITY ─── */
+.activity{padding:80px 60px;position:relative;overflow:hidden}
+.activity-kicker{font-size:.44rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(221,213,192,.28);margin-bottom:16px;position:relative;z-index:1}
+.activity-title{font-family:'Epilogue', sans-serif;font-size:clamp(2.5rem,7vw,6.5rem);color:var(--white);line-height:.86;margin-bottom:48px;position:relative;z-index:1;padding-left:8px}
+.activity-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;max-width:1060px;position:relative;z-index:1}
+.activity-step{border-left:1px solid rgba(221,213,192,.08);padding-left:22px;transition:border-color .5s}
+.activity-step.active{border-color:var(--terra)}
+.activity-num{font-family:'Epilogue', sans-serif;font-size:4rem;color:rgba(221,213,192,.05);line-height:1;transition:color .5s}
+.activity-step.active .activity-num{color:var(--terra)}
+.activity-step-title{font-family:'Inter', sans-serif;font-style:italic;font-weight:700;font-size:1.05rem;color:rgba(221,213,192,.38);margin-bottom:8px;transition:color .5s}
+.activity-step.active .activity-step-title{color:var(--white)}
+.activity-step-body{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:.94rem;color:rgba(221,213,192,.28);line-height:1.9;transition:color .5s}
+.activity-step.active .activity-step-body{color:rgba(221,213,192,.55)}
+
+/* ─── PROJECT HERO (video alternating) ─── */
+.proj-hero{position:relative;overflow:hidden;background:#000;min-height:90vh;display:flex;align-items:flex-end}
+.proj-hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.65;transition:opacity 1.2s}
+.proj-hero video.hidden{opacity:0}
+.proj-hero .proj-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,10,.95) 0%,rgba(7,6,10,.2) 55%,rgba(7,6,10,.6) 100%);z-index:1}
+.proj-overlay{position:relative;z-index:2;padding:72px 60px;width:100%}
+.proj-title{font-family:'Epilogue', sans-serif;font-size:clamp(4rem,11vw,10.5rem);line-height:.82;color:var(--white);letter-spacing:-.01em}
+.proj-title .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.38);font-size:.58em;letter-spacing:.02em;display:block;line-height:1.2}
+.proj-sub{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:1rem;color:var(--cream2);margin-top:18px;max-width:480px;line-height:1.6}
+.proj-tag{display:inline-block;font-size:.38rem;letter-spacing:.18em;text-transform:uppercase;color:var(--terra);border:1px solid rgba(184,56,24,.3);padding:6px 14px;margin-top:16px;transition:all .3s}
+.proj-tag:hover{background:rgba(184,56,24,.1);border-color:var(--terra)}
+
+/* ─── SINGLE PROJECT HERO (photo bg) ─── */
+.proj-photo-hero{position:relative;overflow:hidden;min-height:85vh;display:flex;align-items:flex-end}
+.proj-photo-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.62;transition:transform 8s ease}
+.proj-photo-hero:hover img{transform:scale(1.03)}
+.proj-photo-hero .proj-grad{position:absolute;inset:0;background:linear-gradient(to top,rgba(7,6,10,.95) 0%,rgba(7,6,10,.15) 55%,rgba(7,6,10,.5) 100%);z-index:1}
+
+/* ─── YOUTUBE ─── */
+.yt-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
+.yt-single-wrap{max-width:860px;margin:0 auto;padding:0 60px 64px}
+.yt-wrap{position:relative;width:100%;aspect-ratio:16/9;background:#060606}
+.yt-wrap iframe{width:100%;height:100%;display:block;border:none}
+.yt-label{padding:14px 18px;background:rgba(0,0,0,.4)}
+.yt-title{font-family:'Inter', sans-serif;font-style:italic;font-size:1rem;color:var(--cream2)}
+.yt-meta{font-size:.36rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+
+/* ─── CANVA TREATMENT ─── */
+.treatment{padding:60px;background:var(--bg2)}
+.treatment-label{font-size:.42rem;letter-spacing:.22em;text-transform:uppercase;color:var(--moss-l);margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.treatment-label::before{content:'';width:16px;height:1px;background:var(--moss-l)}
+.treatment-title{font-family:'Inter', sans-serif;font-weight:700;font-size:1.35rem;color:var(--white);margin-bottom:5px}
+.treatment-sub{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:.9rem;color:var(--cream2);margin-bottom:24px}
+.treatment-frame{width:100%;aspect-ratio:16/9;border:none;display:block;background:#111}
+
+/* ─── PDF POPUP ─── */
+.pdf-trigger{display:inline-flex;align-items:center;gap:12px;padding:13px 26px;border:1px solid rgba(255,255,255,.1);color:var(--cream2);font-family:'Space Mono',monospace;font-size:.46rem;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;transition:all .3s;background:transparent;margin-top:18px}
+.pdf-trigger:hover{border-color:var(--terra);color:var(--white);background:rgba(184,56,24,.07)}
+.pdf-trigger::before{content:'↗';font-size:.85rem;color:var(--terra)}
+
+/* ─── LEVAR GRANDÃO ─── */
+.levar-big-sec{padding:120px 60px;position:relative;overflow:hidden;min-height:90vh;display:flex;flex-direction:column;justify-content:center}
+.levar-big-kicker{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ocre);margin-bottom:32px;display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.levar-big-kicker::before{content:'';width:20px;height:1px;background:var(--ocre)}
+.levar-big-items{position:relative;z-index:1}
+.levar-big-item{font-family:'Epilogue', sans-serif;font-size:clamp(2.5rem,6.5vw,6.2rem);line-height:.9;color:rgba(255,255,255,.05);transition:color .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1);padding:8px 0;letter-spacing:-.01em;cursor:default}
+.levar-big-item.active{color:var(--white);transform:translateX(14px)}
+.levar-big-item .c-ocre{color:inherit}
+.levar-big-item.active .c-ocre{color:var(--ocre)}
+.levar-big-item .c-terra{color:inherit}
+.levar-big-item.active .c-terra{color:var(--terra)}
+.levar-big-item .c-petrol{color:inherit}
+.levar-big-item.active .c-petrol{color:var(--petrol-l)}
+.levar-big-item .c-moss{color:inherit}
+.levar-big-item.active .c-moss{color:var(--moss-l)}
+
+/* ─── ENCERRAMENTO ─── */
+#enc{padding:110px 60px 80px;position:relative;overflow:hidden}
+.enc-label{font-size:.46rem;letter-spacing:.28em;text-transform:uppercase;color:var(--ocre);margin-bottom:20px;display:flex;align-items:center;gap:14px;position:relative;z-index:1}
+.enc-label::before{content:'';width:20px;height:1px;background:var(--ocre)}
+.enc-h{font-family:'Epilogue', sans-serif;font-size:clamp(3.5rem,10.5vw,10rem);line-height:.84;color:var(--white);letter-spacing:-.01em;margin-bottom:64px;position:relative;z-index:1}
+.enc-h .alt{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;color:rgba(221,213,192,.32);font-size:.58em;letter-spacing:.02em;display:block;line-height:1.2}
+
+/* ─── PARA LEVAR DAQUI (animated) ─── */
+.levar-items{position:relative;z-index:1}
+.levar-item{padding:32px 0;border-top:1px solid rgba(255,255,255,.04);display:flex;gap:32px;align-items:start;transition:border-color .5s}
+.levar-item.active{border-top-color:var(--terra)}
+.levar-n{font-family:'Epilogue', sans-serif;font-size:5rem;line-height:1;color:rgba(255,255,255,.04);flex-shrink:0;width:80px;transition:color .5s}
+.levar-item.active .levar-n{color:var(--terra)}
+.levar-body h3{font-family:'Inter', sans-serif;font-style:italic;font-weight:700;font-size:1.2rem;color:rgba(221,213,192,.28);margin-bottom:8px;transition:color .5s}
+.levar-item.active .levar-body h3{color:var(--white)}
+.levar-body p{font-family:'Inter', sans-serif;font-style:italic;font-weight:300;font-size:.98rem;color:rgba(221,213,192,.2);line-height:1.9;transition:color .5s}
+.levar-item.active .levar-body p{color:rgba(221,213,192,.55)}
+
+/* ─── REFS ─── */
+#refs{padding:100px 60px;max-width:1280px;margin:0 auto}
+.refs-title{font-family:'Epilogue', sans-serif;font-size:clamp(2.5rem,6vw,5.5rem);color:var(--white);margin-bottom:60px;letter-spacing:-.01em}
+.refs-2col{display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.ref-cat{font-size:.4rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.ref-item{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.03);display:flex;gap:12px;align-items:start}
+.ref-dot{width:3px;height:3px;background:var(--ocre);border-radius:50%;flex-shrink:0;margin-top:11px}
+.ref-name{font-family:'Inter', sans-serif;font-style:italic;font-size:.95rem;color:var(--cream);margin-bottom:3px}
+.ref-desc{font-size:.38rem;letter-spacing:.06em;color:var(--muted);line-height:1.7}
+.ref-movie{padding:12px 16px;border-left:1px solid rgba(255,255,255,.04);margin-bottom:5px;transition:all .25s}
+.ref-movie:hover{border-color:var(--ocre);background:rgba(255,255,255,.014)}
+.ref-movie-name{font-family:'Inter', sans-serif;font-style:italic;font-size:.95rem;color:var(--cream)}
+.ref-movie-year{font-size:.37rem;letter-spacing:.08em;color:var(--muted);margin-top:3px}
+
+/* ─── FOOTER ─── */
+footer{border-top:1px solid var(--line);padding:52px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px;margin-top:100px}
+.footer-name{font-family:'Inter', sans-serif;font-style:italic;font-weight:700;font-size:1.4rem;color:var(--cream2)}
+.footer-info{font-size:.38rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:2.4;text-align:right}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  /* GRIDS → COLUNA ÚNICA */
+  .ab-grid,.mod-2col,.activity-grid,.refs-2col,.yt-grid,.statement-cols{grid-template-columns:1fr;gap:32px}
+  
+  /* PADDING REDUZIDO */
+  nav{padding:14px 22px}.nav-links{display:none}
+  #cur,#cur2{display:none}body{cursor:auto}
+  .cw,#abertura,#refs,.sec-head,.treatment,.activity,#enc,.quote-block,.statement,.hybrid-sec,footer,.yt-single-wrap{padding-left:22px;padding-right:22px}
+  .hero-content{padding:0 22px 64px}.proj-overlay{padding:44px 22px}
+  
+  /* TÍTULOS RESPONSIVOS */
+  .hero-h1{font-size:clamp(3rem,12vw,5rem)!important;line-height:.88}
+  .sec-title{font-size:clamp(2.5rem,9vw,5rem)!important}
+  .ab-q{font-size:clamp(1.8rem,6vw,3rem)!important}
+  .statement-big{font-size:clamp(2.2rem,7vw,4rem)!important}
+  .activity-title{font-size:clamp(2rem,6vw,3.5rem)!important}
+  .proj-title{font-size:clamp(2.5rem,8vw,4.5rem)!important}
+  .quote-text{font-size:clamp(1.3rem,4vw,2rem)!important}
+  .refs-title{font-size:clamp(2rem,6vw,3.5rem)!important}
+  .enc-h{font-size:clamp(2.5rem,8vw,5rem)!important}
+  
+  /* HÍBRIDOS E ESPECIAIS */
+  .hybrid-item{font-size:clamp(2rem,6vw,3.5rem)!important}
+  .levar-big-item{font-size:clamp(1.8rem,5.5vw,3rem)!important}
+  
+  /* TEXTOS MENORES */
+  .mod-h{font-size:clamp(1.3rem,4vw,1.8rem)!important}
+  .mod-body{font-size:1rem!important}
+  .ab-body p{font-size:1.1rem!important}
+  .statement-cols p{font-size:1rem!important}
+  
+  /* SEÇÕES COM NÚMERO GIGANTE */
+  .sec-num{display:none}
+  
+  /* ACTIVITIES */
+  .activity-grid{grid-template-columns:1fr}
+  .activity-step{margin-bottom:24px}
+  
+  /* SCROLL HINT */
+  .scroll-hint{right:22px;bottom:24px;font-size:.32rem}
+  
+  /* TABELAS SCROLL HORIZONTAL */
+  table{font-size:.58rem}
+  
+  /* VIDEOS */
+  .hero-bg,.proj-hero video{object-position:center}
+  
+  /* Grid tabela+tips em mobile vira coluna única */
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+}
+
+/* ANIMAÇÕES SCROLL */
+.reveal{opacity:0;transition:all 1.2s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none!important}
+
+/* Variações de animação */
+.reveal.fade-up{transform:translateY(50px)}
+.reveal.fade-down{transform:translateY(-50px)}
+.reveal.fade-left{transform:translateX(-60px)}
+.reveal.fade-right{transform:translateX(60px)}
+.reveal.zoom-in{transform:scale(0.9)}
+.reveal.rotate-in{transform:rotate(-3deg) scale(0.95)}
+
+</style>
+</head>
+<body class="">
+<div id="cur" style="left: 1000px; top: 2px;"></div><div id="cur2" style="left: 1000px; top: 2px; transform: translate(-50%, -50%) scale(1);"></div><div id="prog" style="width: 35.9025%;"></div>
+
+<!-- NAV -->
+<nav id="nav" class="on">
+  <ul class="nav-links">
+    <li><a href="#roteiro">roteiro</a></li>
+    <li><a href="#direcao">direção</a></li>
+    <li><a href="#projetos" class="">projetos</a></li>
+    <li><a href="#enc" class="">encerramento</a></li>
+    <li class=""><a href="#refs" class="">referências</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section id="hero">
+  <video class="hero-bg" autoplay="" muted="" loop="" playsinline="">
+    <source src="video/dropar_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="hero-grad"></div>
+  <div class="hero-content">
+    <p class="hero-ey reveal fade-up">Masterclass · Imagem, Processo e Decisão</p>
+    <h1 class="hero-h1 reveal d1 fade-left" style=";;font-size:9rem">
+      Roteiro
+      <span class="alt" style=";font-family:'Space Mono',monospace;font-size:4.2rem;font-weight:300;color:#b89030;font-style:italic">&amp; direção de</span>
+      <span class="accent" style=";;;;;;;font-size:9.1rem">Videoclipe</span>
+    </h1>
+    <p class="hero-sub reveal d2 fade-right">Uma oficina sobre imagem, processo e decisão — Vini Poffo</p>
+  </div>
+  <div class="scroll-hint reveal d3 zoom">rolar</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     ABERTURA
+═══════════════════════════════════════════════════ -->
+<section id="abertura" class="photo-bg-sec">
+  <img class="bg" src="fotos/textura-floresta.png" alt="">
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,.88) 0%,rgba(7,6,10,.75) 50%,rgba(7,6,10,.92) 100%)"></div>
+  <div class="content ab-inner" style="padding:130px 60px 110px;max-width:1200px;margin:0 auto">
+    <p class="ab-kicker reveal rotate">_abertura · imagem como sensação</p>
+    <h2 class="ab-q reveal d1 fade-up" style=";;;;;font-size:3.2rem">“Qual imagem de um videoclipe ou filme ficou gravada em você <em>e por quê?”</em></h2>
+    <div class="ab-grid">
+      <div class="reveal fl d1 fade-left">
+        <p style="font-family:'Epilogue', sans-serif;line-height:.9;color:var(--white);letter-spacing:-.01em;margin-bottom:28px;;font-size:3.2rem;font-weight:400;font-style:italic">o que faz uma imagem<br>atravessar o corpo?</p>
+        <div class="ab-rule"></div>
+        <div class="ab-body">
+          <p style=";font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:400;color:#b89030">Parto sempre da imagem como sensação. A imagem precisa criar um estado, provocar algo em quem vê antes de explicar qualquer coisa. </p>
+        </div>
+      </div>
+      <div class="reveal fr d2 fade-right">
+        <div class="ab-body" style="margin-top:60px">
+          <p style=";font-family:'Space Mono',monospace;font-size:0.8rem;font-weight:400;color:#eae3d0"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement photo-bg-sec" data-section="statement" id="statement">
+  <img class="bg statement-bg" src="fotos/pb-pessoas-desfocadas.png" alt="" style="position:absolute">
+  <div class="overlay" style="background:rgba(7,6,10,.22)"></div>
+  <div class="statement-inner content" style="padding:90px 60px 80px">
+    <p class="statement-big reveal zoom">No cinema,<br>você só existe<br><span class="c-terra" style=";font-family:'Epilogue',serif;font-size:6.5rem;font-weight:700;color:#1a5272;font-style:itálico">se der para ver.</span></p>
+    <div class="statement-cols">
+      <p class="reveal d1 rotate" style=";font-family:'Inter',serif;font-size:1.3rem;font-weight:500;color:#eae3d0;font-style:itálico">Um personagem que sente saudade na literatura pode ser descrito em três parágrafos de fluxo de consciência. No roteiro, você precisa decidir: o que é a imagem da saudade? Qual objeto, qual gesto, qual luz carrega esse estado?</p>
+      <p class="reveal d2 fade-up" style=";font-family:'Inter',serif;font-size:1.2rem;font-weight:400;color:#eae3d0;font-style:itálico">Literatura narra, descreve, acessa o interno. Cinema mostra, sugere, externaliza — tudo o que existe éível e audível. <br><br>Roteiro é a tentativa de traduzir um estado interno em imagem e som.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     PARTE 01 — ROTEIRO
+═══════════════════════════════════════════════════ -->
+<div id="roteiro" class="photo-bg-sec" style="background:var(--bg3)">
+  <img class="bg" src="fotos/bts-fabrica-camera.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(7,6,10,.38)"></div>
+  <div class="content sec-head">
+    <div class="sec-num" style="transform: translateY(-626.35px);">01</div>
+    <p class="sec-label reveal fade-left">Parte 01</p>
+    <h2 class="sec-title reveal d1 fade-right" style=";font-family:'Bebas Neue',sans-serif;font-size:7.1rem;font-weight:700;font-style:italic">
+      Roteiro
+      <span class="alt" style=";font-family:'Cormorant Garamond',serif;font-size:6.4rem;font-weight:400;font-style:italic">da Imagem</span>
+      <span class="accent" style=";color:#4a6028;font-family:'Bebas Neue',sans-serif;font-size:8.5rem;font-weight:700;font-style:italic">à página</span>
+    </h2>
+    <p class="sec-intro reveal d2 zoom" style=";font-family:'Space Mono',monospace;font-size:1rem;font-weight:400;color:#eae3d0">O roteiro no cinema é um documento técnico, mas também é a primeira imagem que o filme existe. Antes de qualquer câmera, qualquer set, qualquer artista, existe uma decisão de o que mostrar e como mostrar. Esta parte da aula parte da linguagem audiovisual e chega até o instrumento que vai guiar a produção de vocês.</p>
+  </div>
+</div>
+
+<div class="cw">
+
+  <!-- 01 Linguagem Audiovisual -->
+  <div class="mod reveal rotate" style="">
+    <p class="mod-label draggable">01 — Linguagem Audiovisual</p>
+    <h3 class="mod-h draggable">O cinema não descreve, <em style=";font-family:'Inter',serif;font-size:2.2rem;font-weight:700;color:#4a6028;font-style:italic">ele mostra</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable">A diferença mais fundamental entre escrever para o cinema e escrever literatura está num único princípio: <strong style=";font-family:'Epilogue', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0">no cinema, você só existe se der pra ver.</strong></p>
+        <p class="mod-body draggable"></p>
+        <ul class="il draggable">
+          <li style=";font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;font-style:italic">Literatura: narra, descreve, acessa o interno</li>
+          <li style=";font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;font-style:italic">Cinema: mostra, sugere, externaliza (tudo o que existe éível e audível)</li>
+          <li style=";font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700;font-style:italic">Roteiro é a tentativa de traduzir um estado interno em imagem e som</li>
+        </ul>
+      </div>
+      <div class="callout draggable">
+        <p class="callout-label" style=";font-family:'Inter', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0"></p>
+        <p></p>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- fim mod 01 -->
+
+<!-- /cw parte1-bloco1 -->
+
+<!-- 02 Da Ideia ao Roteiro — FULL WIDTH COM VÍDEO -->
+<div class="reveal fade-up" data-section="mod02" style="position:relative;overflow:hidden;width:100%">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none">
+    <source src="video/naoc_.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.65);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
+    <p class="mod-label draggable">02 — Da Ideia ao Roteiro</p>
+    <h3 class="mod-h draggable">Conflito, argumento, <em style=";font-family:'Space Mono',monospace;font-size:2.2rem;font-weight:700;color:#b89030;font-style:itálico">escaleta</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable" style="position: relative;;font-family:'Space Mono',monospace;font-size:0.9rem;font-weight:700;color:#888888;font-style:italic">Todo projeto narrativo parte de um conflito.</p>
+        <ul class="il draggable">
+          <li style=";font-family:'Inter', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0;font-style:normal"><strong style=";font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#888888;font-style:italic">Conflito externo:</strong> personagem vs. ambiente, vs. outro personagem</li>
+          <li style=";font-family:'Inter', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0;font-style:normal"><strong style=";font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:#888888;font-style:italic">Conflito interno:</strong> personagem vs. seus próprios limites, medos, desejos</li>
+        </ul>
+        <p class="mod-body draggable" style="margin-top: 20px; font-family: Inter, sans-serif; font-size: 1.1rem; font-weight: 400; color: rgb(234, 227, 208); font-style: normal; position: relative;"><strong style=";font-family:'Inter', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0">O Argumento: a ideia</strong><br>Antes de escrever qualquer cena, o argumento testa se a ideia aguenta ser contada. É a síntese.</p>
+        <p class="mod-body draggable" style="font-family: Inter, sans-serif; font-size: 1.1rem; font-weight: 400; color: rgb(234, 227, 208); font-style: normal; position: relative;"><strong style=";font-family:'Inter', sans-serif;font-size:1.1rem;font-weight:400;color:#eae3d0">A Escaleta: o mapa antes do roteiro</strong><br><br>
+A escaleta lista sequencialmente todas as cenas antes de desenvolvê-las. Cada item indica: local, momento do dia e o que acontece.</p>
+      </div>
+      <div>
+        <p class="mod-body draggable" style="position: relative;;font-family:'Space Mono',monospace;font-size:1.1rem;font-weight:700;color:#b83818;font-style:italic"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cw"><!-- cw parte1-bloco2 -->
+
+  <!-- 03 Construção de Personagens -->
+  <div class="mod reveal fade-left">
+    <p class="mod-label draggable">03 — Construção de Personagens</p>
+    <h3 class="mod-h draggable" style="position: relative;;font-family:'Epilogue',serif;font-size:3.1rem;font-weight:700;color:#b89030;font-style:normal">O PERFIL - <em style=";font-family:'Bebas Neue',sans-serif;font-size:3.5rem;font-weight:700;color:#1a5272;font-style:italic">tridimensional do personagem</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable" style="position: relative;;font-family:'Space Mono',monospace;font-size:1rem;font-weight:300;color:#ffffff;font-style:normal">Um bom personagem não é definido pelo que ele parece. É definido pelo que ele carrega — medos, contradições, o que não diz.</p>
+        <ul class="il draggable">
+          <li><strong style=";font-family:'Epilogue', sans-serif;font-size:1.3rem;font-weight:400;color:#ffffff;font-style:normal">Dimensão física:</strong> aparência, forma de se mover, de se vestir — o corpo como linguagem</li>
+          <li><strong style=";font-family:'Epilogue', sans-serif;font-size:1.3rem;font-weight:400;color:#ffffff;font-style:normal">Dimensão psicológica:</strong> medos, traumas, desejos, manias, contradições internas</li>
+          <li><strong style=";font-family:'Epilogue', sans-serif;font-size:1.3rem;font-weight:400;color:#ffffff;font-style:normal">Dimensão social:</strong> contexto familiar, cultural, o que molda aão de mundo</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable" style=";font-family:'Inter',serif;font-size:1rem;font-weight:400;color:#8a8070;font-style:italic"><strong style=";font-family:'Epilogue',serif;font-size:1.3rem;font-weight:700;color:#b89030;font-style:normal">A contradição como humanidade</strong><br>Os personagens mais memoráveis não são coerentes — são contraditórios. O herói que tem medo. O vilão que ama. A contradição gera empatia porque o público reconhece: é assim que a gente é.</p>
+        <p class="mod-body draggable" style=";font-family:'Inter',serif;font-size:1rem;font-weight:400;color:#8a8070;font-style:italic">No videoclipe, o 'personagem' muitas vezes é o próprio artista — mas pensado como persona, não como pessoa.</p>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- fim mod 03 -->
+
+<!-- /cw parte1-bloco2 -->
+
+<!-- 04 Roteiro como Documento Técnico — FULL WIDTH -->
+<div class="reveal fade-right" data-section="mod04" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/bts-fabrica-expressao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.8;filter:brightness(.7) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.42);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
+    <p class="mod-label draggable">04 — O Roteiro como Documento Técnico</p>
+    <h3 class="mod-h draggable" style="position: relative;;font-family:'Bebas Neue',sans-serif;font-size:3.5rem;font-weight:700;color:#4a6028;font-style:italic">O Roteiro como documento <em style=";font-family:'Epilogue', sans-serif;font-size:1.8rem;font-weight:400;color:#1a5272;font-style:normal"></em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable">O roteiro não existe para impressionar. Existe para que a equipe inteira — câmera, arte, produção, atores — saiba o que precisa ser filmado. <br>
+Essa clareza é um ato de respeito com quem trabalha com você.</p>
+        <ul class="il draggable">
+          <li>Fonte: Courier New, tamanho 12</li>
+          <li>Margem esquerda: 3,5cm | Margem direita: 2,5cm</li>
+          <li>1 página bem formatada ≈ 1 minuto de tela</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable"><strong>Anatomia de uma cena</strong></p>
+        <ul class="il draggable">
+          <li><strong>CABEÇALHO:</strong> INT/EXT. LOCAL — DIA/NOITE — indica o local exato e a luz</li>
+          <li><strong>AÇÃO (Rubrica):</strong> o que se vê e ouve. Frases curtas, verbos no presente. O roteirista não dá instruções de câmera — conta a históriaual</li>
+          <li><strong>DIÁLOGO:</strong> nome em maiúsculas centralizado, fala centralizada abaixo</li>
+        </ul>
+      </div>
+    </div>
+    <!-- EXEMPLO REAL DE ROTEIRO -->
+    <div style="margin-top:40px">
+      <p class="mod-body draggable" style="letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.7rem; color: var(--terra); margin-bottom: 20px; position: relative;"></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div>
+          <p class="mod-body draggable" style="letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;     position: relative;;font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:#b89030;font-style:italic">Anatomia de uma cena</p>
+          <ul class="il draggable" style="list-style: none; padding: 0px; position: relative;">
+            <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:var(--terra);font-family:'Space Mono',monospace;font-size:.7rem">CABEÇALHO</span><br><span style=";font-size:0.9rem;font-weight:400;color:#eae3d0;font-style:italic">INT/EXT. LOCAL — DIA/NOITE</span></li>
+            <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06)"><span style="color:var(--petrol-l);font-family:'Space Mono',monospace;font-size:.7rem">AÇÃO (RUBRICA)</span><br><span style=";font-size:0.9rem;font-weight:400;color:#eae3d0;font-style:normal">O que se vê e ouve. Verbos no presente.</span></li>
+            <li style="padding:10px 0"><span style="color:var(--moss-l);font-family:'Space Mono',monospace;font-size:.7rem">DIÁLOGO</span><br><span style=";font-size:0.9rem;font-weight:400;color:#eae3d0;font-style:normal">NOME centralizado, fala abaixo.</span></li>
+          </ul>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:4px;padding:28px 32px">
+          <p style="letter-spacing:.1em;text-transform:uppercase;margin-bottom:20px;font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:#b83818;font-style:italic">Exemplo</p>
+          <pre style="font-family:'Courier New',Courier,monospace;font-size:.82rem;line-height:1.9;color:rgba(221,213,192,.75);white-space:pre-wrap;margin:0"><span style="color:var(--white);font-weight:700">INT. CORREDOR — NOITE</span>
+
+Márcia entra correndo.
+Para ao ver a porta arrombada.
+
+<span style="display:block;text-align:center;color:var(--white)">MÁRCIA</span><span style="display:block;text-align:center">Ele esteve aqui.</span></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /04 full-width -->
+
+<div class="cw"><!-- cw parte1-bloco3 -->
+
+  <!-- 05 Tratamento Visual -->
+  <div class="mod reveal zoom">
+    <p class="mod-label draggable">05 — O Tratamento Visual</p>
+    <h3 class="mod-h draggable">Defender uma ideia <em style=";font-family:'Bebas Neue',sans-serif;font-size:2.4rem;font-weight:700;color:#b89030;font-style:italic">antes do set</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable" style="font-family: Epilogue, sans-serif; font-size: 1.2rem; font-weight: 400; color: rgb(184, 56, 24); font-style: italic; position: relative;"> o roteiro formal muitas vezes é precedido pelo Tratamento Visual — a apresentação daão criativa do diretor para o artista.</p>
+        <ul class="il draggable">
+          <li>Um documento em slides com imagens, referênciasuais, textos curtos e conceito</li>
+          <li>Responde ao briefing do artista com uma proposta de linguagem, não de enredo</li>
+          <li>Funciona como uma 'defesa de ideia' antes de qualquer aprovação de orçamento</li>
+          <li>Quando bem feito, é um equalizador: uma diretora nova com uma ideia forte pode vencer uma equipe de veteranos</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable" style="font-family: Epilogue, sans-serif; font-size: 1.2rem; font-weight: 400; color: rgb(184, 144, 48); font-style: italic; position: relative;"><strong style=";font-family:'Bebas Neue',sans-serif;font-size:2.1rem;font-weight:700;color:#b89030;font-style:italic">O que precisa ter</strong></p>
+        <ul class="il draggable">
+          <li>Conceito central em uma frase: qual é a ideia que sustenta tudo</li>
+          <li>Referênciasuais: filmes, fotografia, pinturas, texturas — o que vai guiar as decisões de câmera e arte</li>
+          <li>Proposta de linguagem: como a câmera se comporta, qual é o registroual, o que é performance e o que é narrativa</li>
+          <li>Storyboard ou descrição de cenas-chave</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- fim mod 05 -->
+
+<!-- /cw parte1-bloco3 -->
+
+<!-- 06 Limitação como Filtro — FULL WIDTH -->
+<div class="reveal rotate" data-section="mod06" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/pb-estacao.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;filter:brightness(.7) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
+    <p class="mod-label draggable">06 — A Limitação como Filtro</p>
+    <h3 class="mod-h draggable">Escrever para <em style=";font-family:'Bebas Neue',sans-serif;font-size:2.1rem;font-weight:700;color:#b89030;font-style:italic">o que você tem</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable" style="font-family: Inter, sans-serif; font-size: 1.4rem; font-weight: 400; color: rgb(136, 136, 136); font-style: italic; position: relative;">O cinema independente tem a necessidade de tomar decisões mais precisas — porque não tem dinheiro para desperdiçar.</p>
+        <p class="mod-body draggable"><strong>Referências de movimento</strong></p>
+        <ul class="il draggable">
+          <li><strong>Cinema Novo Brasileiro</strong> (Glauber Rocha, Nelson Pereira dos Santos): câmera na mão, rua como set, a realidade como matéria</li>
+          <li><strong>Dogma 95</strong> (Lars von Trier, Thomas Vinterberg): eliminar os artificialismos caros como regra estética — e descobrir que essa restrição é libertadora</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable"><strong style=";font-family:'Bebas Neue',sans-serif;font-size:2.1rem;font-weight:700;color:#b89030;font-style:italic"></strong></p>
+        <ul class="il draggable">
+          <li style=";font-family:'Space Mono',monospace;font-size:0.9rem;font-weight:400;color:#ffffff;font-style:italic">Liste o que você tem acesso: lugares, objetos, pessoas, luz natural, horários</li>
+          <li style=";font-family:'Space Mono',monospace;font-size:1rem;font-weight:400;color:#ffffff;font-style:italic">A limitação não é falta de criatividade</li>
+          <li style=";font-family:'Space Mono',monospace;font-size:1rem;font-weight:400;color:#ffffff;font-style:italic">Uma câmera de celular com uma ideia forte bate uma câmera de cinema com uma ideia fraca</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /06 full-width -->
+
+<!-- ATIVIDADE 1 -->
+<div class="activity photo-bg-sec reveal fade-up" style="background:var(--terra-d)">
+  <img class="bg" src="fotos/bts-fabrica-conversa.png" alt="" style="filter:brightness(.7) contrast(1.1);;;;;;;;;;;;;;;;opacity:0.3">
+  <div class="overlay" style="background:rgba(106,32,16,0.4)"></div>
+  
+  <!-- LAYOUT 2 COLUNAS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;max-width:1280px;margin:0 auto">
+    
+    <!-- COLUNA ESQUERDA: Título + Descrição -->
+    <div style="position:relative;z-index:1">
+      <p class="activity-kicker">_atividade · que história é essa?</p>
+      <h3 class="activity-title" style="margin-bottom:32px">Que história<br>é essa?</h3>
+      <p style="font-family:'Inter', sans-serif;font-style:italic;font-size:1.05rem;color:rgba(221,213,192,.65);line-height:1.85">O objetivo é estimular a criatividade e a colaboração, desafiando cada um a criar uma cena cinematográfica a partir de elementos aleatórios. Para entender como a mágica do cinema se desdobra quando combinamos lugares, ações, gêneros de filme e frases.</p>
+    </div>
+    
+    <!-- COLUNA DIREITA: Timeline de passos -->
+    <div style="position:relative;z-index:1">
+      <!-- PASSO 01 -->
+      <div style="display:flex;gap:20px;align-items:start;padding:24px 0;border-left:3px solid var(--terra);padding-left:24px;margin-bottom:6px">
+        <div style="font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:700;color:var(--terra);line-height:1;min-width:45px">01</div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Elementos</p>
+          <p style="font-family:'Inter',sans-serif;font-style:italic;font-size:0.88rem;font-weight:300;color:rgba(221,213,192,.6);line-height:1.7">Vocês receberão papeis em branco. Escreva um conjunto de palavras representando diferentes categorias: "Onde/quando", "Personagem", "Gênero de Filme" e "Frase". Coloque na urna.</p>
+        </div>
+      </div>
+      
+      <!-- PASSO 02 -->
+      <div style="display:flex;gap:20px;align-items:start;padding:24px 0;border-left:3px solid var(--terra);padding-left:24px;margin-bottom:6px">
+        <div style="font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:700;color:var(--terra);line-height:1;min-width:45px">02</div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Escolha</p>
+          <p style="font-family:'Inter',sans-serif;font-style:italic;font-size:0.88rem;font-weight:300;color:rgba(221,213,192,.6);line-height:1.7">Retirem uma palavra de cada categoria da urna. Estas palavras serão os elementos-chave para a criação da sua cena cinematográfica.</p>
+        </div>
+      </div>
+      
+      <!-- PASSO 03 -->
+      <div style="display:flex;gap:20px;align-items:start;padding:24px 0;border-left:3px solid var(--terra);padding-left:24px;margin-bottom:6px">
+        <div style="font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:700;color:var(--terra);line-height:1;min-width:45px">03</div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Roteiro</p>
+          <p style="font-family:'Inter',sans-serif;font-style:italic;font-size:0.88rem;font-weight:300;color:rgba(221,213,192,.6);line-height:1.7">Com seus elementos em mãos, usem o tempo para pensar e planejar como essas palavras se encaixarão em uma cena. Se deixem levar pela criatividade!</p>
+        </div>
+      </div>
+      
+      <!-- PASSO 04 -->
+      <div style="display:flex;gap:20px;align-items:start;padding:24px 0;border-left:3px solid var(--terra);padding-left:24px">
+        <div style="font-family:'Epilogue',sans-serif;font-size:2rem;font-weight:700;color:var(--terra);line-height:1;min-width:45px">04</div>
+        <div>
+          <p style="font-family:'Inter',sans-serif;font-weight:700;font-size:1.05rem;color:var(--white);margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em">Apresentação</p>
+          <p style="font-family:'Inter',sans-serif;font-style:italic;font-size:0.88rem;font-weight:300;color:rgba(221,213,192,.6);line-height:1.7">Compartilhem as cenas individualmente. Analisem juntos como as diferentes combinações de palavras afetaram as histórias.</p>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PARTE 02 — DIREÇÃO
+═══════════════════════════════════════════════════ -->
+<div id="direcao" class="vid-bg-sec" style="min-height:100vh">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="">
+    <source src="video/outres_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,.72) 0%,rgba(7,6,10,.38) 40%,rgba(7,6,10,.88) 100%)"></div>
+  <div class="content sec-head">
+    <div class="sec-num" style="transform: translateY(-390.211px);">02</div>
+    <p class="sec-label c-moss reveal fade-left">Parte 02</p>
+    <h2 class="sec-title reveal d1 fade-right" style=";font-family:'Bebas Neue',sans-serif;font-size:6.2rem;font-weight:700;color:#eae3d0;font-style:italic">
+      Direção
+      <span class="alt" style=";font-family:'Cormorant Garamond',serif;font-size:6.2rem;font-weight:700;color:#b89030;font-style:italic">do papel</span>
+      <span class="accent" style=";font-family:'Bebas Neue',sans-serif;font-size:6.2rem;font-weight:700;color:#b83818;font-style:italic">ao Set</span>
+    </h2>
+    <p class="sec-intro reveal d2 zoom">Se antes foi sobre como a ideia ganha forma antes de chegar ao set, agora é sobre o que acontece quando você chega lá. Dirigir é uma sequência de decisões — algumas planejadas, muitas não. E o que diferencia uma boa direção é, para além do bom planejamento, como ela reage quando o planejamento não funciona.</p>
+  </div>
+</div>
+
+<!-- EXERCÍCIO DE AQUECIMENTO -->
+<div class="activity photo-bg-sec reveal rotate" style="background:var(--moss)">
+  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background:rgba(46,61,24,.42)"></div>
+  <p class="activity-kicker">_antes de começar · exercício de aquecimento</p>
+  <h3 class="activity-title" style=";font-family:'Bebas Neue',sans-serif;font-size:6.2rem;font-weight:700;color:#ffffff;font-style:italic">Exercício de<br>aquecimento</h3>
+  <p style="font-family:'Inter', sans-serif;font-style:italic;font-weight:500;font-size:1.22rem;color:rgba(221,213,192,.75);max-width:720px;line-height:2;position:relative;z-index:1" class="">Ouça a música que vocês vão gravar. Você tem 10 minutos para jogar o maior número de ideias possíveis — não filtre, não julgue. De tudo que você escreveu, identifique a ideia que mais te provoca, a imagem que você não consegue tirar da cabeça. Escreva o conceito do seu clipe em uma única frase. Essa frase vai guiar todas as decisões do set.</p>
+</div>
+
+<!-- LINGUAGEM HÍBRIDA -->
+<div class="hybrid-sec photo-bg-sec">
+  <img class="bg" src="fotos/textura-fantasmas.png" alt="" style="opacity:.06;filter:brightness(.3) contrast(1.5)">
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,.94) 0%,rgba(13,50,72,.7) 50%,rgba(7,6,10,.94) 100%)"></div>
+  <p class="hybrid-kicker reveal fade-up">_o videoclipe · linguagem híbrida</p>
+  <div class="hybrid-items" id="hybridItems">
+    <div class="hybrid-item" style="font-family:'Bebas Neue',sans-serif;font-size:6.1rem;font-weight:700;font-style:italic">O videoclipe <span class="c-terra">é um mini-filme</span></div>
+    <div class="hybrid-item" style="font-family:'Bebas Neue',sans-serif;font-size:6.1rem;font-weight:700;font-style:italic">mistura cinema, <span class="c-petrol">publicidade</span></div>
+    <div class="hybrid-item active" style="font-family:'Bebas Neue',sans-serif;font-size:6.2rem;font-weight:700;font-style:italic">videoarte <span class="c-moss">e performance</span></div>
+    <div class="hybrid-item" style="font-family:'Bebas Neue',sans-serif;font-size:5.4rem;font-weight:700;font-style:italic">pode ser narrativo <br>ou <span class="c-terra">conceitual</span></div>
+    <div class="hybrid-item" style="font-family:'Bebas Neue',sans-serif;font-size:6.2rem;font-weight:700;font-style:italic">seu tratamento é <span class="c-moss">sua bússola</span></div>
+  </div>
+</div>
+
+<div class="cw">
+
+  </div><!-- /cw antes de mod07 -->
+
+<!-- 07 Linguagem Híbrida — FULL WIDTH COM VÍDEO -->
+<div class="reveal fade-right" style="position:relative;overflow:hidden;width:100%">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none">
+    <source src="video/naoc_2.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.68);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)">
+    <p class="mod-label c-moss draggable">07 — O Videoclipe: Linguagem Híbrida e Identidade Visual</p>
+    <h3 class="mod-h draggable">Identidadeual <em>e conceito</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable">O videoclipe não é só um mini-filme com música. É um formato com linguagem própria e hibrida, que mistura cinema, publicidade, performance e videoarte — com a canção como suporte, referência e limite.</p>
+        <ul class="il draggable">
+          <li>A música define o tempo do clipe, o ritmo da edição, a duração das cenas, os pontos de corte</li>
+          <li>Não há obrigação de linearidade narrativa, a ruptura de espaço-tempo é permitida e frequentemente desejada</li>
+          <li>O clipe pode ser: narrativo (conta uma história), performático (foco no artista), conceitual (imagem como ideia), ou híbrido — a maioria é híbrido</li>
+        </ul>
+      </div>
+      <div class="callout c-moss draggable" style="margin-top:80px">
+        <p class="callout-label">_o conceito como bússola</p>
+        <p>Toda decisão de set tem que responder a uma pergunta: <strong>isso serve ao conceito?</strong> A câmera que você vai usar, a roupa que o artista vai vestir, o ângulo do close — tudo precisa ter um por quê.</p>
+      </div>
+    </div>
+  </div>
+</div><!-- /07 full-width -->
+
+<div class="cw"><!-- cw após mod07 -->
+
+  <!-- 08 Câmera Musical -->
+  <div class="mod reveal zoom">
+    <p class="mod-label c-petrol draggable">08 — A Câmera Musical</p>
+    <h3 class="mod-h draggable" style="position: relative;;font-family:'Bebas Neue',sans-serif;font-size:2.5rem;font-weight:700;color:#eae3d0;font-style:italic">vocabulário, ritmo <em style=";font-family:'Bebas Neue',sans-serif;font-size:3.2rem;font-weight:700;color:#4a6028;font-style:italic">e movimento</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable">A câmera em um videoclipe não está apenas documentando uma performance. Ela está participando da música. Cada movimento, cada corte, cada escolha de lente é uma nota dentro da canção.</p>
+        <p class="mod-body draggable"><strong style=";font-family:'Space Mono',monospace;font-size:1.9rem;font-weight:700;color:#b89030;font-style:italic">Escala de planos</strong></p>
+        <ul class="il draggable">
+          <li><strong>Plano Geral (PG):</strong> estabelece o espaço, a relação entre o personagem e o ambiente</li>
+          <li><strong>Plano Médio (PM):</strong> da cintura para cima, foco na ação e expressão</li>
+          <li><strong>Primeiro Plano (PP):</strong> rosto, emoção, intimidade</li>
+          <li><strong>Plano Detalhe (PD):</strong> um objeto, um gesto, um fragmento — carrega significado</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable"><strong style=";font-family:'Space Mono',monospace;font-size:1.9rem;font-weight:700;color:#b89030;font-style:italic">Movimentos de câmera</strong></p>
+        <ul class="il draggable">
+          <li><strong>Travelling:</strong> câmera se move junto com o sujeito — cria presença, acompanhamento</li>
+          <li><strong>Grua / Drone:</strong> distância, perspectiva, escala</li>
+          <li><strong>Câmera na mão:</strong> instabilidade, urgência, subjetividade</li>
+          <li><strong>Steadicam:</strong> fluidez — está com o personagem sem ser errática</li>
+          <li><strong>Tripé:</strong> estabilidade, contemplação, planos mais longos</li>
+        </ul>
+        <p class="mod-body draggable" style="margin-top: 20px; position: relative;;font-family:'Space Mono',monospace;font-size:2.5rem;font-weight:700;color:#b89030;font-style:italic"><span class="drag-handle" style=";font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:#eae3d0;font-style:italic">⋮⋮</span><strong style=";font-family:'Space Mono',monospace;font-size:1.9rem;font-weight:700;color:#b89030;font-style:italic">Ângulos</strong></p>
+        <ul class="il draggable">
+          <li><strong>Plongée</strong> (câmera de cima): reduz o sujeito, impõe perspectiva</li>
+          <li><strong>Contra-plongée</strong> (câmera de baixo): engrandece, heroifica</li>
+          <li class=""><strong class="">Câmera no nível dos olhos:</strong> proximidade, igualdade</li>
+        </ul>
+      </div>
+    </div>
+    <!-- TABELA + TIPS EM GRID -->
+    <div style="margin-top:48px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start" class="">
+      <!-- COLUNA ESQUERDA: TABELA -->
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-family:'Space Mono',monospace;font-size:.75rem">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.12)">
+              <th style="text-align:left;padding:14px 20px;color:var(--terra);letter-spacing:.14em;text-transform:uppercase;font-weight:400">Plano / Movimento</th>
+              <th style="text-align:left;padding:14px 20px;color:var(--petrol-l);letter-spacing:.14em;text-transform:uppercase;font-weight:400">Função</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em" class="">Plano Geral</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Estabelece espaço e contexto</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em" class="">Plano Médio</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Ação e expressão corporal</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Primeiro Plano</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Rosto, emoção</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plano Detalhe</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Objeto, gesto, fragmento</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em" class="">Câmera na Mão</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Instabilidade intencional</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Travelling</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Câmera acompanha o sujeito</td>
+            </tr>
+            <tr style="border-bottom:1px solid rgba(255,255,255,.04)">
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em">Plongée</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Câmera de cima</td>
+            </tr>
+            <tr>
+              <td style="padding:13px 20px;color:var(--white);font-weight:700;text-transform:uppercase;letter-spacing:.08em" class="">Contra-plongée</td>
+              <td style="padding:13px 20px;color:var(--cream2);text-transform:uppercase;letter-spacing:.06em" class="">Câmera de baixo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- COLUNA DIREITA: TIPS -->
+      <div style="display:flex;flex-direction:column;gap:20px" class="">
+        <div class="tip reveal rotate">
+          <span class="tip-icon">◆</span>
+          <p class="" style=";;font-size:0.9rem"><strong class="">A câmera musical — chicotes e zooms no Intensamente:</strong> Chicotes e zooms bruscos em clipe não são aleatórios. Cada movimento de câmera é motivado por um beat específico da música — construído na decupagem ouvindo a canção em loop, mapeando os pontos de corte e de intensidade. A câmera não acompanhou a música: ela tocou junto.</p>
+        </div>
+        <div class="tip reveal d1 fade-up">
+          <span class="tip-icon">◆</span>
+          <p class="" style=";font-size:0.9rem">Antes de chegar ao set, ouça a música muitas vezes com o roteiro na mão. Marque onde são os beats, onde a canção respira, onde explode. <strong>A decupagem de um videoclipe é uma partitura visual.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- fim mod 08 -->
+
+<!-- /cw parte2-bloco1 -->
+
+<!-- 09 Decupagem — FULL WIDTH -->
+<div class="reveal fade-left" data-section="mod09" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/subaquatica-banda.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;filter:brightness(.8) contrast(1.05);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.35);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)" class="">
+    <p class="mod-label draggable">09 — Decupagem</p>
+    <h3 class="mod-h draggable">Do conceito <em style=";font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:#b89030;font-style:italic">ao plano</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable" style="position: relative;;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;font-weight:400;color:#eae3d0;font-style:italic">Decupar é dividir a cena em planos. É o ato de transformar o que está no roteiro, ou no tratamento, em uma lista de imagens que precisam ser filmadas. </p>
+        <p class="mod-body draggable"><strong>A minuta de decupagem</strong></p>
+        <ul class="il draggable">
+          <li>Número do plano, tipo de plano e ângulo</li>
+          <li>Movimento de câmera (se houver)</li>
+          <li>O que acontece na cena: ação do artista, posição, timing</li>
+          <li>Referência da música: em qual trecho da canção essa imagem entra</li>
+        </ul>
+      </div>
+      <div>
+        <p class="mod-body draggable"><strong>O storyboard</strong><br>O storyboard é a decupagem em imagens, um quadro por plano, feito à mão ou digitalmente. Não precisa ser perfeito artisticamente. Precisa comunicar a ideia com clareza.</p>
+        <ul class="il draggable">
+          <li>Mostra para a equipe de câmera o que a diretora tem na cabeça</li>
+          <li>Mostra para a direção de arte o que vai aparecer em cada quadro</li>
+          <li>Funciona como contratoual da ideia</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /09 full-width -->
+
+<!-- 10 Direção de Arte e Iluminação — FULL WIDTH -->
+<div class="reveal fade-right" data-section="mod10" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/subaquatica-cadeira.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9;filter:brightness(.8) contrast(1.05);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.35);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)" class="">
+    <p class="mod-label c-moss draggable">10 — Direção de Arte e Iluminação</p>
+    <h3 class="mod-h draggable">O set como <em>linguagem</em></h3>
+    <div class="mod-2col">
+      <div class="">
+        <p class="mod-body draggable">Direção de arte não é decoração. É a construção do espaçoual onde o filme acontece. Cada objeto, cada cor, cada textura tem uma função narrativa ou emocional — ou não deveria estar ali.</p>
+        <p class="mod-body draggable"><strong class="">O set como linguagem</strong></p>
+        <ul class="il draggable">
+          <li class=""><strong>COR:</strong> paleta define o estado emocional da cena — frios para isolamento, quentes para intensidade</li>
+          <li><strong>TEXTURA:</strong> concreto cru, tecido, terra — as superfícies carregam significado</li>
+          <li><strong>OBJETOS DE CENA:</strong> cada prop é uma escolha — o que está no quadro diz algo sobre o personagem</li>
+        </ul>
+      </div>
+      <div class="">
+        <p class="mod-body draggable"><strong class="">Iluminação — fundamentos práticos</strong></p>
+        <ul class="il draggable">
+          <li class=""><strong class="">PONTOS DE LUZ:</strong> luz principal (key), preenchimento (fill), contraluz (back) — a key cria a forma, o fill suaviza as sombras, o back separa o sujeito do fundo</li>
+          <li class=""><strong class="">LUZ DURA:</strong> sombras definidas, contraste alto — dramaticidade, conflito</li>
+          <li class=""><strong class="">LUZ DIFUSA:</strong> sombras suaves, tom uniforme — suavidade, intimidade, melancolia</li>
+          <li class=""><strong class="">TEMPERATURA:</strong> fria (azulada) evoca frieza e solidão; quente (alaranjada) evoca aconchego ou perigo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- /10 full-width -->
+
+<div class="cw"><!-- cw parte2-bloco2 -->
+
+  <!-- 11 Direção de Artistas -->
+  <div class="mod reveal zoom">
+    <p class="mod-label c-petrol draggable">11 — Direção de Artistas</p>
+    <h3 class="mod-h draggable">O 'action' <em style=";font-family:'Bebas Neue',sans-serif;font-size:2.4rem;font-weight:700;color:#b89030;font-style:italic">musical</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable">Dirigir um artista num videoclipe é diferente de dirigir um ator num filme. O artista já carrega uma relação com aquela canção, obra — muitas vezes é autobiográfica, muitas vezes é performativa. Sua função como diretora é saber usar isso.</p>
+        <p class="mod-body draggable"><strong>O que o artista precisa de você</strong></p>
+        <ul class="il draggable">
+          <li>Clareza: saber onde fica, o que faz, quando começa</li>
+          <li>Segurança: confiar que o que você está pedindo faz sentido</li>
+          <li>Liberdade dentro do frame: espaço para a performance ser real, não encenada</li>
+          <li>Mostrar referênciasuais antes de pedir — uma imagem vale mais que mil palavras</li>
+          <li>O playback cria presença, não apenas marcação de lipsync</li>
+        </ul>
+      </div>
+      <div class="callout c-petrol draggable">
+        <p class="callout-label">_técnica</p>
+        <p class="">Em vez de dizer <strong>"fique triste"</strong>, diga <strong class="">"pense em um lugar que você não pode mais voltar"</strong>. A câmera captura o que é real.</p>
+      </div>
+    </div>
+  </div>
+
+  </div><!-- /cw parte2-bloco2 -->
+
+<!-- 12 Continuidade e Montagem — FULL WIDTH COM VÍDEO -->
+<div class="reveal rotate" style="position:relative;overflow:hidden;width:100%">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none">
+    <source src="video/noreflexo_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.70);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)" class="">
+    <p class="mod-label draggable">12 — Continuidade, Montagem e o Filme na Edição</p>
+    <h3 class="mod-h draggable">Um set bem dirigido <em style=";font-family:'Bebas Neue',sans-serif;font-weight:700;font-style:italic;font-size:2.6rem;color:#b89030" class="">vai dar um bom corte</em></h3>
+    <div class="mod-2col">
+      <div class="">
+        <p class="mod-body draggable">Um set bem dirigido é um set que vai dar um bom corte na ilha. Isso significa: as cenas foram filmadas com a edição em mente.</p>
+        <p class="mod-body draggable"><strong style=";font-family:'Bebas Neue',sans-serif;font-size:1.3rem;font-weight:700;color:#1a5272;font-style:italic">Raccord e continuidade</strong></p>
+        <ul class="il draggable">
+          <li class=""><strong class="">Raccord de ação:</strong> o movimento que começa num plano precisa continuar no próximo</li>
+          <li class=""><strong class="">Raccord de olhar:</strong> se o personagem olha para a esquerda, o que ele vê deve estar à direita no próximo plano</li>
+          <li class=""><strong class="">Raccord de figurino e arte:</strong> o copo no lado direito num plano não pode aparecer no esquerdo no seguinte</li>
+        </ul>
+        <p class="mod-body draggable" style="margin-top: 16px; position: relative;"><strong style=";font-family:'Bebas Neue',sans-serif;font-size:1.3rem;font-weight:700;color:#1a5272;font-style:italic">A Regra dos 180°</strong><br>Existe uma linha imaginária no set — o eixo da ação. Todos os planos de uma mesma cena precisam ser filmados do mesmo lado dessa linha. Cruzar o eixo desorenta o espectador.</p>
+      </div>
+      <div class="">
+        <p class="mod-body draggable"><strong style=";font-family:'Bebas Neue',sans-serif;font-size:1.3rem;font-weight:700;color:#1a5272;font-style:italic" class="">Cobertura inteligente</strong></p>
+        <ul class="il draggable">
+          <li class="">Filme sempre mais do que você acha que vai precisar — o que parece redundante no set salva na ilha</li>
+          <li class="">Varie os planos: alterne abertos e fechados, perfis e frontais, estáticos e em movimento</li>
+          <li class="">Filme os detalhes: mãos, olhos, objetos — os planos detalhe são o que dá textura à montagem</li>
+        </ul>
+        <div class="tip" style="margin-top:20px">
+          <span class="tip-icon">◆</span>
+          <p class="" style=";font-size:1rem;color:#888888"><strong class="" style=";font-size:1.4rem;color:#4a6028">O filme existe só na edição, não no set.</strong> Cenas que pareciam perfeitas podem não funcionar no corte. Cenas que pareciam descartáveis podem ser o coração do clipe. Dar material para o editor é parte do trabalho.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /12 full-width -->
+
+<!-- 13 Arte do Desapego — FULL WIDTH -->
+<div class="reveal fade-up" data-section="mod13" style="position:relative;overflow:hidden;width:100%">
+  <img src="fotos/pb-rua-noite.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:left center;opacity:.85;filter:brightness(.75) contrast(1.1);z-index:0;pointer-events:none">
+  <div style="position:absolute;inset:0;background:rgba(7,6,10,.38);z-index:1;pointer-events:none"></div>
+  <div style="position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:68px 60px;border-top:1px solid rgba(255,255,255,.05)" class="">
+    <p class="mod-label draggable">13 — A Arte do Desapego</p>
+    <h3 class="mod-h draggable">Criatividade <em style=";font-family:'Bebas Neue',sans-serif;font-size:2.6rem;font-weight:700;color:#b83818;font-style:italic">na adversidade</em></h3>
+    <div class="mod-2col">
+      <div>
+        <p class="mod-body draggable"></p>
+        <p class="mod-body draggable"><strong>O que fazer quando o plano não funciona</strong></p>
+        <ul class="il draggable">
+          <li>Perguntar: o conceito continua intacto? Se sim, a solução técnica pode mudar</li>
+          <li>Usar o ambiente: o que o local oferece que você não tinha previsto?</li>
+          <li>Envolver a equipe: os melhores problemas são resolvidos em conversa aberta no set</li>
+          <li>Confiar no acidente: às vezes o que deu errado é melhor do que o que estava planejado</li>
+        </ul>
+      </div>
+      <div class="callout draggable">
+        <p class="callout-label"></p>
+        <p class="">Dirigir é estar presente e atenta aos detalhes. Articular para que conceito e execução caminhem juntos, e quando eles se separam, <strong class="">saber o que preservar.</strong></p>
+      </div>
+    </div>
+  </div>
+</div><!-- /13 full-width -->
+
+<!-- QUOTE -->
+<div class="quote-block photo-bg-sec reveal fade-left">
+  <img class="bg" src="fotos/subaquatica-hero.png" alt="" style="opacity:.9;filter:brightness(.8) contrast(1.05)">
+  <div class="overlay" style="background:rgba(7,6,10,.38)"></div>
+  <p class="quote-text" style=";font-family:'Bebas Neue',sans-serif;font-style:italic;font-size:2.3rem;font-weight:400;color:#eae3d0">Nenhum set acontece exatamente como o planejado. E isso nem sempre é falha de execução, é a natureza do processo. <br> <br>A questão não é evitar o improviso. <br>É saber improvisár bem.</p>
+  <div class="quote-rule"></div>
+  <p class="quote-author">Vini Poffo</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     PROJETOS
+═══════════════════════════════════════════════════ -->
+<div id="projetos" class="photo-bg-sec" style="background:var(--bg3)"><img class="bg" src="fotos/bts-fabrica-camera.png" data-new-bg="projetos" style="position: absolute; inset: 0px; width: 100%; height: 100%; object-fit: cover; opacity: 0.8; z-index: 0; pointer-events: none;"><div data-new-overlay="projetos" style="position: absolute; inset: 0px; background: rgba(7, 6, 10, 0.35); z-index: 1; pointer-events: none;"></div>
+  <img class="bg" src="fotos/bts-fabrica-elenco.png" alt="" style="opacity:.85;filter:brightness(.7) contrast(1.1)">
+  <div class="overlay" style="background: rgba(7, 6, 10, 0.55); position: relative; z-index: 2;"></div>
+  <div class="content sec-head" style="position: relative; z-index: 2;">
+    <p class="sec-label c-petrol reveal fade-right">_projetos</p>
+    <h2 class="sec-title reveal d1 zoom" style="font-size:clamp(3rem,8vw,7.5rem)">
+      Tratamentos
+      <span class="alt">em prática</span>
+    </h2>
+    <p class="sec-intro reveal d2 rotate">Cada projeto tem seu tratamentoual, o clipe final depende disso. Veja como o conceito se transforma em imagem.</p>
+  </div>
+</div>
+
+<!-- ─── PROJETO 1: OUTRÊS DE NÓS ─── -->
+<div class="proj-hero">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="">
+    <source src="video/outres_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="proj-grad"></div>
+  <div class="proj-overlay reveal fade-upible fade-left">
+    <h2 class="proj-title" style="font-family:'Epilogue',serif;font-size:6.8rem;font-weight:700;color:#eae3d0;font-style:normal">
+      Outrês de Nós
+      <span class="alt" style="font-size:.38em;display:block;margin-top:8px">Jesus Lumma feat Dandara Manoela</span>
+    </h2>
+    <p class="proj-sub">Direção Vini Poffo</p>
+  </div>
+</div>
+
+<div class="treatment reveal fade-leftible fade-up">
+  <p class="treatment-label">_tratamentoual</p>
+  <h3 class="treatment-title">Outrês de Nós</h3>
+  <p class="treatment-sub">Jesus Lumma &amp; Dandara Manoela · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAEgdZg_ZM4/zeQqiT5TRb92Vbfe2kHUow/view?embed" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+<div class="yt-single-wrap reveal fade-rightible fade-left">
+  <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/w2uoe7uvmQQ" title="Outrês de Nós" allowfullscreen="" loading="lazy"></iframe></div>
+  <div class="yt-label"><p class="yt-title">Outrês de Nós</p><p class="yt-meta">Jesus Lumma &amp; Dandara Manoela · Direção Vini Poffo</p></div>
+</div>
+
+<!-- ─── PROJETO 2: ARANHA ─── -->
+<div class="proj-hero" style="margin-top:3px">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="">
+    <source src="video/aranha_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="proj-grad"></div>
+  <div class="proj-overlay reveal zoomible fade-right">
+    <h2 class="proj-title" style="font-family:'Epilogue',serif;font-size:6.8rem;font-weight:700;color:#eae3d0;font-style:normal">
+      Aranha
+      <span class="alt" style="font-size:.38em;display:block;margin-top:8px">Letrux</span>
+    </h2>
+    <p class="proj-sub">Letrux · Direção Vini Poffo &amp; Sillas H · Realização SUFE &amp; Lei Paulo Gustavo</p>
+    <a href="https://raw.githubusercontent.com/v-poffo/vini-poffo-masterclass/main/aranha_tratamento.pdf" target="_blank" class="pdf-trigger" style="text-decoration:none;display:inline-flex">Ver tratamento visual completo (PDF)</a>
+  </div>
+</div>
+
+<div class="yt-single-wrap reveal rotateible zoom">
+  <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/b-a2mUsEfOE" title="Letrux — Aranha" allowfullscreen="" loading="lazy"></iframe></div>
+  <div class="yt-label"><p class="yt-title">Letrux — Aranha (clipe oficial)</p><p class="yt-meta">Direção Vini Poffo &amp; Sillas H</p></div>
+</div>
+
+<!-- ─── PROJETO 3: DROPAR TEU NOME + VIRA ESSA BOCA ─── -->
+<div class="proj-hero" id="dualProj" style="margin-top:3px">
+  <video class="bg hidden" id="vidDropar" autoplay="" muted="" loop="" playsinline="">
+    <source src="video/dropar_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <video class="bg" id="vidVira" muted="" loop="" playsinline="">
+    <source src="video/vira_essa_boca_portfolio_video.mp4" type="video/mp4">
+  </video>
+  <div class="proj-grad"></div>
+  <div class="proj-overlay reveal fade-upible rotate">
+    <h2 class="proj-title" id="dualTitle" style="font-family:'Epilogue',serif;font-size:6rem;font-weight:700;color:#eae3d0;font-style:normal">Vira Essa Boca Pra Cá <span class="alt" id="dualAlt" style="font-size:.38em;display:block;margin-top:8px">Letrux feat Nouvella</span>
+    </h2>
+    <p class="proj-sub" id="dualSub">Direção Vini Poffo</p>
+    <span class="proj-tag" id="dualTag">● Vira Essa Boca Pra Cá</span>
+  </div>
+</div>
+
+<div class="treatment reveal fade-leftible fade-up">
+  <p class="treatment-label">_tratamentoual</p>
+  <h3 class="treatment-title">Vira Essa Boca Pra Cá / Dropar Teu Nome</h3>
+  <p class="treatment-sub">Letrux &amp; Nouvella · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAGjJjZTkU0/eiwuATCJt_IoLH8FDIlMEQ/view?embed" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+<div class="yt-grid reveal fade-rightible fade-up">
+  <div>
+    <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/PUFx8Z9AEtU" title="Dropar Teu Nome" allowfullscreen="" loading="lazy" class=""></iframe></div>
+    <div class="yt-label"><p class="yt-title">Dropar Teu Nome</p><p class="yt-meta">Letrux &amp; Nouvella · Direção Vini Poffo</p></div>
+  </div>
+  <div>
+    <div class="yt-wrap"><iframe src="https://www.youtube.com/embed/UuH-i5Qx21Y" title="Vira Essa Boca Pra Cá" allowfullscreen="" loading="lazy"></iframe></div>
+    <div class="yt-label"><p class="yt-title">Vira Essa Boca Pra Cá</p><p class="yt-meta">Letrux &amp; Nouvella · Direção Vini Poffo</p></div>
+  </div>
+</div>
+
+<!-- ─── PROJETO 4: NUVEM NEGRA ─── -->
+<div class="proj-photo-hero" style="margin-top:3px">
+  <img src="fotos/nuvem-negra-hero.png" alt="Nuvem Negra">
+  <div class="proj-grad"></div>
+  <div class="proj-overlay reveal zoomible fade-left" style="position:relative;z-index:2;padding:72px 60px;width:100%">
+    <h2 class="proj-title" style="font-family:'Epilogue',serif;font-size:6.1rem;font-weight:700;color:#eae3d0;font-style:normal">
+      Nuvem Negra
+      <span class="alt" style="font-size:.38em;display:block;margin-top:8px">Linn da Quebrada</span>
+    </h2>
+    <p class="proj-sub">Direção Vini Poffo</p>
+  </div>
+</div>
+
+<div class="treatment reveal rotateible fade-up">
+  <p class="treatment-label">_tratamentoual</p>
+  <h3 class="treatment-title">Nuvem Negra</h3>
+  <p class="treatment-sub">Tratamentoual · Direção Vini Poffo</p>
+  <iframe class="treatment-frame" src="https://www.canva.com/design/DAG-3ZdqBdQ/tu14hZtIiEQhflfyKLzcgQ/view?embed" allowfullscreen="" loading="lazy"></iframe>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     ENCERRAMENTO
+═══════════════════════════════════════════════════ -->
+<section id="enc" class="levar-big-sec photo-bg-sec">
+  <video class="bg" autoplay="" muted="" loop="" playsinline="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none">
+    <source src="video/naoc_.mp4" type="video/mp4">
+  </video>
+  <div class="overlay" style="background:linear-gradient(180deg,rgba(7,6,10,0.75) 0%,rgba(13,50,72,0.7) 50%,rgba(7,6,10,0.75) 100%)"></div>
+  <p class="levar-big-kicker reveal fade-upible fade-left">_para levar daqui</p>
+  <div class="levar-big-items" id="levarBigItems">
+    <div class="levar-big-item" style="font-family:'Epilogue',sans-serif;font-size:5rem;font-weight:400">O roteiro é a <span class="c-ocre">primeira versão</span> da imagem</div>
+    <div class="levar-big-item" style="font-family:'Epilogue',sans-serif;font-size:5rem;font-weight:400">A limitação <span class="c-terra">não é inimiga</span> da criatividade</div>
+    <div class="levar-big-item active" style="font-family:'Epilogue',sans-serif;font-size:5rem;font-weight:400">Dirigir é <span class="c-petrol">estar presente</span></div>
+    <div class="levar-big-item" style="font-family:'Epilogue',sans-serif;font-size:5rem;font-weight:400">Imagem que atravessa o corpo <span class="c-moss">não precisa ser cara</span></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════
+     REFERÊNCIAS
+═══════════════════════════════════════════════════ -->
+<section id="refs">
+  <h2 class="refs-title reveal fade-leftible fade-right">_referências</h2>
+  <div class="refs-2col">
+    <div>
+      <p class="ref-cat reveal fade-rightible zoom">Leituras sugeridas</p>
+      <div class="ref-item reveal zoomible rotate"><div class="ref-dot"></div><div><p class="ref-name">Syd Field — Manual do Roteiro</p><p class="ref-desc">A bíblia da estrutura em três atos</p></div></div>
+      <div class="ref-item reveal d1 rotateible fade-up"><div class="ref-dot"></div><div><p class="ref-name">Robert McKee — Story</p><p class="ref-desc">Narrativa para roteiristas, romancistas e outros</p></div></div>
+      <div class="ref-item reveal d2 fade-upible fade-up"><div class="ref-dot"></div><div><p class="ref-name">Glauber Rocha — Revolução do Cinema Novo</p><p class="ref-desc">Manifesto e teoria do cinema de guerrilha</p></div></div>
+      <div class="ref-item reveal d3 fade-leftible fade-left"><div class="ref-dot"></div><div><p class="ref-name">Walter Murch — Em Um Piscar de Olhos</p><p class="ref-desc">A arte da montagem</p></div></div>
+    </div>
+    <div>
+      <p class="ref-cat reveal fade-rightible fade-up">Movimentos para conhecer</p>
+      <div class="ref-movie reveal zoomible fade-left"><p class="ref-movie-name">Cinema Novo Brasileiro (anos 60)</p><p class="ref-movie-year">Glauber Rocha, Nelson Pereira dos Santos, Cacá Diegues</p></div>
+      <div class="ref-movie reveal d1 rotateible fade-right"><p class="ref-movie-name">Nouvelle Vague Francesa (anos 60)</p><p class="ref-movie-year">Godard, Truffaut, Resnais</p></div>
+      <div class="ref-movie reveal d2 fade-upible zoom"><p class="ref-movie-name">Dogma 95 (anos 90)</p><p class="ref-movie-year">Lars von Trier, Thomas Vinterberg — regras como libertação</p></div>
+      <div class="ref-movie reveal d3 fade-leftible rotate"><p class="ref-movie-name">Mumblecore (anos 2000)</p><p class="ref-movie-year">Cinema ultra-low budget, câmera na mão, personagens reais</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <p class="footer-name">Vini Poffo</p>
+    <p style="font-family:'Inter', sans-serif;font-style:italic;font-size:.82rem;color:var(--muted);margin-top:3px">Cineasta e Diretora Criativa</p>
+  </div>
+  <div>
+    <p class="footer-info">Roteiro &amp; Direção de Videoclipe<br>Masterclass — Material da Aula</p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     JAVASCRIPT
+═══════════════════════════════════════════════════ -->
+
+
+
+
+
+
+<script>
+// ── Cursor personalizado ──
+const cur=document.getElementById('cur'),cur2=document.getElementById('cur2');
+if(cur&&cur2){
+  document.addEventListener('mousemove',e=>{
+    cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+    cur2.style.left=e.clientX+'px';cur2.style.top=e.clientY+'px';
+  },{passive:true});
+}
+document.querySelectorAll('a,button,iframe,.levar-item,.pdf-trigger,.proj-tag').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{if(cur2)cur2.style.transform='translate(-50%,-50%) scale(2.4)';});
+  el.addEventListener('mouseleave',()=>{if(cur2)cur2.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+// ── Progress + nav ──
+const prog=document.getElementById('prog'),nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{
+  const s=window.scrollY,d=document.documentElement.scrollHeight-window.innerHeight;
+  if(prog)prog.style.width=(s/d*100)+'%';
+  if(nav)nav.classList.toggle('on',s>60);
+},{passive:true});
+
+// ── Reveal on scroll (orgânico) ──
+(function() {
+  const reveals = document.querySelectorAll('.reveal');
+  const types = ['fade-up', 'fade-left', 'fade-right', 'zoom', 'rotate', 'fade-up', 'fade-up', 'fade-left'];
+  
+  reveals.forEach((el, i) => {
+    // Não sobrescrever se já tem classe de direção
+    const hasDir = el.classList.contains('fade-left') || el.classList.contains('fade-right') || 
+                   el.classList.contains('zoom') || el.classList.contains('rotate') ||
+                   el.classList.contains('fade-up');
+    if(!hasDir) el.classList.add(types[i % types.length]);
+  });
+  
+  function check() {
+    const h = window.innerHeight;
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < h * 0.88) el.classList.add('visible');
+    });
+  }
+  
+  window.addEventListener('load', check);
+  window.addEventListener('scroll', check, {passive: true});
+  check();
+})();
+
+// ── Hybrid animated list (O videoclipe não é um mini-filme) ──
+const hybridItems=document.querySelectorAll('#hybridItems .hybrid-item');
+let hIdx=0;
+if(hybridItems.length){
+  // Garantir que só o primeiro está ativo ao iniciar
+  hybridItems.forEach((el,i)=>el.classList.toggle('active',i===0));
+  setInterval(()=>{
+    hybridItems[hIdx].classList.remove('active');
+    hIdx=(hIdx+1)%hybridItems.length;
+    hybridItems[hIdx].classList.add('active');
+  },2400);
+}
+
+// ── Para Levar Daqui animated (grandão) ──
+const levarBigItems=document.querySelectorAll('#levarBigItems .levar-big-item');
+let lbIdx=0;
+if(levarBigItems.length){
+  // Garantir que só o primeiro está ativo ao iniciar
+  levarBigItems.forEach((el,i)=>el.classList.toggle('active',i===0));
+  setInterval(()=>{
+    levarBigItems[lbIdx].classList.remove('active');
+    lbIdx=(lbIdx+1)%levarBigItems.length;
+    levarBigItems[lbIdx].classList.add('active');
+  },3000);
+}
+
+// ── Dual video alternating (Dropar / Vira) ──
+const vidDropar=document.getElementById('vidDropar');
+const vidVira=document.getElementById('vidVira');
+const dualTitle=document.getElementById('dualTitle');
+const dualAlt=document.getElementById('dualAlt');
+const dualSub=document.getElementById('dualSub');
+const dualTag=document.getElementById('dualTag');
+let showingDropar=false;
+if(vidDropar&&vidVira&&dualTitle){
+  vidVira.play().catch(()=>{});
+  setInterval(()=>{
+    showingDropar=!showingDropar;
+    if(showingDropar){
+      vidDropar.classList.remove('hidden');vidVira.classList.add('hidden');
+      vidDropar.play().catch(()=>{});
+      dualTitle.childNodes[0].textContent='Dropar Teu Nome ';
+      if(dualAlt)dualAlt.textContent='Letrux feat Nouvella';
+      if(dualSub)dualSub.textContent='Direção Vini Poffo';
+      if(dualTag)dualTag.textContent='● Dropar Teu Nome';
+    } else {
+      vidVira.classList.remove('hidden');vidDropar.classList.add('hidden');
+      vidVira.play().catch(()=>{});
+      dualTitle.childNodes[0].textContent='Vira Essa Boca Pra Cá ';
+      if(dualAlt)dualAlt.textContent='Letrux feat Nouvella';
+      if(dualSub)dualSub.textContent='Direção Vini Poffo';
+      if(dualTag)dualTag.textContent='● Vira Essa Boca Pra Cá';
+    }
+  },5000);
+}
+
+</script>
+</body></html>
